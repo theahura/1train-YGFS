@@ -1,14 +1,25 @@
-.links line {
+html, body {
+	padding: 0;
+	margin: 0;
+}
+
+.link {
+  fill: none;
   stroke: #999;
-  stroke-opacity: 0.6;
+  stroke-width: 1px;
+  opacity: 0.5;
 }
 
-.node circle {
-  stroke: #fff;
-  stroke-width: 1.5px;
+g text {
+  font-family: 'Open Sans', sans-serif;
 }
 
-.node text{
-	fill: #666;
-	font-family: Helvetica
+#description-box {
+  pointer-events: none;
+  position: fixed;
+  bottom: 5%; right: 5%;
+  background-color: #E7C5CF;
+  width: 20%;
+  height: 30%;
+  padding: 1%;
 }
