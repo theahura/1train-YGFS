@@ -10,7 +10,8 @@ var simulation = d3.forceSimulation(nodes)
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+    .style("background-color", "#594D57");
 
 // svg.append("defs")
     // .selectAll("pattern")
@@ -99,8 +100,32 @@ function restart() {
         .attr("opacity", 0)
         .remove();
 
+// // .transition()
+//         .duration(2000)
+//         .ease("linear")
+//         .attr("stroke-dashoffset", totalLength);
+
     link = link.enter().append("path")
         .attr("class", function(d) { return "link " + d.type; })
+        .style("stroke-dasharray", function(d) {
+            if (d.confirmed) {
+                return d3.select(this).node().getTotalLength();
+            }
+            else {
+                return 3;
+            }
+        })
+        .style("stroke", function(d) {
+            if (d.type == LINK_TYPE.Business) {
+                return "#8FD5A6"
+            }
+            else if (d.type == LINK_TYPE.Political) {
+                return "#FC7753"
+            }
+            else {
+                return "#EB5160"
+            }
+        })
         .style("fill", 0)
         .style("opacity", 0.5)
         .attr("marker-end", "url(#arrow)")
