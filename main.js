@@ -30,6 +30,7 @@ nodes = {
         "source": nodes["Donald Trump"],
         "target": nodes["Vladimir Putin"],
         "type": LINK_TYPE.Default,
+        "index": 0,
         "linknum": 0,
         "confirmed": true
       },
@@ -37,25 +38,11 @@ nodes = {
         "source": nodes["Donald Trump"],
         "target": nodes["Vladimir Putin"],
         "type": LINK_TYPE.Default,
+        "index": 1,
         "linknum": 40,
-        "confirmed": true
-      },
-      {
-        "source": nodes["Donald Trump"],
-        "target": nodes["Vladimir Putin"],
-        "type": LINK_TYPE.Default,
-        "linknum": 10,
-        "confirmed": true
-      },
-      {
-        "source": nodes["Vladimir Putin"],
-        "target": nodes["Donald Trump"],
-        "type": LINK_TYPE.Default,
-        "linknum": 10,
         "confirmed": true
       }
   ];
-
 
 d3.selection.prototype.moveToBack = function() {  
     return this.each(function() { 
@@ -77,6 +64,17 @@ var simulation = d3.forceSimulation(nodes)
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
+
+for (var l in links) {
+    svg.append("circle")
+        .attr("class", function() {
+            return "marker";
+        })
+        .style("fill", "#fff")
+        .attr("r", "2")
+        .attr("transform", "translate(350, 300)")
+        .moveToBack();
+}
 
   // function expand() {
   //   $('.intro-text').fadeOut();
@@ -190,7 +188,8 @@ function start() {
     link = link.data(links, function (d) { return d.source.name + "-" + d.target.name; });
 
     link = link.enter().append("path")
-        .attr("class", function (d) { return "link " + d.type; })
+        .attr("class", function (d) { return "link " })
+        .attr("id", function (d) { return "link" + d.index; })
         .style("stroke", function (d) {
             if (d.type == LINK_TYPE.Business) {
                 return "#8FD5A6"
@@ -217,20 +216,18 @@ function start() {
         })
         .transition()
         .delay(function(d, i){
-            return i * 750
+            return i * 2000
         })
         .duration(2000)
         .attr("stroke-dashoffset", 0);
 
-    var marker = svg.append("circle")
-        .style("fill", "#fff")
-        .attr("r", "2")
-        // .attr("transform", "translate(350, 300)")
-        .moveToBack();
-
-    marker.transition()
+    d3.selectAll("circle.marker")
+        .transition()
         .duration(2000)
-        .attrTween("transform", translateAlong(link.node()))
+        .attrTween("transform", translateAlong(d3.select("#link0").node()))
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link1").node()))
 
     simulation.nodes(nodes);
     simulation.force("link").links(links);
