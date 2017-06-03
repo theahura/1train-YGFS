@@ -1,6 +1,13 @@
-html, body {
+html {
 	padding: 0;
 	margin: 0;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+
+  background-color: #594D57;
 }
 
 .link {
@@ -14,7 +21,8 @@ g text {
   font-family: 'Open Sans', sans-serif;
 }
 
-#description-box {
+.description-box {
+  display: none;
   font-family: 'Open Sans', sans-serif;
   pointer-events: none;
   position: fixed;
