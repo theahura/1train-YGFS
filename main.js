@@ -32,6 +32,16 @@ nodes = {
     "confirmed": true
   }];
 
+
+d3.selection.prototype.moveToBack = function() {  
+    return this.each(function() { 
+        var firstChild = this.parentNode.firstChild; 
+        if (firstChild) { 
+            this.parentNode.insertBefore(this, firstChild); 
+        } 
+    });
+};
+
 var width = window.innerWidth,
     height = window.innerHeight;
 
@@ -153,7 +163,7 @@ function restart() {
 
     nodeBuild();
 
-    link = link.data(links, function (d) { console.log(d.source.name + "-" + d.target.name); return d.source.name + "-" + d.target.name; });
+    link = link.data(links, function (d) { return d.source.name + "-" + d.target.name; });
 
     link = link.enter().append("path")
         .attr("class", function (d) { return "link " + d.type; })
@@ -200,34 +210,7 @@ function restart() {
       .attr("stroke-width", "2")
       .attr("fill", "none");
 
-      var path = svg.append("path")
-      .attr("d","M 500 60 L 50 110 L 90 70 L 140 100")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", "2")
-      .attr("fill", "none")
-
-      var totalLength = path.node().getTotalLength();
-
-      path
-      .attr("stroke-dasharray", totalLength + " " + totalLength)
-      .attr("stroke-dashoffset", totalLength)
-      .transition()
-    .duration(2000)
-    .attr("stroke-dashoffset", 0);
-
-    startPoint = pathStartPoint(path);
-
-    var circ = svg.append("circle")
-        .attr("r", 50)
-        .attr("transform", "translate(500, 60)");
-
-    circ.transition()
-        .duration(2000)
-        .attrTween("transform", translateAlong(path.node()))
         // .each("end", transition);// infinite loop
-
-    console.log(link.node())
-
 
     // .attr("transform", "translate(" + startPoint + ")");
 
@@ -240,34 +223,33 @@ function restart() {
     initLink
         .attr("d", linkArc)
         .attr("stroke-dasharray", function (d) {
-
-            // var totalLength = d3.select(this).node().getTotalLength();
-            // return totalLength + " " + totalLength;
-            return "500 500"
+            var totalLength = this.getTotalLength();
+            return totalLength + " " + totalLength;
         })
         .attr("stroke-dashoffset", function (d) {
-            return "500";
-            // return d3.select(this).node().getTotalLength();
+            return this.getTotalLength();
         })
         .transition()
         .duration(2000)
         .attr("stroke-dashoffset", 0)
         .attr("marker-end", "url(#arrow)")
 
-    var totalLength = link.node().getTotalLength();
+    console.log(initLink.node());
+    var totalLength = initLink.node().getTotalLength();
 
     startPoint = pathStartPoint(link);
-    console.log(startPoint);
 
-    // var marker = svg.append("polygon")
-    //     .attr("points", "0,0 10,0 5,8.66")
-    // .attr("refX", 55)
-    // .attr("refY", -2)
-    //     // .attr("transform", "translate(" + startPoint + ")");
 
-    // marker.transition()
-    //     .duration(2000)
-    //     .attrTween("transform", translateAlong(link.node()))
+    var marker = svg.append("circle")
+        .style("fill", "#fff")
+        // .attr("points", "0,0 7.5,0 3.75,6.5")
+        .attr("r", "4")
+        // .attr("transform", "translate(" + startPoint + ")")
+        .moveToBack();
+
+    marker.transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(link.node()))
 
     // link
     // .transition()
@@ -289,29 +271,20 @@ function restart() {
     simulation.alpha(1).on("tick", ticked).restart();
 }
 
-function translateAlong(path) {
-  var l = path.getTotalLength();
-  var t0 = 0;
-  return function(i) {
-    return function(t) {
-      var p0 = path.getPointAtLength(t0 * l);//previous point
-      var p = path.getPointAtLength(t * l);////current point
-      var angle = Math.atan2(p.y - p0.y, p.x - p0.x) * 180 / Math.PI;//angle for tangent
-      t0 = t;
-      //Shifting center to center of rocket
-      var centerX = p.x - 5,
-      centerY = p.y - 4.33;
-      return "translate(" + centerX + "," + centerY + ")rotate(" + angle + " 5" + " 4.33" +")";
+  function translateAlong(path) {
+    var l = path.getTotalLength();
+    return function(i) {
+      return function(t) {
+        var p = path.getPointAtLength(t * l);
+        return "translate(" + p.x + "," + p.y + ")";//Move marker
+      }
     }
   }
-}
 
 // Get path start point for placing marker
 function pathStartPoint(path) {
-    console.log(path.attr("d"));
     var d = path.attr("d"),
     dsplitted = d.split(" ");
-    console.log(dsplitted[1]);
     return dsplitted[1];
 }
 
