@@ -37,14 +37,21 @@ nodes = {
         "source": nodes["Donald Trump"],
         "target": nodes["Vladimir Putin"],
         "type": LINK_TYPE.Default,
-        "linknum": 10,
+        "linknum": 40,
         "confirmed": true
       },
       {
         "source": nodes["Donald Trump"],
         "target": nodes["Vladimir Putin"],
         "type": LINK_TYPE.Default,
-        "linknum": 40,
+        "linknum": 10,
+        "confirmed": true
+      },
+      {
+        "source": nodes["Vladimir Putin"],
+        "target": nodes["Donald Trump"],
+        "type": LINK_TYPE.Default,
+        "linknum": 10,
         "confirmed": true
       }
   ];
@@ -199,46 +206,31 @@ function start() {
             }
         });
 
-    // initLink
-    //     .attr("d", linkArc)
-    //     .attr("stroke-dasharray", function (d) {
-    //         var totalLength = this.getTotalLength();
-    //         return totalLength + " " + totalLength;
-    //     })
-    //     .attr("stroke-dashoffset", function (d) {
-    //         return this.getTotalLength();
-    //     })
-    //     .transition()
-    //     .delay(function(d, i) { return i * 10; })
-    //     .duration(2000)
-    //     .attr("stroke-dashoffset", 0)
+    link
+        .attr("d", linkArc)
+        .attr("stroke-dasharray", function (d) {
+            var totalLength = this.getTotalLength();
+            return totalLength + " " + totalLength;
+        })
+        .attr("stroke-dashoffset", function (d) {
+            return this.getTotalLength();
+        })
+        .transition()
+        .delay(function(d, i){
+            return i * 750
+        })
+        .duration(2000)
+        .attr("stroke-dashoffset", 0);
 
-    link.each( function(l, i) {
-        d3.select(this)
-            .attr("d", linkArc)
-            .attr("stroke-dasharray", function (d) {
-                var totalLength = this.getTotalLength();
-                console.log(this.outerHTML);
-                return totalLength + " " + totalLength;
-            })
-            .attr("stroke-dashoffset", function (d) {
-                return this.getTotalLength();
-            })
-            .transition()
-            .duration(2000)
-            .attr("stroke-dashoffset", 0)
+    var marker = svg.append("circle")
+        .style("fill", "#fff")
+        .attr("r", "2")
+        // .attr("transform", "translate(350, 300)")
+        .moveToBack();
 
-        var marker = svg.append("circle")
-            .style("fill", "#fff")
-            .attr("r", "2")
-            .moveToBack();
-
-        marker.transition()
-            .duration(2000)
-            .attrTween("transform", translateAlong(this));
-    });
-
-    // console.log(initLink.attr("d"))
+    marker.transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(link.node()))
 
     simulation.nodes(nodes);
     simulation.force("link").links(links);
