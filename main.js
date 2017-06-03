@@ -4,7 +4,7 @@ nodes = {
     "Donald Trump": {
         "name": "United States",
         "USA": true,
-        "index": 0,
+        "index": 1,
         "x": 350,
         "y": 300,
         "image": "http://www.flags.net/images/largeflags/UNST0001.GIF",
@@ -15,7 +15,7 @@ nodes = {
     "Vladimir Putin": {
         "name": "Russia",
         "USA": false,
-        "index": 1,
+        "index": 2,
         "x": 850,
         "y": 300,
         "image": "https://upload.wikimedia.org/wikipedia/en/archive/f/f3/20120812153730%21Flag_of_Russia.svg",
@@ -25,12 +25,29 @@ nodes = {
     }
 }
 
-  links = [{
-    "source": nodes["Donald Trump"],
-    "target": nodes["Vladimir Putin"],
-    "type": LINK_TYPE.Default,
-    "confirmed": true
-  }];
+  links = [
+      {
+        "source": nodes["Donald Trump"],
+        "target": nodes["Vladimir Putin"],
+        "type": LINK_TYPE.Default,
+        "linknum": 0,
+        "confirmed": true
+      },
+      {
+        "source": nodes["Donald Trump"],
+        "target": nodes["Vladimir Putin"],
+        "type": LINK_TYPE.Default,
+        "linknum": 10,
+        "confirmed": true
+      },
+      {
+        "source": nodes["Donald Trump"],
+        "target": nodes["Vladimir Putin"],
+        "type": LINK_TYPE.Default,
+        "linknum": 40,
+        "confirmed": true
+      }
+  ];
 
 
 d3.selection.prototype.moveToBack = function() {  
@@ -107,10 +124,10 @@ svg.append("defs").selectAll("marker")
     .attr("d", "M0,-5L10,0L0,5");
 
 var g = svg.append("g"),
-    link = g.append("g").selectAll("path")
-    node = g.append("g").selectAll("circle");
+    link = g.append("g").selectAll("path"),
+    node = g.append("g").selectAll("circle")
 
-restart();
+start();
 
 function nodeBuild() {
     node = node.data(d3.values(nodes), function (d) { return d.name;});
@@ -159,6 +176,75 @@ function nodeBuild() {
         .call(wrap, 50);
 }
 
+function start() {
+
+    nodeBuild();
+
+    link = link.data(links, function (d) { return d.source.name + "-" + d.target.name; });
+
+    link = link.enter().append("path")
+        .attr("class", function (d) { return "link " + d.type; })
+        .style("stroke", function (d) {
+            if (d.type == LINK_TYPE.Business) {
+                return "#8FD5A6"
+            }
+            else if (d.type == LINK_TYPE.Political) {
+                return "#FC7753"
+            }
+            else if (d.type == LINK_TYPE.Personal) {
+                return "#EB5160"
+            }
+            else {
+                return "FFF"
+            }
+        });
+
+    // initLink
+    //     .attr("d", linkArc)
+    //     .attr("stroke-dasharray", function (d) {
+    //         var totalLength = this.getTotalLength();
+    //         return totalLength + " " + totalLength;
+    //     })
+    //     .attr("stroke-dashoffset", function (d) {
+    //         return this.getTotalLength();
+    //     })
+    //     .transition()
+    //     .delay(function(d, i) { return i * 10; })
+    //     .duration(2000)
+    //     .attr("stroke-dashoffset", 0)
+
+    link.each( function(l, i) {
+        d3.select(this)
+            .attr("d", linkArc)
+            .attr("stroke-dasharray", function (d) {
+                var totalLength = this.getTotalLength();
+                console.log(this.outerHTML);
+                return totalLength + " " + totalLength;
+            })
+            .attr("stroke-dashoffset", function (d) {
+                return this.getTotalLength();
+            })
+            .transition()
+            .duration(2000)
+            .attr("stroke-dashoffset", 0)
+
+        var marker = svg.append("circle")
+            .style("fill", "#fff")
+            .attr("r", "2")
+            .moveToBack();
+
+        marker.transition()
+            .duration(2000)
+            .attrTween("transform", translateAlong(this));
+    });
+
+    // console.log(initLink.attr("d"))
+
+    simulation.nodes(nodes);
+    simulation.force("link").links(links);
+    simulation.alpha(1).on("tick", ticked).restart();
+}
+
 function restart() {
 
     nodeBuild();
@@ -193,93 +279,66 @@ function restart() {
         })
         .attr("marker-end", "url(#arrow)")
     
-    var initLink = svg.select("path.default");
+    var initLink = d3.selectAll("link default");
 
-    // var startPoint = pathStartPoint(initLink);
-    // var marker = svg.append("circle");
-    
-    // marker.attr("r", 7)
-    //     .attr("id", "marker")
-    //     .attr("transform", "translate(" + startPoint + ")");
-    // console.log(initLink.node().attr("d"));
-    // var startPoint = initLink.x;
-
-
-    link
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", "2")
-      .attr("fill", "none");
-
-        // .each("end", transition);// infinite loop
-
-    // .attr("transform", "translate(" + startPoint + ")");
-
-
-    // console.log(translateAlong(startPoint));
-
-    // link.filter( function (d) {
-    //     return d.source.name == "United States";
+    // initLink
+    //     .attr("d", linkArc)
+    //     .attr("stroke-dasharray", function (d) {
+    //         var totalLength = this.getTotalLength();
+    //         return totalLength + " " + totalLength;
     //     })
-    initLink
-        .attr("d", linkArc)
-        .attr("stroke-dasharray", function (d) {
-            var totalLength = this.getTotalLength();
-            return totalLength + " " + totalLength;
-        })
-        .attr("stroke-dashoffset", function (d) {
-            return this.getTotalLength();
-        })
-        .transition()
-        .duration(2000)
-        .attr("stroke-dashoffset", 0)
-        .attr("marker-end", "url(#arrow)")
+    //     .attr("stroke-dashoffset", function (d) {
+    //         return this.getTotalLength();
+    //     })
+    //     .transition()
+    //     .delay(function(d, i) { return i * 10; })
+    //     .duration(2000)
+    //     .attr("stroke-dashoffset", 0)
+    console.log(initLink)
+    initLink.each( function(link, i) {
+        // console.log(d3.select(this));
+        // console.log(initLink);
+        // console.log(d3.select(this));
+        d3.select(this)
+            .attr("d", linkArc)
+            .attr("stroke-dasharray", function (d) {
+                var totalLength = this.getTotalLength();
+                console.log(this.outerHTML);
+                return totalLength + " " + totalLength;
+            })
+            .attr("stroke-dashoffset", function (d) {
+                return this.getTotalLength();
+            })
+            .transition()
+            .duration(2000)
+            .attr("stroke-dashoffset", 0)
 
-    console.log(initLink.node());
-    var totalLength = initLink.node().getTotalLength();
+        var marker = svg.append("circle")
+            .style("fill", "#fff")
+            .attr("r", "2")
+            .moveToBack();
 
-    startPoint = pathStartPoint(link);
+        marker.transition()
+            .duration(2000)
+            .attrTween("transform", translateAlong(this));
+    });
 
-
-    var marker = svg.append("circle")
-        .style("fill", "#fff")
-        // .attr("points", "0,0 7.5,0 3.75,6.5")
-        .attr("r", "4")
-        // .attr("transform", "translate(" + startPoint + ")")
-        .moveToBack();
-
-    marker.transition()
-        .duration(2000)
-        .attrTween("transform", translateAlong(link.node()))
-
-    // link
-    // .transition()
-    // .duration(2000)
-    // .attr("stroke-dashoffset", function (d) {
-    //     console.log(d3.select(this).node().getTotalLength());
-    //     return d3.select(this).node().getTotalLength();
-    // });
-
-    
-    // .transition()
-    // .duration(2000)
-    // .attr("stroke-dashoffset", function (d) {
-        // d3.select(this).node().getTotalLength();
-    // });
+    // console.log(initLink.attr("d"))
 
     simulation.nodes(nodes);
     simulation.force("link").links(links);
     simulation.alpha(1).on("tick", ticked).restart();
 }
 
-  function translateAlong(path) {
+function translateAlong(path) {
     var l = path.getTotalLength();
     return function(i) {
-      return function(t) {
-        var p = path.getPointAtLength(t * l);
-        return "translate(" + p.x + "," + p.y + ")";//Move marker
-      }
+        return function(t) {
+            var p = path.getPointAtLength(t * l);
+            return "translate(" + p.x + "," + p.y + ")";//Move marker
+        }
     }
-  }
+}
 
 // Get path start point for placing marker
 function pathStartPoint(path) {
@@ -296,10 +355,7 @@ function ticked() {
 }
 
 function linkArc(d) {
-    var dx = d.target.x - d.source.x,
-        dy = d.target.y - d.source.y,
-        dr = Math.sqrt(dx * dx + dy * dy);
-
+    var dr = d.linknum + 250;
     return "M " + d.source.x + "," + d.source.y + " A " + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
 }
 

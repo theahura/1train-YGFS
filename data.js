@@ -12,7 +12,7 @@ function initialize() {
         "Donald Trump": {
             "name": "Donald Trump",
             "USA": true,
-            "index": 0,
+            "index": 1,
             "x": 100,
             "y": 100,
             "image": "http://media.boingboing.net/wp-content/uploads/2016/11/trump.jpg",
@@ -23,7 +23,7 @@ function initialize() {
         "Vladimir Putin": {
             "name": "Vladimir Putin",
             "USA": false,
-            "index": 1,
+            "index": 2,
             "x": 500,
             "y": 500,
             "image": "http://static2.businessinsider.com/image/5232093ceab8ea8a68966704/meet-the-pr-firm-that-helped-vladimir-putin-troll-the-entire-country.jpg",
@@ -34,7 +34,7 @@ function initialize() {
         "Ivanka Trump": {
             "name": "Ivanka Trump",
             "USA": true,
-            "index": 2,
+            "index": 3,
             "x": 300,
             "y": 500,
             "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Ivankatrump.jpg/170px-Ivankatrump.jpg",
