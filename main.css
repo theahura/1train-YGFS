@@ -8,22 +8,52 @@ body {
   margin: 0;
 
   background-color: #594D57;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .link {
   fill: none;
   stroke: #999;
   stroke-width: 1px;
-  opacity: 0.5;
 }
 
 g text {
-  font-family: 'Open Sans', sans-serif;
+}
+
+.intro-box {
+  pointer-events: none;
+  position: fixed;
+  padding-top: 10%;
+  padding-left: 10%;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  border: 1px solid black;
+  background-color: #EEE5BF;
+}
+
+.headline p {
+  font-size: 140%;
+  width: 50%;
+}
+
+.highlight {
+  color: #BA1200;
+}
+
+.part1 {
+  color: #9DD1F1;
+  font-size: 500%;
+}
+
+.part2 {
+  color: #BA1200;
+  font-size: 500%;
 }
 
 .description-box {
   display: none;
-  font-family: 'Open Sans', sans-serif;
   pointer-events: none;
   position: fixed;
   bottom: 5%; right: 5%;

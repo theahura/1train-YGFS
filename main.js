@@ -1,48 +1,67 @@
 // forked from http://bl.ocks.org/mbostock/1153292
 
-// nodes = {
-//     "Donald Trump": {
-//         "name": "United States",
-//         "USA": true,
-//         "index": 1,
-//         "x": 350,
-//         "y": 300,
-//         "image": "http://www.flags.net/images/largeflags/UNST0001.GIF",
-//         "description": "dick president",
-//         "source":"",
-//         "largeRadius": true
-//     },
-//     "Vladimir Putin": {
-//         "name": "Russia",
-//         "USA": false,
-//         "index": 2,
-//         "x": 850,
-//         "y": 300,
-//         "image": "https://upload.wikimedia.org/wikipedia/en/archive/f/f3/20120812153730%21Flag_of_Russia.svg",
-//         "description": "dick prime minister",
-//         "source":"",
-//         "largeRadius": true
-//     }
-// }
+var width = window.innerWidth,
+    height = window.innerHeight;
 
-//   links = [
-//       {
-//         "source": nodes["Donald Trump"],
-//         "target": nodes["Vladimir Putin"],
-//         "type": LINK_TYPE.Business,
-//         "index": 0,
-//         "linknum": 0,
-//         "confirmed": true
-//       },
-//       {
-//         "source": nodes["Donald Trump"],
-//         "target": nodes["Vladimir Putin"],
-//         "type": LINK_TYPE.Political,
-//         "index": 1,
-//         "linknum": 40,
-//         "confirmed": true
-//       }
-//   ];
+nodes = {
+    "Donald Trump": {
+        "name": "United States",
+        "USA": true,
+        "index": 1,
+        "x": width * 0.75,
+        "y": height * 0.7,
+        "image": "http://www.flags.net/images/largeflags/UNST0001.GIF",
+        "description": "dick president",
+        "source":"",
+        "largeRadius": true
+    },
+    "Vladimir Putin": {
+        "name": "Russia",
+        "USA": false,
+        "index": 2,
+        "x": width * 0.85,
+        "y": height * 0.3,
+        "image": "https://upload.wikimedia.org/wikipedia/en/archive/f/f3/20120812153730%21Flag_of_Russia.svg",
+        "description": "dick prime minister",
+        "source":"",
+        "largeRadius": true
+    }
+}
+
+  links = [
+      {
+        "source": nodes["Donald Trump"],
+        "target": nodes["Vladimir Putin"],
+        "type": LINK_TYPE.Default,
+        "index": 0,
+        "linknum": 0,
+        "confirmed": true
+      },
+      {
+        "source": nodes["Vladimir Putin"],
+        "target": nodes["Donald Trump"],
+        "type": LINK_TYPE.Default,
+        "index": 1,
+        "linknum": 2000,
+        "confirmed": true
+      },
+      {
+        "source": nodes["Donald Trump"],
+        "target": nodes["Vladimir Putin"],
+        "type": LINK_TYPE.Default,
+        "index": 2,
+        "linknum": 1000,
+        "confirmed": true
+      },
+      {
+        "source": nodes["Vladimir Putin"],
+        "target": nodes["Donald Trump"],
+        "type": LINK_TYPE.Default,
+        "index": 3,
+        "linknum": 0,
+        "confirmed": true
+      }
+  ];
 
 d3.selection.prototype.moveToBack = function() {  
     return this.each(function() { 
@@ -53,9 +72,6 @@ d3.selection.prototype.moveToBack = function() {
     });
 };
 
-var width = window.innerWidth,
-    height = window.innerHeight;
-
 var simulation = d3.forceSimulation(nodes)
     .force("link", d3.forceLink(links).distance(40))
     .alphaTarget(1)
@@ -65,54 +81,37 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-// for (var l in links) {
-//     svg.append("circle")
-//         .attr("class", function() {
-//             return "marker";
-//         })
-//         .style("fill", "#fff")
-//         .attr("r", "2")
-//         .attr("transform", "translate(350, 300)")
-//         .moveToBack();
-// }
+for (var l in links) {
+    svg.append("circle")
+        .attr("class", function() {
+            return "marker";
+        })
+        .style("fill", "#fff")
+        .attr("r", "2")
+        .attr("transform", "translate(" + width * 0.2 + ", " + height * 0.2 + ")")
+        .moveToBack();
+}
 
-  // function expand() {
-  //   $('.intro-text').fadeOut();
-  //   $('.svg-container').removeClass('intro');
-  //   $('.about-button').removeClass('intro');
-  //   simulation.restart();
-  //   var a1 = $(nodes["You"]).animate({x:21, px: 21});
-  //   var a2 = $(nodes["Donald Trump"]).animate({x:1121, px: 1121});
-  //   $.when( a1, a2 ).then(function() {
-  //     simulation.stop();
-  //     nodes = {};
-  //     links = [];
-  //     restart();
-  //     initData();
-  //     restart();
-  //     $('.ui-container').fadeIn(500);
-  //     panIfSmall();
-  //     $(window).resize(panIfSmall);
-  //     setTimeout(function() {
-  //       simulation.stop();
-  //     }, 5000);
-  //   });
-  // }
+function openGraph() {
+    alert(123);
+}
 
+// initialize();
 
+console.log(d3.values(nodes));
 svg.append("defs").selectAll("pattern")
     .data(d3.values(nodes))
     .enter()
     .append("pattern")
-                        .attr("id", function (d) { return d.index })
-                        .attr("height", 1)
-                        .attr("width", 1)
-                        .attr("x", "0")
-                        .attr("y", "0")
-                        .append("image")
-                        .attr("xlink:href", function (d) { return d.image })
-                        .attr("height", 0)
-                        .attr("width", 0);
+    .attr("id", function (d) { return "image" + d.index })
+    .attr("height", 100)
+    .attr("width", 100)
+    .attr("x", "0")
+    .attr("y", "0")
+    .append("image")
+    .attr("xlink:href", function (d) { return d.image })
+    .attr("height", 100)
+    .attr("width", 100);
 
 svg.append("defs").selectAll("marker")
     .data(["arrow"])
@@ -131,9 +130,8 @@ var g = svg.append("g"),
     link = g.append("g").selectAll("path"),
     node = g.append("g").selectAll("circle")
 
-// start();
-initialize();
-restart();
+start();
+// restart();
 
 function networkNodes(nData) {
     var queue = [nData];
@@ -160,14 +158,14 @@ function networkNodes(nData) {
 
     node.filter( function (d) {
         return !visitedNodes.has(d);
-    }).style("opacity", 0.5);
+    }).style("opacity", 0.2);
 
     link.filter( function (d) {
         return !visitedLinks.has(d);
-    }).style("opacity", 0.5);
+    }).style("opacity", 0.2);
 }
 
-function nodeBuild() {
+function nodeBuild(isStart) {
     node = node.data(d3.values(nodes), function (d) { return d.name;});
     node.exit().remove();
 
@@ -175,27 +173,54 @@ function nodeBuild() {
         .append("g")
         .attr("id", function(d) {
             return "node" + d.index;
-        });
+        })
+        .style("cursor", "default");
 
     var a = node.append("a")
-        .on("mouseover", function (d) {
-            networkNodes(d);
-            d3.select(this).style("cursor", "default");
-            d3.select(this.parentNode).selectAll("text").style("opacity", 0);
-            d3.select(this.parentNode).selectAll("circle").attr("fill", function (d) { return "url(#" + d.index + ")" });
-            $("#description-box").text(d.description);
-        })
-        .on("mouseout", function (d) { 
-            node.style("opacity", 1);
-            link.style("opacity", 1);
-            d3.select(this.parentNode).selectAll("text").style("opacity", 1);
-            d3.select(this.parentNode).selectAll("circle").attr("fill", "white") 
-        });
+
+    if (isStart) {
+        a
+            .on("mouseover", function (d) {
+                link.style("opacity", 0.2);
+                node.selectAll("text")
+                    .style("opacity", 0);
+                node.selectAll("circle")
+                    .attr("fill", function (d) { return "url(#image" + d.index + ")" });
+            })
+            .on("mouseout", function (d) {
+                link.style("opacity", 1);
+                node.selectAll("text")
+                    .style("opacity", 1);
+                node.selectAll("circle")
+                    .attr("fill", "white"); 
+            })
+    }
+    else {
+        a
+            .on("mouseover", function (d) {
+                networkNodes(d);
+                d3.select(this)
+                    .style("cursor", "default");
+                d3.select(this.parentNode).selectAll("text")
+                    .style("opacity", 0);
+                d3.select(this.parentNode).selectAll("circle")
+                    .attr("fill", function (d) { return "url(#image" + d.index + ")" });
+                $("#description-box").text(d.description);
+            })
+            .on("mouseout", function (d) { 
+                node.style("opacity", 1);
+                link.style("opacity", 1);
+                d3.select(this.parentNode).selectAll("text")
+                    .style("opacity", 1);
+                d3.select(this.parentNode).selectAll("circle")
+                    .attr("fill", "white") 
+            });
+    }
 
     a.append("circle")
         .attr("r", function (d) {
             if (d.largeRadius) {
-                return 95;
+                return 45;
             }
             else {
                 return 35;
@@ -212,6 +237,10 @@ function nodeBuild() {
             }
         });
 
+    // var image = a.append("image")
+    //     .attr("xlink:href", function (d) { return d.image });
+
+
     a.append("text")
         .attr("text-anchor", "middle")
         .attr("dy", 0.3)
@@ -223,7 +252,7 @@ function nodeBuild() {
 
 function start() {
 
-    nodeBuild();
+    nodeBuild(true);
 
     link = link.data(links, function (d) { return d.source.name + "-" + d.target.name; });
 
@@ -266,13 +295,36 @@ function start() {
         .transition()
         .duration(2000)
         .attrTween("transform", translateAlong(d3.select("#link0").node()))
+        
         .transition()
         .duration(2000)
         .attrTween("transform", translateAlong(d3.select("#link1").node()))
+        
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link2").node()))
+        
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link3").node()))
+
+
 
     simulation.nodes(nodes);
     simulation.force("link").links(links);
     simulation.alpha(1).on("tick", ticked).restart();
+}
+
+function networkLinks(lData) {
+
+    node.filter( function (d) {
+        return d.index != lData.source.index && d.index != lData.target.index;
+    }).style("opacity", 0.2);
+
+    link.filter( function (d) {
+        console.log(d.index)
+        return lData.index != d.index;
+    }).style("opacity", 0.2);
 }
 
 function restart() {
@@ -306,6 +358,13 @@ function restart() {
             }
         })
         .attr("marker-end", "url(#arrow)")
+        .on("mouseover", function (d) {
+            networkLinks(d);
+        })
+        .on("mouseout", function (d) {
+            node.style("opacity", 1);
+            link.style("opacity", 1);
+        })
 
     simulation.nodes(nodes);
     simulation.force("link").links(links);

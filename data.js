@@ -15,7 +15,7 @@ function initialize() {
             "index": 1,
             "x": 100,
             "y": 100,
-            "image": "http://media.boingboing.net/wp-content/uploads/2016/11/trump.jpg",
+            "image": "http://placekitten.com/g/48/48",
             "description": "dick president",
             "source":"",
         	"largeRadius": false
