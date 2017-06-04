@@ -1,48 +1,48 @@
 // forked from http://bl.ocks.org/mbostock/1153292
 
-nodes = {
-    "Donald Trump": {
-        "name": "United States",
-        "USA": true,
-        "index": 1,
-        "x": 350,
-        "y": 300,
-        "image": "http://www.flags.net/images/largeflags/UNST0001.GIF",
-        "description": "dick president",
-        "source":"",
-        "largeRadius": true
-    },
-    "Vladimir Putin": {
-        "name": "Russia",
-        "USA": false,
-        "index": 2,
-        "x": 850,
-        "y": 300,
-        "image": "https://upload.wikimedia.org/wikipedia/en/archive/f/f3/20120812153730%21Flag_of_Russia.svg",
-        "description": "dick prime minister",
-        "source":"",
-        "largeRadius": true
-    }
-}
+// nodes = {
+//     "Donald Trump": {
+//         "name": "United States",
+//         "USA": true,
+//         "index": 1,
+//         "x": 350,
+//         "y": 300,
+//         "image": "http://www.flags.net/images/largeflags/UNST0001.GIF",
+//         "description": "dick president",
+//         "source":"",
+//         "largeRadius": true
+//     },
+//     "Vladimir Putin": {
+//         "name": "Russia",
+//         "USA": false,
+//         "index": 2,
+//         "x": 850,
+//         "y": 300,
+//         "image": "https://upload.wikimedia.org/wikipedia/en/archive/f/f3/20120812153730%21Flag_of_Russia.svg",
+//         "description": "dick prime minister",
+//         "source":"",
+//         "largeRadius": true
+//     }
+// }
 
-  links = [
-      {
-        "source": nodes["Donald Trump"],
-        "target": nodes["Vladimir Putin"],
-        "type": LINK_TYPE.Default,
-        "index": 0,
-        "linknum": 0,
-        "confirmed": true
-      },
-      {
-        "source": nodes["Donald Trump"],
-        "target": nodes["Vladimir Putin"],
-        "type": LINK_TYPE.Default,
-        "index": 1,
-        "linknum": 40,
-        "confirmed": true
-      }
-  ];
+//   links = [
+//       {
+//         "source": nodes["Donald Trump"],
+//         "target": nodes["Vladimir Putin"],
+//         "type": LINK_TYPE.Business,
+//         "index": 0,
+//         "linknum": 0,
+//         "confirmed": true
+//       },
+//       {
+//         "source": nodes["Donald Trump"],
+//         "target": nodes["Vladimir Putin"],
+//         "type": LINK_TYPE.Political,
+//         "index": 1,
+//         "linknum": 40,
+//         "confirmed": true
+//       }
+//   ];
 
 d3.selection.prototype.moveToBack = function() {  
     return this.each(function() { 
@@ -65,16 +65,16 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-for (var l in links) {
-    svg.append("circle")
-        .attr("class", function() {
-            return "marker";
-        })
-        .style("fill", "#fff")
-        .attr("r", "2")
-        .attr("transform", "translate(350, 300)")
-        .moveToBack();
-}
+// for (var l in links) {
+//     svg.append("circle")
+//         .attr("class", function() {
+//             return "marker";
+//         })
+//         .style("fill", "#fff")
+//         .attr("r", "2")
+//         .attr("transform", "translate(350, 300)")
+//         .moveToBack();
+// }
 
   // function expand() {
   //   $('.intro-text').fadeOut();
@@ -99,7 +99,6 @@ for (var l in links) {
   //   });
   // }
 
-// initialize();
 
 svg.append("defs").selectAll("pattern")
     .data(d3.values(nodes))
@@ -132,22 +131,63 @@ var g = svg.append("g"),
     link = g.append("g").selectAll("path"),
     node = g.append("g").selectAll("circle")
 
-start();
+// start();
+initialize();
+restart();
+
+function networkNodes(nData) {
+    var queue = [nData];
+    var visitedNodes = new Set();
+    var visitedLinks = new Set();
+
+    while (queue.length > 0) {
+        var n = queue.shift();
+
+        if (!visitedNodes.has(n)) {
+            visitedNodes.add(n);
+
+            for (var l in links) {
+                var parent = links[l].source;
+                var child = links[l].target;
+
+                if (parent == n && !visitedNodes.has(child)) {
+                    queue.push(child);
+                    visitedLinks.add(links[l]);
+                }
+            }
+        }
+    }
+
+    node.filter( function (d) {
+        return !visitedNodes.has(d);
+    }).style("opacity", 0.5);
+
+    link.filter( function (d) {
+        return !visitedLinks.has(d);
+    }).style("opacity", 0.5);
+}
 
 function nodeBuild() {
     node = node.data(d3.values(nodes), function (d) { return d.name;});
     node.exit().remove();
 
-    node = node.enter().append("g")
+    node = node.enter()
+        .append("g")
+        .attr("id", function(d) {
+            return "node" + d.index;
+        });
 
     var a = node.append("a")
         .on("mouseover", function (d) {
+            networkNodes(d);
             d3.select(this).style("cursor", "default");
             d3.select(this.parentNode).selectAll("text").style("opacity", 0);
             d3.select(this.parentNode).selectAll("circle").attr("fill", function (d) { return "url(#" + d.index + ")" });
             $("#description-box").text(d.description);
         })
         .on("mouseout", function (d) { 
+            node.style("opacity", 1);
+            link.style("opacity", 1);
             d3.select(this.parentNode).selectAll("text").style("opacity", 1);
             d3.select(this.parentNode).selectAll("circle").attr("fill", "white") 
         });
@@ -221,6 +261,7 @@ function start() {
         .duration(2000)
         .attr("stroke-dashoffset", 0);
 
+    // add another transition for every new initial link
     d3.selectAll("circle.marker")
         .transition()
         .duration(2000)
@@ -243,13 +284,11 @@ function restart() {
     link = link.enter().append("path")
         .attr("class", function (d) { return "link " + d.type; })
         .style("stroke-dasharray", function (d) {
-            if (d.source.name != "United States") {
-                if (d.confirmed) {
-                    return d3.select(this).node().getTotalLength();
-                }
-                else {
-                    return 3;
-                }
+            if (d.confirmed) {
+                return d3.select(this).node().getTotalLength();
+            }
+            else {
+                return 3;
             }
         })
         .style("stroke", function (d) {
@@ -267,52 +306,6 @@ function restart() {
             }
         })
         .attr("marker-end", "url(#arrow)")
-    
-    var initLink = d3.selectAll("link default");
-
-    // initLink
-    //     .attr("d", linkArc)
-    //     .attr("stroke-dasharray", function (d) {
-    //         var totalLength = this.getTotalLength();
-    //         return totalLength + " " + totalLength;
-    //     })
-    //     .attr("stroke-dashoffset", function (d) {
-    //         return this.getTotalLength();
-    //     })
-    //     .transition()
-    //     .delay(function(d, i) { return i * 10; })
-    //     .duration(2000)
-    //     .attr("stroke-dashoffset", 0)
-    console.log(initLink)
-    initLink.each( function(link, i) {
-        // console.log(d3.select(this));
-        // console.log(initLink);
-        // console.log(d3.select(this));
-        d3.select(this)
-            .attr("d", linkArc)
-            .attr("stroke-dasharray", function (d) {
-                var totalLength = this.getTotalLength();
-                console.log(this.outerHTML);
-                return totalLength + " " + totalLength;
-            })
-            .attr("stroke-dashoffset", function (d) {
-                return this.getTotalLength();
-            })
-            .transition()
-            .duration(2000)
-            .attr("stroke-dashoffset", 0)
-
-        var marker = svg.append("circle")
-            .style("fill", "#fff")
-            .attr("r", "2")
-            .moveToBack();
-
-        marker.transition()
-            .duration(2000)
-            .attrTween("transform", translateAlong(this));
-    });
-
-    // console.log(initLink.attr("d"))
 
     simulation.nodes(nodes);
     simulation.force("link").links(links);
@@ -344,7 +337,15 @@ function ticked() {
 }
 
 function linkArc(d) {
-    var dr = d.linknum + 250;
+    if (d.linknum) {
+        var dr = d.linknum + 250;
+    }
+    else {
+    var dx = d.target.x - d.source.x,
+        dy = d.target.y - d.source.y,
+        dr = Math.sqrt(dx * dx + dy * dy);
+    }
+
     return "M " + d.source.x + "," + d.source.y + " A " + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
 }
 
