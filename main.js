@@ -97,9 +97,9 @@ function openGraph() {
     d3.selectAll("circle.marker").remove();
 
     node.selectAll("text")
-        .style("opacity", 1);
+        .style("opacity", 0);
     node.selectAll("circle")
-        .attr("fill", "white"); 
+        .attr("fill", function (d) { return "url(#image" + d.index + ")" });
 
     node.selectAll("a").on("mouseover", null);
     node.selectAll("a").on("mouseout", null);
@@ -133,12 +133,6 @@ function openGraph() {
         .queue( function() {
             $(".intro-box").animate({"width": 0, "padding-left": 0})
         });
-    
-    // d3.selectAll("pattern").remove();
-    
-    // .transition()
-    // .duration(2000)
-
 }
 
 function nodePrebuild() {
