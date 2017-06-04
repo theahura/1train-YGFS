@@ -1,77 +1,5 @@
 // forked from http://bl.ocks.org/mbostock/1153292
 
-var width = window.innerWidth,
-    height = window.innerHeight;
-
-nodes = {
-    "Donald Trump": {
-        "name": "United States",
-        "USA": true,
-        "index": 1,
-        "x": width * 0.75,
-        "y": height * 0.7,
-        "image": "http://www.flags.net/images/largeflags/UNST0001.GIF",
-        "description": "dick president",
-        "source":"",
-        "largeRadius": true
-    },
-    "Vladimir Putin": {
-        "name": "Russia",
-        "USA": false,
-        "index": 2,
-        "x": width * 0.85,
-        "y": height * 0.3,
-        "image": "https://upload.wikimedia.org/wikipedia/en/archive/f/f3/20120812153730%21Flag_of_Russia.svg",
-        "description": "dick prime minister",
-        "source":"",
-        "largeRadius": true
-    }
-}
-
-  links = [
-      {
-        "source": nodes["Donald Trump"],
-        "target": nodes["Vladimir Putin"],
-        "type": LINK_TYPE.Default,
-        "index": 0,
-        "linknum": 0,
-        "confirmed": true
-      },
-      {
-        "source": nodes["Vladimir Putin"],
-        "target": nodes["Donald Trump"],
-        "type": LINK_TYPE.Default,
-        "index": 1,
-        "linknum": 2000,
-        "confirmed": true
-      },
-      {
-        "source": nodes["Donald Trump"],
-        "target": nodes["Vladimir Putin"],
-        "type": LINK_TYPE.Default,
-        "index": 2,
-        "linknum": 1000,
-        "confirmed": true
-      },
-      {
-        "source": nodes["Vladimir Putin"],
-        "target": nodes["Donald Trump"],
-        "type": LINK_TYPE.Default,
-        "index": 3,
-        "linknum": 0,
-        "confirmed": true
-      }
-  ];
-
-d3.selection.prototype.moveToBack = function() {  
-    return this.each(function() { 
-        var firstChild = this.parentNode.firstChild; 
-        if (firstChild) { 
-            this.parentNode.insertBefore(this, firstChild); 
-        } 
-    });
-};
-
 var simulation = d3.forceSimulation(nodes)
     .force("link", d3.forceLink(links).distance(40))
     .alphaTarget(1)
@@ -80,33 +8,6 @@ var simulation = d3.forceSimulation(nodes)
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
-
-for (var l in links) {
-    svg.append("circle")
-        .attr("class", function() {
-            return "marker";
-        })
-        .style("fill", "#fff")
-        .attr("r", "2")
-        .attr("transform", "translate(" + width * 0.2 + ", " + height * 0.2 + ")")
-        .moveToBack();
-}
-
-// initialize();
-
-svg.append("defs").selectAll("pattern")
-    .data(d3.values(nodes))
-    .enter()
-    .append("pattern")
-    .attr("id", function (d) { return "image" + d.index })
-    .attr("height", 100)
-    .attr("width", 100)
-    .attr("x", "0")
-    .attr("y", "0")
-    .append("image")
-    .attr("xlink:href", function (d) { return d.image })
-    .attr("height", 100)
-    .attr("width", 100);
 
 svg.append("defs").selectAll("marker")
     .data(["arrow"])
@@ -121,12 +22,40 @@ svg.append("defs").selectAll("marker")
     .append("path")
     .attr("d", "M0,-5L10,0L0,5");
 
+for (var l in links) {
+    svg.append("circle")
+        .attr("class", function() {
+            return "marker";
+        })
+        .style("fill", "#fff")
+        .attr("r", "2")
+        .attr("transform", "translate(" + width * 0.2 + ", " + height * 0.2 + ")")
+        .moveToBack();
+}
+
 var g = svg.append("g"),
     link = g.append("g").selectAll("path"),
     node = g.append("g").selectAll("circle")
 
+nodeImages();
+
+function nodeImages() {
+    svg.append("defs").selectAll("pattern")
+        .data(d3.values(nodes))
+        .enter()
+        .append("pattern")
+            .attr("id", function (d) { return "image" + d.index })
+            .attr("height", 100)
+            .attr("width", 100)
+            .attr("x", "0")
+            .attr("y", "0")
+        .append("image")
+            .attr("xlink:href", function (d) { return d.image })
+            .attr("height", 100)
+            .attr("width", 100);
+}
+
 start();
-// restart();
 
 function networkNodes(nData) {
     var queue = [nData];
@@ -161,17 +90,71 @@ function networkNodes(nData) {
 }
 
 function openGraph() {
+
+    simulation.stop();
+
+    link.remove()
+    d3.selectAll("circle.marker").remove();
+
+    node.selectAll("text")
+        .style("opacity", 1);
+    node.selectAll("circle")
+        .attr("fill", "white"); 
+
+    node.selectAll("a").on("mouseover", null);
+    node.selectAll("a").on("mouseout", null);
+
+    node.filter( function (d) {
+        return d.index == 1;
+    })
+    .transition()
+        .duration(2000)
+        .attr("transform", "translate(" + width * 0.1 + "," + height * 0.5 + ")")
+    .transition()
+        .duration(200)
+        .style("opacity", 0)
+
+    node.filter( function (d) {
+        return d.index == 2;
+    })
+    .transition()
+        .duration(2000)
+        .attr("transform", "translate(" + width * 0.9 + "," + height * 0.5 + ")")
+    .transition()
+        .duration(200)
+        .style("opacity", 0)
+    .on("end", function (d) {
+        nodePrebuild();
+    });
+    
     $(".intro-subbox")
         .animate({"opacity": 0})
         .delay(200)
         .queue( function() {
             $(".intro-box").animate({"width": 0, "padding-left": 0})
-        })
+        });
+    
+    // d3.selectAll("pattern").remove();
+    
+    // .transition()
+    // .duration(2000)
+
+}
+
+function nodePrebuild() {
+    node = node.data(d3.values(nodes), function (d) { return d.name;});
+    node.exit().remove()
+        // .transition()
+        // .duration(2000)
+        // .style("opacity", 0)
+        // .on("end", function (d) {
+            // console.log(1234);
+            restart();
+        // });
 }
 
 function nodeBuild(isStart) {
     node = node.data(d3.values(nodes), function (d) { return d.name;});
-    node.exit().remove();
 
     node = node.enter()
         .append("g")
@@ -184,6 +167,7 @@ function nodeBuild(isStart) {
     if (isStart) {
         a
             .on("mouseover", function (d) {
+                console.log(123);
                 link.style("opacity", 0.2);
                 node.selectAll("text")
                     .style("opacity", 0);
@@ -203,6 +187,10 @@ function nodeBuild(isStart) {
             });
     }
     else {
+        node.style("opacity", 0)
+            .transition()
+            .duration(200)
+            .style("opacity", 1);
         a
             .on("mouseover", function (d) {
                 networkNodes(d);
@@ -225,14 +213,7 @@ function nodeBuild(isStart) {
     }
 
     a.append("circle")
-        .attr("r", function (d) {
-            if (d.largeRadius) {
-                return 45;
-            }
-            else {
-                return 35;
-            }
-        })
+        .attr("r", 35)
         .attr("fill", "white")
         .attr("stroke-width", 3)
         .attr("stroke", function (d) {
@@ -243,10 +224,6 @@ function nodeBuild(isStart) {
                 return "#BA6157";
             }
         });
-
-    // var image = a.append("image")
-    //     .attr("xlink:href", function (d) { return d.image });
-
 
     a.append("text")
         .attr("text-anchor", "middle")
@@ -336,7 +313,9 @@ function networkLinks(lData) {
 
 function restart() {
 
-    nodeBuild();
+    dataBuild();
+    nodeImages();
+    nodeBuild(false);
 
     link = link.data(links, function (d) { return d.source.name + "-" + d.target.name; });
 
@@ -372,6 +351,12 @@ function restart() {
             node.style("opacity", 1);
             link.style("opacity", 1);
         })
+        
+    link
+        .style("opacity", 0)    
+        .transition()
+        .duration(200)
+        .style("opacity", 1);
 
     simulation.nodes(nodes);
     simulation.force("link").links(links);

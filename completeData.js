@@ -1,20 +1,11 @@
-var nodes, links;
-
-var LINK_TYPE = {
-  Business: "business",
-  Political: "political",
-  Personal: "personal",
-  Default: "default"
-}
-
-function initialize() {
+function dataBuild() {
 	nodes = {
         "Donald Trump": {
             "name": "Donald Trump",
             "USA": true,
             "index": 1,
-            "x": 100,
-            "y": 100,
+            "x": width * 0.1,
+            "y": height * 0.5,
             "image": "http://placekitten.com/g/48/48",
             "description": "dick president",
             "source":"",
@@ -24,8 +15,8 @@ function initialize() {
             "name": "Vladimir Putin",
             "USA": false,
             "index": 2,
-            "x": 450,
-            "y": 300,
+	        "x": width * 0.9,
+	        "y": height * 0.5,
             "image": "http://static2.businessinsider.com/image/5232093ceab8ea8a68966704/meet-the-pr-firm-that-helped-vladimir-putin-troll-the-entire-country.jpg",
             "description": "dick prime minister",
             "source":"",
