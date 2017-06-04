@@ -92,13 +92,8 @@ for (var l in links) {
         .moveToBack();
 }
 
-function openGraph() {
-    alert(123);
-}
-
 // initialize();
 
-console.log(d3.values(nodes));
 svg.append("defs").selectAll("pattern")
     .data(d3.values(nodes))
     .enter()
@@ -165,6 +160,15 @@ function networkNodes(nData) {
     }).style("opacity", 0.2);
 }
 
+function openGraph() {
+    $(".intro-subbox")
+        .animate({"opacity": 0})
+        .delay(200)
+        .queue( function() {
+            $(".intro-box").animate({"width": 0, "padding-left": 0})
+        })
+}
+
 function nodeBuild(isStart) {
     node = node.data(d3.values(nodes), function (d) { return d.name;});
     node.exit().remove();
@@ -173,8 +177,7 @@ function nodeBuild(isStart) {
         .append("g")
         .attr("id", function(d) {
             return "node" + d.index;
-        })
-        .style("cursor", "default");
+        });
 
     var a = node.append("a")
 
@@ -186,6 +189,7 @@ function nodeBuild(isStart) {
                     .style("opacity", 0);
                 node.selectAll("circle")
                     .attr("fill", function (d) { return "url(#image" + d.index + ")" });
+                node.style("cursor", "pointer");
             })
             .on("mouseout", function (d) {
                 link.style("opacity", 1);
@@ -194,6 +198,9 @@ function nodeBuild(isStart) {
                 node.selectAll("circle")
                     .attr("fill", "white"); 
             })
+            .on("click", function() {
+                openGraph();
+            });
     }
     else {
         a
