@@ -28,7 +28,7 @@ nodes = {
         "index": 1,
         "x": width * 0.75,
         "y": height * 0.7,
-        "image": "http://www.flags.net/images/largeflags/UNST0001.GIF"
+        "image": "american-flag.png"
     },
     "Russia": {
         "name": "Russia",
@@ -36,7 +36,7 @@ nodes = {
         "index": 2,
         "x": width * 0.85,
         "y": height * 0.3,
-        "image": "https://upload.wikimedia.org/wikipedia/en/archive/f/f3/20120812153730%21Flag_of_Russia.svg"
+        "image": "russia-flag.png"
     }
 }
 

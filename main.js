@@ -27,7 +27,7 @@ for (var l in links) {
         .attr("class", function() {
             return "marker";
         })
-        .style("fill", "#fff")
+        .style("fill", "#000")
         .attr("r", "2")
         .attr("transform", "translate(" + width * 0.2 + ", " + height * 0.2 + ")")
         .moveToBack();
@@ -45,14 +45,14 @@ function nodeImages() {
         .enter()
         .append("pattern")
             .attr("id", function (d) { return "image" + d.index })
-            .attr("height", 100)
-            .attr("width", 100)
+            .attr("height", 10)
+            .attr("width", 10)
             .attr("x", "0")
             .attr("y", "0")
         .append("image")
             .attr("xlink:href", function (d) { return d.image })
-            .attr("height", 100)
-            .attr("width", 100);
+            .attr("height", 70)
+            .attr("width", 70);
 }
 
 start();
@@ -347,18 +347,7 @@ function start() {
         .attr("class", function (d) { return "link " })
         .attr("id", function (d) { return "link" + d.index; })
         .style("stroke", function (d) {
-            if (d.type == LINK_TYPE.Business) {
-                return "#8FD5A6"
-            }
-            else if (d.type == LINK_TYPE.Political) {
-                return "#FC7753"
-            }
-            else if (d.type == LINK_TYPE.Personal) {
-                return "#EB5160"
-            }
-            else {
-                return "FFF"
-            }
+            return "#000"
         });
 
     link

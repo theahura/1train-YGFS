@@ -7,7 +7,7 @@ body {
   padding: 0;
   margin: 0;
 
-  background-color: #594D57;
+  background-color: #F9E8C0;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -15,9 +15,6 @@ body {
   fill: none;
   stroke: #999;
   stroke-width: 1px;
-}
-
-g text {
 }
 
 .intro-box {
@@ -29,13 +26,13 @@ g text {
   left: 0;
   width: 50%;
   height: 100%;
-  border: 1px solid black;
-  background-color: #EEE5BF;
+  background-color: #001427;
 }
 
 .intro-subbox p {
-  font-size: 140%;
-  width: 50%;
+  font-size: 130%;
+  width: 64%;
+  color: #fff;
 }
 
 .highlight {
@@ -43,7 +40,7 @@ g text {
 }
 
 .part1 {
-  color: #9DD1F1;
+  color: #fff;
   font-size: 500%;
 }
 
