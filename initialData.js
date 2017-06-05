@@ -3,10 +3,22 @@ var width = window.innerWidth,
     nodes, links;
 
 var LINK_TYPE = {
-  Business: "business",
-  Political: "political",
-  Personal: "personal",
-  Default: "default"
+    Business: {
+        name: "business",
+        color: "#8FD5A6"
+    },
+    Political: {
+        name: "political",
+        color: "#FC7753"
+    },
+    Personal: {
+        name: "personal",
+        color: "#EB5160"
+    },
+    Default: {
+        name: "default",
+        color: "#FFF"
+    }
 }
 
 nodes = {

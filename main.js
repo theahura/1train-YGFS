@@ -133,6 +133,39 @@ function openGraph() {
         .queue( function() {
             $(".intro-box").animate({"width": 0, "padding-left": 0})
         });
+
+    $(".description-box")
+        .delay(500)
+        .animate({"opacity": 1}, 1500)
+
+    for (var l in LINK_TYPE) {
+        populateDescriptionBox(LINK_TYPE[l].color, LINK_TYPE[l].name);
+    }
+    // var div = 
+
+    // div.append('span').text(l.annotation)
+}
+
+function populateDescriptionBox(color, name) {
+    var div = d3.select('.description-subbox')
+        .append('div')
+
+    div
+        .append('svg')
+            .attr('height', 10)
+            .attr('width', 50)
+        .append('path')
+            .attr('d', "M0 7 l50 0")
+            .style("stroke", function (d) {
+                return color;
+            });
+
+    div
+        .append('span')
+        .attr("class", "description-link")
+        .text( function (d) {
+            return name;
+        });
 }
 
 function nodePrebuild() {
