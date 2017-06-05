@@ -24,7 +24,8 @@ nodes = {
         "index": 1,
         "x": width * 0.75,
         "y": height * 0.7,
-        "image": "american-flag.png"
+        "image": "american-flag.png",
+        "source": "http://flaglane.com/download/american-flag/american-flag-large.png"
     },
     "Russia": {
         "name": "Russia",
@@ -32,7 +33,8 @@ nodes = {
         "index": 2,
         "x": width * 0.85,
         "y": height * 0.3,
-        "image": "russia-flag.png"
+        "image": "russia-flag.png",
+        "source": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Flag_of_Russia.png"
     }
 }
 

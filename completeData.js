@@ -6,7 +6,9 @@ function dataBuild() {
             "index": 1,
             "x": width * 0.1,
             "y": height * 0.5,
-            "image": "http://placekitten.com/g/48/48",
+            "image": "donald-trump.png",
+            "source_name": "National Review",
+            "source_url": "http://c10.nrostatic.com/sites/default/files/styles/original_image_with_cropping/public/uploaded/donald-trump-grow-up.jpg?itok=n1PW3Myr",
             "description": "dick president"
         },
         "Vladimir Putin": {
@@ -15,7 +17,9 @@ function dataBuild() {
             "index": 2,
 	        "x": width * 0.9,
 	        "y": height * 0.5,
-            "image": "http://static2.businessinsider.com/image/5232093ceab8ea8a68966704/meet-the-pr-firm-that-helped-vladimir-putin-troll-the-entire-country.jpg",
+            "image": "vladimir-putin.png",
+            "source_name": "Daily Express",
+            "source_url": "http://cdn.images.express.co.uk/img/dynamic/galleries/x701/73375.jpg",
             "description": "dick prime minister"
         },
         "Ivanka Trump": {
@@ -24,7 +28,9 @@ function dataBuild() {
             "index": 3,
             "x": 300,
             "y": 300,
-            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Ivankatrump.jpg/170px-Ivankatrump.jpg",
+            "image": "ivanka-trump.png",
+            "source_name": "Yahoo",
+            "source_url": "https://s.yimg.com/uu/api/res/1.2/U7k0xM2ymzzM1MgSz_2kYQ--/cT04NTtzbT0xO2FwcGlkPXl0YWNoeW9u/http://media.zenfs.com/en-US/homerun/time_72/a99ef0edcd3745f65a4bf61a1f67373b",
             "description": "dick president's daughter"
         },
         "Rex Tillerson": {

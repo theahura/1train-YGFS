@@ -97,55 +97,53 @@ function networkNodes(nData) {
 }
 
 function populatePOIBox(nData) {
-    d3.select(".poi-title")
-        .remove();
+    // d3.select(".poi-title")
+        // .remove();
 
-    var container = d3.select(".poi-subbox")
-        .style("opacity", 0);
+    d3.select(".poi-box")
+        // .transition()
+        // .duration(200)
+        .style("opacity", 1);
 
-    container.append("div")
-        .attr("class", "poi-name")
+    d3.select(".poi-name")
         .text( function (d) {
             return nData.name;
         });
 
-    container.append("p")
-        .attr("class", "poi-description")
+    d3.select(".poi-description")
         .text( function (d) {
             return nData.description;
         });
-
-    container
-        .transition()
-        .duration(200)
-        .style("opacity", 1);
 }
 
 function defaultPOIBox() {
-    d3.selectAll(".poi-name, .poi-description")
-        .remove();
-        
-    var container = d3.select(".poi-subbox")
+
+    var container = d3.select(".poi-box")
         .style("opacity", 0);
+    // d3.selectAll(".poi-name, .poi-description")
+    //     .remove();
+        
+    // var container = d3.select(".poi-subbox")
+    //     .style("opacity", 0);
 
-    var title = container
-        .append("div")
-        .attr("class", "poi-title");
+    // var title = container
+    //     .append("div")
+    //     .attr("class", "poi-title");
 
-    title
-        .append('span')
-        .attr("class", "part1")
-        .text("Your Gov");
+    // title
+    //     .append('span')
+    //     .attr("class", "part1")
+    //     .text("Your Gov");
 
-    title
-        .append('span')
-        .attr("class", "part2")
-        .text("FOR SALE");
+    // title
+    //     .append('span')
+    //     .attr("class", "part2")
+    //     .text("FOR SALE");
 
-    container
-        .transition()
-        .duration(200)
-        .style("opacity", 1);
+    // container
+    //     .transition()
+    //     .duration(200)
+    //     .style("opacity", 0);
 }
 
 function openGraph() {
@@ -202,7 +200,6 @@ function openGraph() {
         .animate({"opacity": 1}, 1500)
 
     defaultDescriptionBox();
-    defaultPOIBox();
 }
 
 function clearDescriptionBox() {
