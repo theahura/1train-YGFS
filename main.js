@@ -98,9 +98,6 @@ function networkNodes(nData) {
 
 function populatePOIBox(nData) {
     d3.select(".poi-title")
-        // .transition()
-        // .duration(200)
-        // .style("opacity", 1)
         .remove();
 
     var container = d3.select(".poi-subbox")
@@ -246,13 +243,7 @@ function defaultDescriptionBox() {
 function nodePrebuild() {
     node = node.data(d3.values(nodes), function (d) { return d.name;});
     node.exit().remove()
-        // .transition()
-        // .duration(2000)
-        // .style("opacity", 0)
-        // .on("end", function (d) {
-            // console.log(1234);
-            restart();
-        // });
+    restart();
 }
 
 function nodeBuild(isStart) {
@@ -321,10 +312,10 @@ function nodeBuild(isStart) {
         .attr("stroke-width", 3)
         .attr("stroke", function (d) {
             if (d.USA) {
-                return "#9DD1F1";
+                return "#2E3E4E";
             }
             else {
-                return "#BA6157";
+                return "#BF0603";
             }
         });
 
@@ -437,19 +428,8 @@ function restart() {
             }
         })
         .style("stroke", function (d) {
-            if (d.type == LINK_TYPE.Business) {
-                return "#8FD5A6"
-            }
-            else if (d.type == LINK_TYPE.Political) {
-                return "#FC7753"
-            }
-            else if (d.type == LINK_TYPE.Personal) {
-                return "#EB5160"
-            }
-            else {
-                return "FFF"
-            }
-        })
+                return d.type.color
+            })
         .attr("marker-end", "url(#arrow)")
         .on("mouseover", function (d) {
             networkLinks(d);

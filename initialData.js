@@ -14,10 +14,6 @@ var LINK_TYPE = {
     Personal: {
         name: "personal",
         color: "#EB5160"
-    },
-    Default: {
-        name: "default",
-        color: "#FFF"
     }
 }
 
@@ -45,56 +41,48 @@ links = [
   {
     "source": nodes["United States"],
     "target": nodes["Russia"],
-    "type": LINK_TYPE.Default,
     "linknum": 1000,
     "confirmed": true
   },
   {
     "source": nodes["Russia"],
     "target": nodes["United States"],
-    "type": LINK_TYPE.Default,
     "linknum": 1000,
     "confirmed": true
   },
   {
     "source": nodes["United States"],
     "target": nodes["Russia"],
-    "type": LINK_TYPE.Default,
     "linknum": 0,
     "confirmed": true
   },
   {
     "source": nodes["Russia"],
     "target": nodes["United States"],
-    "type": LINK_TYPE.Default,
     "linknum": 0,
     "confirmed": true
   },
   {
     "source": nodes["United States"],
     "target": nodes["Russia"],
-    "type": LINK_TYPE.Default,
     "linknum": 30,
     "confirmed": true
   },
   {
     "source": nodes["Russia"],
     "target": nodes["United States"],
-    "type": LINK_TYPE.Default,
     "linknum": 30,
     "confirmed": true
   },
   {
     "source": nodes["United States"],
     "target": nodes["Russia"],
-    "type": LINK_TYPE.Default,
     "linknum": 60,
     "confirmed": true
   },
   {
     "source": nodes["Russia"],
     "target": nodes["United States"],
-    "type": LINK_TYPE.Default,
     "linknum": 60,
     "confirmed": true
   }
