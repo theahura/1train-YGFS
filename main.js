@@ -13,11 +13,11 @@ svg.append("defs").selectAll("marker")
     .data(["arrow"])
     .enter().append("marker")
     .attr("id", function (d) { return d; })
-    .attr("viewBox", "0 -5 10 10")
-    .attr("refX", 55)
-    .attr("refY", -2)
-    .attr("markerWidth", 8)
-    .attr("markerHeight", 8)
+    .attr("viewBox", "0 0 10 10")
+    .attr("refX", 69)
+    .attr("refY", -4)
+    .attr("markerWidth", 3)
+    .attr("markerHeight", 6)
     .attr("orient", "auto")
     .append("path")
     .attr("d", "M0,-5L10,0L0,5");
@@ -336,7 +336,8 @@ function start() {
         .attr("id", function (d) { return "link" + d.index; })
         .style("stroke", function (d) {
             return "#000"
-        });
+        })
+        .style("stroke-width", 2);
 
     link
         .attr("d", linkArc)
@@ -425,16 +426,17 @@ function restart() {
             }
         })
         .style("stroke", function (d) {
-                return d.type.color
-            })
+            return d.type.color
+        })
+        .style("stroke-width", 2)
         .attr("marker-end", "url(#arrow)")
-        .on("mouseover", function (d) {
-            networkLinks(d);
-        })
-        .on("mouseout", function (d) {
-            node.style("opacity", 1);
-            link.style("opacity", 1);
-        })
+        // .on("mouseover", function (d) {
+        //     networkLinks(d);
+        // })
+        // .on("mouseout", function (d) {
+        //     node.style("opacity", 1);
+        //     link.style("opacity", 1);
+        // })
         
     link
         .style("opacity", 0)    

@@ -5,15 +5,15 @@ var width = window.innerWidth,
 var LINK_TYPE = {
     Business: {
         name: "business",
-        color: "#8FD5A6"
+        color: "#3E4D47"
     },
     Political: {
         name: "political",
-        color: "#FC7753"
+        color: "#BF0603"
     },
     Personal: {
         name: "personal",
-        color: "#EB5160"
+        color: "#455461"
     }
 }
 
