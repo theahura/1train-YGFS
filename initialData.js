@@ -29,8 +29,7 @@ nodes = {
         "x": width * 0.75,
         "y": height * 0.7,
         "image": "http://www.flags.net/images/largeflags/UNST0001.GIF",
-        "description": "dick president",
-        "source":""
+        "description": "dick president"
     },
     "Vladimir Putin": {
         "name": "Russia",
@@ -39,8 +38,7 @@ nodes = {
         "x": width * 0.85,
         "y": height * 0.3,
         "image": "https://upload.wikimedia.org/wikipedia/en/archive/f/f3/20120812153730%21Flag_of_Russia.svg",
-        "description": "dick prime minister",
-        "source":""
+        "description": "dick prime minister"
     }
 }
 

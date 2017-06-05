@@ -63,6 +63,7 @@ g text {
   padding: 1%;
 }
 
-.description-link {
+.description-path {
   padding-left: 10px;
+  font-size: 60%;
 }

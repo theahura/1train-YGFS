@@ -87,6 +87,11 @@ function networkNodes(nData) {
     link.filter( function (d) {
         return !visitedLinks.has(d);
     }).style("opacity", 0.2);
+
+    clearDescriptionBox();
+    for (let l of visitedLinks) {
+        populateDescriptionBox(l.type.color, l.description)
+    }
 }
 
 function openGraph() {
@@ -138,15 +143,15 @@ function openGraph() {
         .delay(500)
         .animate({"opacity": 1}, 1500)
 
-    for (var l in LINK_TYPE) {
-        populateDescriptionBox(LINK_TYPE[l].color, LINK_TYPE[l].name);
-    }
-    // var div = 
-
-    // div.append('span').text(l.annotation)
+    defaultDescriptionBox();
 }
 
-function populateDescriptionBox(color, name) {
+function clearDescriptionBox() {
+    d3.select('.description-subbox').selectAll("div").remove()
+}
+
+function populateDescriptionBox(color, label) {
+
     var div = d3.select('.description-subbox')
         .append('div')
 
@@ -162,10 +167,18 @@ function populateDescriptionBox(color, name) {
 
     div
         .append('span')
-        .attr("class", "description-link")
+        .attr("class", "description-path")
         .text( function (d) {
-            return name;
+            return label;
         });
+}
+
+function defaultDescriptionBox() {
+
+    clearDescriptionBox();
+    for (var l in LINK_TYPE) {
+        populateDescriptionBox(LINK_TYPE[l].color, LINK_TYPE[l].name);
+    }
 }
 
 function nodePrebuild() {
@@ -194,7 +207,6 @@ function nodeBuild(isStart) {
     if (isStart) {
         a
             .on("mouseover", function (d) {
-                console.log(123);
                 link.style("opacity", 0.2);
                 node.selectAll("text")
                     .style("opacity", 0);
@@ -229,7 +241,8 @@ function nodeBuild(isStart) {
                     .attr("fill", function (d) { return "url(#image" + d.index + ")" });
                 $("#description-box").text(d.description);
             })
-            .on("mouseout", function (d) { 
+            .on("mouseout", function (d) {
+                defaultDescriptionBox(); 
                 node.style("opacity", 1);
                 link.style("opacity", 1);
                 d3.select(this.parentNode).selectAll("text")
@@ -333,7 +346,6 @@ function networkLinks(lData) {
     }).style("opacity", 0.2);
 
     link.filter( function (d) {
-        console.log(d.index)
         return lData.index != d.index;
     }).style("opacity", 0.2);
 }
