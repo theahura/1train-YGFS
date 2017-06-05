@@ -52,18 +52,40 @@ g text {
   font-size: 500%;
 }
 
-.description-box {
+.link-box {
   opacity: 0;
   pointer-events: none;
   position: fixed;
-  bottom: 5%; right: 5%;
+  top: 5%; right: 5%;
   background-color: #E7C5CF;
   width: 20%;
-  height: 30%;
   padding: 1%;
 }
 
-.description-path {
+.link-path {
   padding-left: 10px;
   font-size: 60%;
+}
+
+.poi-box {
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 5%; left: 5%;
+  background-color: #E7C5CF;
+  width: 60%;
+  height: 10%;
+  padding: 1%;
+}
+
+.poi-name {
+  font-size: 70%;
+}
+
+.poi-description {
+  font-size: 100%;
+}
+
+.poi-title {
+
 }

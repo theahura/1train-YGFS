@@ -92,6 +92,63 @@ function networkNodes(nData) {
     for (let l of visitedLinks) {
         populateDescriptionBox(l.type.color, l.description)
     }
+
+    populatePOIBox(nData);
+}
+
+function populatePOIBox(nData) {
+    d3.select(".poi-title")
+        // .transition()
+        // .duration(200)
+        // .style("opacity", 1)
+        .remove();
+
+    var container = d3.select(".poi-subbox")
+        .style("opacity", 0);
+
+    container.append("div")
+        .attr("class", "poi-name")
+        .text( function (d) {
+            return nData.name;
+        });
+
+    container.append("p")
+        .attr("class", "poi-description")
+        .text( function (d) {
+            return nData.description;
+        });
+
+    container
+        .transition()
+        .duration(200)
+        .style("opacity", 1);
+}
+
+function defaultPOIBox() {
+    d3.selectAll(".poi-name, .poi-description")
+        .remove();
+        
+    var container = d3.select(".poi-subbox")
+        .style("opacity", 0);
+
+    var title = container
+        .append("div")
+        .attr("class", "poi-title");
+
+    title
+        .append('span')
+        .attr("class", "part1")
+        .text("Your Gov");
+
+    title
+        .append('span')
+        .attr("class", "part2")
+        .text("FOR SALE");
+
+    container
+        .transition()
+        .duration(200)
+        .style("opacity", 1);
 }
 
 function openGraph() {
@@ -139,20 +196,25 @@ function openGraph() {
             $(".intro-box").animate({"width": 0, "padding-left": 0})
         });
 
-    $(".description-box")
+    $(".link-box")
+        .delay(500)
+        .animate({"opacity": 1}, 1500)
+
+    $(".poi-box")
         .delay(500)
         .animate({"opacity": 1}, 1500)
 
     defaultDescriptionBox();
+    defaultPOIBox();
 }
 
 function clearDescriptionBox() {
-    d3.select('.description-subbox').selectAll("div").remove()
+    d3.select('.link-subbox').selectAll("div").remove()
 }
 
 function populateDescriptionBox(color, label) {
 
-    var div = d3.select('.description-subbox')
+    var div = d3.select('.link-subbox')
         .append('div')
 
     div
@@ -167,7 +229,7 @@ function populateDescriptionBox(color, label) {
 
     div
         .append('span')
-        .attr("class", "description-path")
+        .attr("class", "link-path")
         .text( function (d) {
             return label;
         });
@@ -239,10 +301,11 @@ function nodeBuild(isStart) {
                     .style("opacity", 0);
                 d3.select(this.parentNode).selectAll("circle")
                     .attr("fill", function (d) { return "url(#image" + d.index + ")" });
-                $("#description-box").text(d.description);
+                $("#link-box").text(d.description);
             })
             .on("mouseout", function (d) {
-                defaultDescriptionBox(); 
+                defaultDescriptionBox();
+                defaultPOIBox();
                 node.style("opacity", 1);
                 link.style("opacity", 1);
                 d3.select(this.parentNode).selectAll("text")
@@ -331,6 +394,22 @@ function start() {
         .transition()
         .duration(2000)
         .attrTween("transform", translateAlong(d3.select("#link3").node()))
+        
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link4").node()))
+        
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link5").node()))
+        
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link6").node()))
+        
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link7").node()))
 
 
 
@@ -428,7 +507,7 @@ function ticked() {
 
 function linkArc(d) {
     if (d.linknum) {
-        var dr = d.linknum + 250;
+        var dr = d.linknum + 200;
     }
     else {
     var dx = d.target.x - d.source.x,
