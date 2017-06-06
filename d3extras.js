@@ -6,3 +6,10 @@ d3.selection.prototype.moveToBack = function() {
         } 
     });
 };
+
+jQuery.fn.d3Click = function () {
+  this.each(function (i, e) {
+    var evt = new MouseEvent("click");
+    e.dispatchEvent(evt);
+  });
+};

@@ -9,18 +9,18 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-svg.append("defs").selectAll("marker")
-    .data(["arrow"])
-    .enter().append("marker")
-    .attr("id", function (d) { return d; })
-    .attr("viewBox", "0 0 10 10")
-    .attr("refX", 69)
-    .attr("refY", -4)
-    .attr("markerWidth", 3)
-    .attr("markerHeight", 6)
-    .attr("orient", "auto")
-    .append("path")
-    .attr("d", "M0,-5L10,0L0,5");
+// svg.append("defs").selectAll("marker")
+//     .data(["arrow"])
+//     .enter().append("marker")
+//     .attr("id", function (d) { return d; })
+//     .attr("viewBox", "0 0 10 10")
+//     .attr("refX", 69)
+//     .attr("refY", -4)
+//     .attr("markerWidth", 3)
+//     .attr("markerHeight", 6)
+//     .attr("orient", "auto")
+//     .append("path")
+//     .attr("d", "M0,-5L10,0L0,5");
 
 for (var l in links) {
     svg.append("circle")
@@ -51,13 +51,14 @@ function nodeImages() {
             .attr("y", "0")
         .append("image")
             .attr("xlink:href", function (d) { return d.image })
-            .attr("height", 70)
-            .attr("width", 70);
+            .attr("height", 60)
+            .attr("width", 60);
 }
 
 start();
+openGraph();
 
-function networkNodes(nData) {
+function BFS(nData, isForward) {
     var queue = [nData];
     var visitedNodes = new Set();
     var visitedLinks = new Set();
@@ -69,8 +70,15 @@ function networkNodes(nData) {
             visitedNodes.add(n);
 
             for (var l in links) {
-                var parent = links[l].source;
-                var child = links[l].target;
+                
+                if (isForward) {
+                    var parent = links[l].source;
+                    var child = links[l].target;
+                }
+                else {
+                    var parent = links[l].target;
+                    var child = links[l].source;
+                }
 
                 if (parent == n && !visitedNodes.has(child)) {
                     queue.push(child);
@@ -79,24 +87,42 @@ function networkNodes(nData) {
             }
         }
     }
+    return [visitedNodes, visitedLinks];
+}
+
+function networkNodes(nData) {
+
+    var forward = BFS(nData, true),
+        backward = BFS(nData, false);
+    console.log(backward[0], forward[0])
+
+    var visitedNodesForward = forward[0],
+        visitedNodesBackward = backward[0],
+        visitedLinksForward = forward[1],
+        visitedLinksBackward = backward[1];
 
     node.filter( function (d) {
-        return !visitedNodes.has(d);
+        return !visitedNodesForward.has(d) && !visitedNodesBackward.has(d);
     })
         .transition()
         .duration(200)
         .style("opacity", 0.2);
 
     link.filter( function (d) {
-        return !visitedLinks.has(d);
+        return !visitedLinksForward.has(d) && !visitedLinksBackward.has(d);
     })
         .transition()
         .duration(200)
         .style("opacity", 0.2);
 
     clearDescriptionBox();
-    for (let l of visitedLinks) {
-        populateDescriptionBox(l.type.color, l.description)
+    for (let l of immediateLinks) {
+        if (l.news_source_name == "") {
+            populateDescriptionBox(l.type.color, l.description);            
+        }
+        else {
+            populateDescriptionBox(l.type.color, l.description + " (" + l.news_source_name + ")");
+        }
     }
 
     populatePOIBox(nData);
@@ -123,33 +149,7 @@ function populatePOIBox(nData) {
 }
 
 function defaultPOIBox() {
-
-    var container = d3.select(".poi-box")
-        .style("opacity", 0);
-    // d3.selectAll(".poi-name, .poi-description")
-    //     .remove();
-        
-    // var container = d3.select(".poi-subbox")
-    //     .style("opacity", 0);
-
-    // var title = container
-    //     .append("div")
-    //     .attr("class", "poi-title");
-
-    // title
-    //     .append('span')
-    //     .attr("class", "part1")
-    //     .text("Your Gov");
-
-    // title
-    //     .append('span')
-    //     .attr("class", "part2")
-    //     .text("FOR SALE");
-
-    // container
-    //     .transition()
-    //     .duration(200)
-    //     .style("opacity", 0);
+    d3.select(".poi-box").style("opacity", 0);
 }
 
 function openGraph() {
@@ -172,7 +172,7 @@ function openGraph() {
     })
     .transition()
         .duration(2000)
-        .attr("transform", "translate(" + width * 0.1 + "," + height * 0.5 + ")")
+        .attr("transform", "translate(" + width * 0.05 + "," + height * 0.5 + ")")
     .transition()
         .duration(200)
         .style("opacity", 0)
@@ -182,7 +182,7 @@ function openGraph() {
     })
     .transition()
         .duration(2000)
-        .attr("transform", "translate(" + width * 0.9 + "," + height * 0.5 + ")")
+        .attr("transform", "translate(" + width * 0.95 + "," + height * 0.5 + ")")
     .transition()
         .duration(200)
         .style("opacity", 0)
@@ -212,7 +212,7 @@ function clearDescriptionBox() {
     d3.select('.link-subbox').selectAll("div").remove()
 }
 
-function populateDescriptionBox(color, label) {
+function populateDescriptionBox(color, label, isDashed = false) {
 
     var div = d3.select('.link-subbox')
         .append('div')
@@ -226,10 +226,18 @@ function populateDescriptionBox(color, label) {
             .style("stroke", function (d) {
                 return color;
             })
+            .style("stroke-dasharray", function (d) {
+                if (isDashed) {
+                    return 3
+                }
+                else {
+                    return d3.select(this).node().getTotalLength();
+                }
+            })
             .style("stroke-width", 2);
 
     div
-        .append('span')
+        .append('div')
         .attr("class", "link-path")
         .text( function (d) {
             return label;
@@ -242,6 +250,7 @@ function defaultDescriptionBox() {
     for (var l in LINK_TYPE) {
         populateDescriptionBox(LINK_TYPE[l].color, LINK_TYPE[l].name);
     }
+    populateDescriptionBox("#000", "alleged, not confirmed", true);
 }
 
 function nodePrebuild() {
@@ -317,9 +326,9 @@ function nodeBuild(isStart) {
     }
 
     a.append("circle")
-        .attr("r", 35)
+        .attr("r", 30)
         .attr("fill", "white")
-        .attr("stroke-width", 3)
+        .attr("stroke-width", 2)
         .attr("stroke", function (d) {
             if (d.USA) {
                 return "#2E3E4E";
@@ -441,8 +450,7 @@ function restart() {
         .style("stroke", function (d) {
             return d.type.color
         })
-        .style("stroke-width", 2)
-        .attr("marker-end", "url(#arrow)")
+        .style("stroke-width", 2);
         // .on("mouseover", function (d) {
         //     networkLinks(d);
         // })
