@@ -173,7 +173,7 @@ function dataBuild() {
             "target": nodes["Paul Manafort"],
             "type": LINK_TYPE.Political,
             "confirmed": true,
-            "description":"Was Trump's former presidential campaign manager",
+            "forward_description":"Was Trump's former presidential campaign manager",
             "news_source_name":"NPR",
             "news_source_url": "http://www.npr.org/2017/06/05/531588442/russian-businessman-with-ties-to-ex-trump-campaign-official-comes-under-scrutiny"
         },
@@ -182,7 +182,7 @@ function dataBuild() {
             "target": nodes["Oleg Deripaska"],
             "type": LINK_TYPE.Business,
             "confirmed": false,
-            "description":"Wrote to Deripaska in 2005 that he would work to benefit Putin's government",
+            "forward_description":"Wrote to Deripaska in 2005 that he would work to benefit Putin's government",
             "news_source_name":"NPR",
             "news_source_url": "http://www.npr.org/2017/06/05/531588442/russian-businessman-with-ties-to-ex-trump-campaign-official-comes-under-scrutiny"
         },
@@ -191,7 +191,7 @@ function dataBuild() {
             "target": nodes["Viktor Yanukovych"],
             "type": LINK_TYPE.Business,
             "confirmed": true,
-            "description":"Worked for Yanukovych, the former president of Ukraine, who was backed by the Kremlin",
+            "forward_description":"Worked for Yanukovych, the former president of Ukraine, who was backed by the Kremlin",
             "news_source_name":"NYT",
             "news_source_url": "https://www.nytimes.com/2017/05/11/opinion/trump-russia-fbi-investigation.html?_r=0"
         },
@@ -200,7 +200,7 @@ function dataBuild() {
             "target": nodes["Vladimir Putin"],
             "type": LINK_TYPE.Political,
             "confirmed": true,
-            "description":"Fled to Russia with Putin's support after being ousted from Ukraine",
+            "forward_description":"Fled to Russia with Putin's support after being ousted from Ukraine",
             "news_source_name":"BBC",
             "news_source_url": "http://www.bbc.com/news/world-europe-29761799"
         },
@@ -209,7 +209,7 @@ function dataBuild() {
             "target": nodes["Michael Flynn"],
             "type": LINK_TYPE.Political,
             "confirmed": true,
-            "description":"Was Trump's former National Security Advisor",
+            "forward_description":"Was Trump's former National Security Advisor",
             "news_source_name":"LA Times",
             "news_source_url": "http://www.latimes.com/politics/la-na-pol-trump-flynn-comey-russia-timeline-2017-htmlstory.html"
         },
@@ -218,7 +218,7 @@ function dataBuild() {
             "target": nodes["Vladimir Putin"],
             "type": LINK_TYPE.Personal,
             "confirmed": true,
-            "description":"Attended a Moscow dinner in 2015 where he sat next to Putin",
+            "forward_description":"Attended a Moscow dinner in 2015 where he sat next to Putin",
             "news_source_name":"LA Times",
             "news_source_url": "http://www.latimes.com/politics/la-na-pol-trump-flynn-comey-russia-timeline-2017-htmlstory.html"
         },
@@ -227,7 +227,7 @@ function dataBuild() {
             "target": nodes["Sergey Kislyak"],
             "type": LINK_TYPE.Political,
             "confirmed": true,
-            "description":"Contacted Kislyak several times on December 29, including via telephone",
+            "forward_description":"Contacted Kislyak several times on December 29, including via telephone",
             "news_source_name":"LA Times",
             "news_source_url": "http://www.latimes.com/politics/la-na-pol-trump-flynn-comey-russia-timeline-2017-htmlstory.html"
         },
@@ -236,7 +236,7 @@ function dataBuild() {
             "target": nodes["RT"],
             "type": LINK_TYPE.Business,
             "confirmed": true,
-            "description":"Received more than $45,000 from RT in December 2015",
+            "forward_description":"Received more than $45,000 from RT in December 2015",
             "news_source_name":"WashPo",
             "news_source_url": "https://www.washingtonpost.com/politics/new-details-released-on-russia-related-payments-to-flynn-before-he-joined-trump-campaign/2017/03/16/52a4205a-0a55-11e7-a15f-a58d4a988474_story.html?utm_term=.8ab41b4586ba"
         },
@@ -245,7 +245,7 @@ function dataBuild() {
             "target": nodes["Kaspersky Lab"],
             "type": LINK_TYPE.Business,
             "confirmed": true,
-            "description":"Received $11,250 from Kaspersky Lab in 2015",
+            "forward_description":"Received $11,250 from Kaspersky Lab in 2015",
             "news_source_name":"WashPo",
             "news_source_url": "https://www.washingtonpost.com/politics/new-details-released-on-russia-related-payments-to-flynn-before-he-joined-trump-campaign/2017/03/16/52a4205a-0a55-11e7-a15f-a58d4a988474_story.html?utm_term=.8ab41b4586ba"
         },
@@ -254,7 +254,7 @@ function dataBuild() {
             "target": nodes["Volga-Dnepr Group"],
             "type": LINK_TYPE.Business,
             "confirmed": true,
-            "description":"Received $11,250 from Volga-Dnepr Group in 2015",
+            "forward_description":"Received $11,250 from Volga-Dnepr Group in 2015",
             "news_source_name":"WashPo",
             "news_source_url": "https://www.washingtonpost.com/politics/new-details-released-on-russia-related-payments-to-flynn-before-he-joined-trump-campaign/2017/03/16/52a4205a-0a55-11e7-a15f-a58d4a988474_story.html?utm_term=.8ab41b4586ba"
         },
@@ -263,7 +263,7 @@ function dataBuild() {
             "target": nodes["Jared Kushner"],
             "type": LINK_TYPE.Personal,
             "confirmed": true,
-            "description":"Married to Trump's daughter, Ivanka",
+            "forward_description":"Married to Trump's daughter, Ivanka",
             "news_source_name":"",
             "news_source_url": ""
         },
@@ -272,7 +272,7 @@ function dataBuild() {
             "target": nodes["Sergey Kislyak"],
             "type": LINK_TYPE.Political,
             "confirmed": true,
-            "description":"Met with Russian ambassador Sergey Kislyak during transition into White House",
+            "forward_description":"Met with Russian ambassador Sergey Kislyak during transition into White House",
             "news_source_name":"NYT",
             "news_source_url": "https://www.nytimes.com/2017/03/27/us/politics/senate-jared-kushner-russia.html?_r=0"
         },
@@ -281,7 +281,7 @@ function dataBuild() {
             "target": nodes["Sergey Gorkov"],
             "type": LINK_TYPE.Business,
             "confirmed": true,
-            "description":"Met with Russian businessman Sergey Gorkov at the request of the Russian ambassador",
+            "forward_description":"Met with Russian businessman Sergey Gorkov at the request of the Russian ambassador",
             "news_source_name":"NYT",
             "news_source_url": "https://www.nytimes.com/2017/03/27/us/politics/senate-jared-kushner-russia.html?_r=0"
         },
@@ -290,7 +290,7 @@ function dataBuild() {
             "target": nodes["Jeff Sessions"],
             "type": LINK_TYPE.Political,
             "confirmed": true,
-            "description":"Appointed as Attorney General",
+            "forward_description":"Appointed as Attorney General",
             "news_source_name":"",
             "news_source_url": ""
         },
@@ -299,7 +299,7 @@ function dataBuild() {
             "target": nodes["Sergey Kislyak"],
             "type": LINK_TYPE.Political,
             "confirmed": true,
-            "description":"Met twice with Russian ambassador Sergey Kislyak while campaigning for Trump, did not disclose to Senate",
+            "forward_description":"Met twice with Russian ambassador Sergey Kislyak while campaigning for Trump, did not disclose to Senate",
             "news_source_name":"NYT",
             "news_source_url": "https://www.nytimes.com/2017/03/02/us/politics/jeff-sessions-russia-trump-investigation-democrats.html"
         },
@@ -308,7 +308,7 @@ function dataBuild() {
             "target": nodes["Dmytro Firtash"],
             "type": LINK_TYPE.Business,
             "confirmed": true,
-            "description":" Bought Park Avenue hotel site with Firtash",
+            "forward_description":" Bought Park Avenue hotel site with Firtash",
             "news_source_name":"NYT",
             "news_source_url": "https://www.nytimes.com/2017/03/02/us/politics/jeff-sessions-russia-trump-investigation-democrats.html"
         },

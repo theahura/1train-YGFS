@@ -62,6 +62,7 @@ function BFS(nData, isForward) {
     var queue = [nData];
     var visitedNodes = new Set();
     var visitedLinks = new Set();
+    var immediateLinks = new Set();
 
     while (queue.length > 0) {
         var n = queue.shift();
@@ -78,6 +79,10 @@ function BFS(nData, isForward) {
                 else {
                     var parent = links[l].target;
                     var child = links[l].source;
+
+                    if (parent == nData) {
+                        immediateLinks.add(links[l]);
+                    }
                 }
 
                 if (parent == n && !visitedNodes.has(child)) {
@@ -87,7 +92,7 @@ function BFS(nData, isForward) {
             }
         }
     }
-    return [visitedNodes, visitedLinks];
+    return [visitedNodes, visitedLinks, immediateLinks];
 }
 
 function networkNodes(nData) {
@@ -100,6 +105,7 @@ function networkNodes(nData) {
         visitedNodesBackward = backward[0],
         visitedLinksForward = forward[1],
         visitedLinksBackward = backward[1];
+        immediateLinksBackward = backward[2];
 
     node.filter( function (d) {
         return !visitedNodesForward.has(d) && !visitedNodesBackward.has(d);
@@ -115,15 +121,18 @@ function networkNodes(nData) {
         .duration(200)
         .style("opacity", 0.2);
 
+    link.filter( function (d) {
+        return visitedLinksForward.has(d) || visitedLinksBackward.has(d);
+    })
+        .transition()
+        .duration(200)
+        .style("stroke", function (d) {
+            return d.type.color;
+        });
+
     clearDescriptionBox();
-    for (let l of immediateLinks) {
-        if (l.news_source_name == "") {
-            populateDescriptionBox(l.type.color, l.description);            
-        }
-        else {
-            populateDescriptionBox(l.type.color, l.description + " (" + l.news_source_name + ")");
-        }
-    }
+    populateDescriptionBox(visitedLinksForward, true);
+    populateDescriptionBox(immediateLinksBackward, false);
 
     populatePOIBox(nData);
 }
@@ -212,7 +221,27 @@ function clearDescriptionBox() {
     d3.select('.link-subbox').selectAll("div").remove()
 }
 
-function populateDescriptionBox(color, label, isDashed = false) {
+function populateDescriptionBox(visitedLinks, isForward) {
+
+    var description;
+
+    for (let l of visitedLinks) {
+        if (isForward) {
+            description = l.forward_description;
+        }
+        else {
+            description = l.backward_description
+        }
+
+        if (l.news_source_name != "") {
+            description = description + " (" + l.news_source_name + ")";
+        }
+
+        buildDescriptionBox(l.type.color, description);
+    }
+}
+
+function buildDescriptionBox(color, label, isDashed = false) {
 
     var div = d3.select('.link-subbox')
         .append('div')
@@ -248,9 +277,9 @@ function defaultDescriptionBox() {
 
     clearDescriptionBox();
     for (var l in LINK_TYPE) {
-        populateDescriptionBox(LINK_TYPE[l].color, LINK_TYPE[l].name);
+        buildDescriptionBox(LINK_TYPE[l].color, LINK_TYPE[l].name);
     }
-    populateDescriptionBox("#000", "alleged, not confirmed", true);
+    buildDescriptionBox("#000", "alleged, not confirmed", true);
 }
 
 function nodePrebuild() {
@@ -317,7 +346,8 @@ function nodeBuild(isStart) {
                 link
                     .transition()
                     .duration(200)
-                    .style("opacity", 1);
+                    .style("opacity", 1)
+                    .style("stroke", "#FCF3DF");
                 d3.select(this.parentNode).selectAll("text")
                     .style("opacity", 1);
                 d3.select(this.parentNode).selectAll("circle")
@@ -447,9 +477,7 @@ function restart() {
                 return 3;
             }
         })
-        .style("stroke", function (d) {
-            return d.type.color
-        })
+        .style("stroke", "#FCF3DF")
         .style("stroke-width", 2);
         // .on("mouseover", function (d) {
         //     networkLinks(d);
