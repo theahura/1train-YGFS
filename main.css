@@ -7,6 +7,9 @@ body {
   padding: 0;
   margin: 0;
 
+  width: 100%;
+  height: 100%;
+
   background-color: #F9E8C0;
   font-family: 'Raleway', sans-serif;
 }
@@ -18,7 +21,6 @@ body {
 }
 
 .intro-box {
-  display: none;
   pointer-events: none;
   position: fixed;
   padding-top: 10%;
@@ -50,8 +52,8 @@ body {
   font-size: 500%;
 }
 
-.link-box {
-  /*opacity: 0;*/
+.description-box {
+  opacity: 0;
   pointer-events: none;
   position: fixed;
   top: 5%; right: 5%;
@@ -60,10 +62,19 @@ body {
   border: 1px #000 dashed;
 }
 
+.description-subbox1 {
+  float: left;
+}
+
+.description-subbox2 {
+  width: 60%;
+  padding-top: 1%;
+  float: left;
+}
+
 .link-path {
   display: inline-block;
-  width: 80%;
-  padding-left: 10px;
+  padding-left: 1%;
   font-size: 60%;
 }
 
@@ -88,4 +99,12 @@ body {
 
 .poi-title {
 
+}
+
+#source-cursor {
+    position:fixed;
+    margin-left:-8px;
+    margin-top:-6px;
+    pointer-events:none;
+    cursor: none;
 }

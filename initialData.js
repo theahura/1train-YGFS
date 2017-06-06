@@ -1,25 +1,28 @@
-var width = window.innerWidth,
-    height = window.innerHeight,
+var width = $(document).width(),
+    height = $(document).height(),
     nodes, links;
+
+console.log(width, height);
 
 var LINK_TYPE = {
     Business: {
         name: "business",
-        color: "#3E4D47"
+        color: "#3B8EA5"
     },
     Political: {
         name: "political",
-        color: "#BF0603"
+        color: "#AB3428"
     },
     Personal: {
         name: "personal",
-        color: "#455461"
+        color: "#F49E4C"
     }
 }
 
 nodes = {
     "United States": {
         "name": "United States",
+        "country": "USA",
         "USA": true,
         "index": 1,
         "x": width * 0.75,
@@ -29,6 +32,7 @@ nodes = {
     },
     "Russia": {
         "name": "Russia",
+        "country": "Russia",
         "USA": false,
         "index": 2,
         "x": width * 0.85,

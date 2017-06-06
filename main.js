@@ -9,19 +9,6 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-// svg.append("defs").selectAll("marker")
-//     .data(["arrow"])
-//     .enter().append("marker")
-//     .attr("id", function (d) { return d; })
-//     .attr("viewBox", "0 0 10 10")
-//     .attr("refX", 69)
-//     .attr("refY", -4)
-//     .attr("markerWidth", 3)
-//     .attr("markerHeight", 6)
-//     .attr("orient", "auto")
-//     .append("path")
-//     .attr("d", "M0,-5L10,0L0,5");
-
 for (var l in links) {
     svg.append("circle")
         .attr("class", function() {
@@ -50,13 +37,12 @@ function nodeImages() {
             .attr("x", "0")
             .attr("y", "0")
         .append("image")
-            .attr("xlink:href", function (d) { return d.image })
+            .attr("xlink:href", function (d) { return "img/" + d.image })
             .attr("height", 60)
             .attr("width", 60);
 }
 
 start();
-openGraph();
 
 function BFS(nData, isForward) {
     var queue = [nData];
@@ -79,10 +65,10 @@ function BFS(nData, isForward) {
                 else {
                     var parent = links[l].target;
                     var child = links[l].source;
+                }
 
-                    if (parent == nData) {
-                        immediateLinks.add(links[l]);
-                    }
+                if (parent == nData) {
+                    immediateLinks.add(links[l]);
                 }
 
                 if (parent == n && !visitedNodes.has(child)) {
@@ -97,53 +83,124 @@ function BFS(nData, isForward) {
 
 function networkNodes(nData) {
 
+    console.log(nData.name);
+
     var forward = BFS(nData, true),
         backward = BFS(nData, false);
-    console.log(backward[0], forward[0])
 
     var visitedNodesForward = forward[0],
         visitedNodesBackward = backward[0],
+        immediateLinksForward = forward[2];
         visitedLinksForward = forward[1],
         visitedLinksBackward = backward[1];
         immediateLinksBackward = backward[2];
+
 
     node.filter( function (d) {
         return !visitedNodesForward.has(d) && !visitedNodesBackward.has(d);
     })
         .transition()
         .duration(200)
-        .style("opacity", 0.2);
+        .style("opacity", 0.3)
 
     link.filter( function (d) {
         return !visitedLinksForward.has(d) && !visitedLinksBackward.has(d);
     })
         .transition()
         .duration(200)
-        .style("opacity", 0.2);
+        .style("opacity", 0.1)
 
-    link.filter( function (d) {
-        return visitedLinksForward.has(d) || visitedLinksBackward.has(d);
-    })
-        .transition()
-        .duration(200)
-        .style("stroke", function (d) {
-            return d.type.color;
-        });
+    if (nData.name == "Donald Trump") {
+        console.log(immediateLinksForward);
+        link.filter( function (d) {
+            return immediateLinksForward.has(d);
+        })
+            .transition()
+            .duration(200)
+            .style("opacity", 1)
+            .style("stroke", function (d) {
+                return d.type.color;
+            });
 
-    clearDescriptionBox();
-    populateDescriptionBox(visitedLinksForward, true);
-    populateDescriptionBox(immediateLinksBackward, false);
+        // link.filter( function (d) {
+        //     return visitedLinksForward.has(d) && !immediateLinksForward.has(d);
+        // })
+        //     .transition()
+        //     .duration(200)
+        //     .style("opacity", 1)
+        //     .style("stroke", "#000");
+
+        clearDescriptionBox();
+        populateDescriptionBox(immediateLinksForward);
+    }
+    else if (nData.name == "Vladimir Putin") {
+
+        link.filter( function (d) {
+            return immediateLinksBackward.has(d);
+        })
+            .transition()
+            .duration(200)
+            .style("opacity", 1)
+            .style("stroke", function (d) {
+                return d.type.color;
+            });
+
+        // link.filter( function (d) {
+        //     return visitedLinksBackward.has(d) && !immediateLinksBackward.has(d);
+        // })
+        //     .transition()
+        //     .duration(200)
+        //     .style("opacity", 1)
+        //     .style("stroke", "#000");
+
+        clearDescriptionBox();
+        populateDescriptionBox(immediateLinksBackward);
+    }
+    else {
+
+        node.filter( function (d) {
+            return !visitedNodesForward.has(d) && !visitedNodesBackward.has(d);
+        })
+            .transition()
+            .duration(200)
+            .style("opacity", 0.3)
+
+        link.filter( function (d) {
+            return !visitedLinksForward.has(d) && !visitedLinksBackward.has(d);
+        })
+            .transition()
+            .duration(200)
+            .style("opacity", 0.1)
+
+        link.filter( function (d) {
+            return visitedLinksForward.has(d) || immediateLinksBackward.has(d);
+        })
+            .transition()
+            .duration(200)
+            .style("opacity", 1)
+            .style("stroke", function (d) {
+                return d.type.color;
+            });
+
+        link.filter( function (d) {
+            return visitedLinksBackward.has(d) && !immediateLinksBackward.has(d);
+        })
+            .transition()
+            .duration(200)
+            .style("opacity", 1)
+            .style("stroke", "#000");
+
+        clearDescriptionBox();
+        populateDescriptionBox(visitedLinksForward);
+        populateDescriptionBox(immediateLinksBackward);
+    }
 
     populatePOIBox(nData);
 }
 
 function populatePOIBox(nData) {
-    // d3.select(".poi-title")
-        // .remove();
 
     d3.select(".poi-box")
-        // .transition()
-        // .duration(200)
         .style("opacity", 1);
 
     d3.select(".poi-name")
@@ -206,7 +263,7 @@ function openGraph() {
             $(".intro-box").animate({"width": 0, "padding-left": 0})
         });
 
-    $(".link-box")
+    $(".description-box")
         .delay(500)
         .animate({"opacity": 1}, 1500)
 
@@ -214,37 +271,40 @@ function openGraph() {
         .delay(500)
         .animate({"opacity": 1}, 1500)
 
+    console.log(d3.select("div").node())
     defaultDescriptionBox();
 }
 
 function clearDescriptionBox() {
-    d3.select('.link-subbox').selectAll("div").remove()
+    d3.select('.description-subbox1').selectAll("div").remove()
+    d3.select('.description-subbox2').selectAll("div").remove()
 }
 
-function populateDescriptionBox(visitedLinks, isForward) {
-
-    var description;
+function populateDescriptionBox(visitedLinks) {
 
     for (let l of visitedLinks) {
-        if (isForward) {
-            description = l.forward_description;
-        }
-        else {
-            description = l.backward_description
-        }
+        var description = l.description;
 
         if (l.news_source_name != "") {
             description = description + " (" + l.news_source_name + ")";
         }
 
-        buildDescriptionBox(l.type.color, description);
+        buildDescriptionBoxLinks(l.type.color, description, !l.confirmed);
     }
 }
 
-function buildDescriptionBox(color, label, isDashed = false) {
+function buildDescriptionBoxLinks(color, label, isDashed = false, isBigger = true) {
+    console.log(isBigger)
+    var div = d3.select('.description-subbox1')
+    
+    if (isBigger) {
+        div.style("width", "100%")
+    }
+    else {
+        div.style("width", "36%")
+    }
 
-    var div = d3.select('.link-subbox')
-        .append('div')
+    div = div.append('div');
 
     div
         .append('svg')
@@ -263,23 +323,73 @@ function buildDescriptionBox(color, label, isDashed = false) {
                     return d3.select(this).node().getTotalLength();
                 }
             })
-            .style("stroke-width", 2);
+            .style("stroke-width", 3);
 
-    div
+    var subdiv = div
         .append('div')
         .attr("class", "link-path")
-        .text( function (d) {
-            return label;
+        .text(label);
+    
+    if (isBigger) {
+        subdiv.style("width", "80%")
+    }
+    else {
+        subdiv.style("width", "62%")
+    }
+
+}
+
+function buildDescriptionBoxNodes(country) {
+
+    var div = d3.select('.description-subbox2')
+        .append('div')
+        .style('float', "left")
+        .style('padding-left', "5%")
+        .append('svg')
+            .attr('height', 65)
+            .attr('width', 65)
+        .append("g")
+
+    var a = div.append("a")
+
+    a.append("circle")
+        .attr("cx", 32.5)
+        .attr("cy", 32.5)
+        .attr("r", 30)
+        .attr("fill", "white")
+        .attr("stroke-width", 2)
+        .attr("stroke", function (d) {
+            if (country == "USA") {
+                return "#2E3E4E";
+            }
+            else if (country == "Russia") {
+                return "#BF0603";
+            }
+            else {
+                return "#FFF";
+            }
         });
+
+    a.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", 32.5)
+        .attr("y", 35)
+        .style("fill", "#485F6E")
+        .style("font-size", "60%")
+        .text(country)
 }
 
 function defaultDescriptionBox() {
 
     clearDescriptionBox();
     for (var l in LINK_TYPE) {
-        buildDescriptionBox(LINK_TYPE[l].color, LINK_TYPE[l].name);
+        buildDescriptionBoxLinks(LINK_TYPE[l].color, LINK_TYPE[l].name, false, false);
     }
-    buildDescriptionBox("#000", "alleged, not confirmed", true);
+    buildDescriptionBoxLinks("#000", "alleged, not confirmed", true, false);
+
+    buildDescriptionBoxNodes("USA");
+    buildDescriptionBoxNodes("Russia");
+    buildDescriptionBoxNodes("Neither");
 }
 
 function nodePrebuild() {
@@ -334,7 +444,6 @@ function nodeBuild(isStart) {
                     .style("opacity", 0);
                 d3.select(this.parentNode).selectAll("circle")
                     .attr("fill", function (d) { return "url(#image" + d.index + ")" });
-                $("#link-box").text(d.description);
             })
             .on("mouseout", function (d) {
                 defaultDescriptionBox();
@@ -346,8 +455,8 @@ function nodeBuild(isStart) {
                 link
                     .transition()
                     .duration(200)
-                    .style("opacity", 1)
-                    .style("stroke", "#FCF3DF");
+                    .style("opacity", 0.5)
+                    .style("stroke", "#A9ADB3");
                 d3.select(this.parentNode).selectAll("text")
                     .style("opacity", 1);
                 d3.select(this.parentNode).selectAll("circle")
@@ -360,11 +469,14 @@ function nodeBuild(isStart) {
         .attr("fill", "white")
         .attr("stroke-width", 2)
         .attr("stroke", function (d) {
-            if (d.USA) {
+            if (d.country == "USA") {
                 return "#2E3E4E";
             }
-            else {
+            else if (d.country == "Russia") {
                 return "#BF0603";
+            }
+            else {
+                return "#FFF";
             }
         });
 
@@ -389,7 +501,7 @@ function start() {
         .style("stroke", function (d) {
             return "#000"
         })
-        .style("stroke-width", 2);
+        .style("stroke-width", 3);
 
     link
         .attr("d", linkArc)
@@ -448,15 +560,27 @@ function start() {
     simulation.alpha(1).on("tick", ticked).restart();
 }
 
+function linkOut(lData) {
+    console.log(lData);
+    window.open(lData.news_source_url)
+}
+
 function networkLinks(lData) {
 
     node.filter( function (d) {
         return d.index != lData.source.index && d.index != lData.target.index;
-    }).style("opacity", 0.2);
+    }).style("opacity", 0.5);
 
     link.filter( function (d) {
-        return lData.index != d.index;
-    }).style("opacity", 0.2);
+        return lData.index == d.index;
+    })
+    .style("opacity", 1)
+    .style("stroke", function (d) {
+        return d.type.color;
+    });
+
+    clearDescriptionBox();
+    populateDescriptionBox([lData]);
 }
 
 function restart() {
@@ -477,21 +601,37 @@ function restart() {
                 return 3;
             }
         })
-        .style("stroke", "#FCF3DF")
-        .style("stroke-width", 2);
-        // .on("mouseover", function (d) {
-        //     networkLinks(d);
-        // })
-        // .on("mouseout", function (d) {
-        //     node.style("opacity", 1);
-        //     link.style("opacity", 1);
-        // })
+        .style("stroke", "#A9ADB3")
+        .style("stroke-width", 3)
+        .on("click", function (d) {
+            linkOut(d);
+        })
+        .on("mouseover", function (d) {
+            networkLinks(d);
+
+            var coordinates = d3.mouse(this);
+            var x = coordinates[0];
+            var y = coordinates[1];
+
+            $("#source-cursor").text(d.news_source_name);
+            $("#source-cursor").css("left", x + 20);
+            $("#source-cursor").css("top", y + 20);
+            $('body').css('cursor', 'pointer');
+        })
+        .on("mouseout", function (d) {
+            defaultDescriptionBox();
+            node.style("opacity", 1);
+            link.style("opacity", 0.5)
+                .style("stroke", "#A9ADB3");
+            $("#source-cursor").text("");
+            $('body').css('cursor', 'default');
+        })
         
     link
-        .style("opacity", 0)    
+        .style("opacity", 0)
         .transition()
         .duration(200)
-        .style("opacity", 1);
+        .style("opacity", 0.5);
 
     simulation.nodes(nodes);
     simulation.force("link").links(links);
