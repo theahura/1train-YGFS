@@ -82,11 +82,17 @@ function networkNodes(nData) {
 
     node.filter( function (d) {
         return !visitedNodes.has(d);
-    }).style("opacity", 0.2);
+    })
+        .transition()
+        .duration(200)
+        .style("opacity", 0.2);
 
     link.filter( function (d) {
         return !visitedLinks.has(d);
-    }).style("opacity", 0.2);
+    })
+        .transition()
+        .duration(200)
+        .style("opacity", 0.2);
 
     clearDescriptionBox();
     for (let l of visitedLinks) {
@@ -219,7 +225,8 @@ function populateDescriptionBox(color, label) {
             .attr('d', "M0 7 l50 0")
             .style("stroke", function (d) {
                 return color;
-            });
+            })
+            .style("stroke-width", 2);
 
     div
         .append('span')
@@ -267,7 +274,7 @@ function nodeBuild(isStart) {
             .on("mouseout", function (d) {
                 link.style("opacity", 1);
                 node.selectAll("text")
-                    .style("opacity", 1);
+                    .style("opacity", 1)
                 node.selectAll("circle")
                     .attr("fill", "white"); 
             })
@@ -294,8 +301,14 @@ function nodeBuild(isStart) {
             .on("mouseout", function (d) {
                 defaultDescriptionBox();
                 defaultPOIBox();
-                node.style("opacity", 1);
-                link.style("opacity", 1);
+                node
+                    .transition()
+                    .duration(200)
+                    .style("opacity", 1);
+                link
+                    .transition()
+                    .duration(200)
+                    .style("opacity", 1);
                 d3.select(this.parentNode).selectAll("text")
                     .style("opacity", 1);
                 d3.select(this.parentNode).selectAll("circle")
