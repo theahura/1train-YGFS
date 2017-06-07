@@ -38,8 +38,8 @@ function nodeImages() {
             .attr("y", "0")
         .append("image")
             .attr("xlink:href", function (d) { return "img/" + d.image })
-            .attr("height", 60)
-            .attr("width", 60);
+            .attr("height", 70)
+            .attr("width", 70);
 }
 
 start();
@@ -83,8 +83,6 @@ function BFS(nData, isForward) {
 
 function networkNodes(nData) {
 
-    console.log(nData.name);
-
     var forward = BFS(nData, true),
         backward = BFS(nData, false);
 
@@ -111,7 +109,6 @@ function networkNodes(nData) {
         .style("opacity", 0.1)
 
     if (nData.name == "Donald Trump") {
-        console.log(immediateLinksForward);
         link.filter( function (d) {
             return immediateLinksForward.has(d);
         })
@@ -271,7 +268,6 @@ function openGraph() {
         .delay(500)
         .animate({"opacity": 1}, 1500)
 
-    console.log(d3.select("div").node())
     defaultDescriptionBox();
 }
 
@@ -294,7 +290,7 @@ function populateDescriptionBox(visitedLinks) {
 }
 
 function buildDescriptionBoxLinks(color, label, isDashed = false, isBigger = true) {
-    console.log(isBigger)
+
     var div = d3.select('.description-subbox1')
     
     if (isBigger) {
@@ -346,16 +342,16 @@ function buildDescriptionBoxNodes(country) {
         .style('float', "left")
         .style('padding-left', "5%")
         .append('svg')
-            .attr('height', 65)
-            .attr('width', 65)
+            .attr('height', 75)
+            .attr('width', 75)
         .append("g")
 
     var a = div.append("a")
 
     a.append("circle")
-        .attr("cx", 32.5)
-        .attr("cy", 32.5)
-        .attr("r", 30)
+        .attr("cx", 37.5)
+        .attr("cy", 37.5)
+        .attr("r", 35)
         .attr("fill", "white")
         .attr("stroke-width", 2)
         .attr("stroke", function (d) {
@@ -372,8 +368,8 @@ function buildDescriptionBoxNodes(country) {
 
     a.append("text")
         .attr("text-anchor", "middle")
-        .attr("x", 32.5)
-        .attr("y", 35)
+        .attr("x", 37)
+        .attr("y", 39)
         .style("fill", "#485F6E")
         .style("font-size", "60%")
         .text(country)
@@ -472,7 +468,7 @@ function nodeBuild(isStart) {
     }
 
     a.append("circle")
-        .attr("r", 30)
+        .attr("r", 35)
         .attr("fill", "white")
         .attr("stroke-width", 2)
         .attr("stroke", function (d) {
@@ -568,7 +564,6 @@ function start() {
 }
 
 function linkOut(lData) {
-    console.log(lData);
     window.open(lData.news_source_url)
 }
 

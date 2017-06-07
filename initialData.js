@@ -2,7 +2,11 @@ var width = $(document).width(),
     height = $(document).height(),
     nodes, links;
 
-console.log(width, height);
+d3.select(window).on('resize', function () {
+    console.log(222);
+    width = $(document).width()
+    height = $(document).height()
+});
 
 var LINK_TYPE = {
     Business: {
