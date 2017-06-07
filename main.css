@@ -60,6 +60,7 @@ body {
   width: 40%;
   padding: 1%;
   border: 1px #000 dashed;
+  background-color: rgba(249,232,192,0.9)
 }
 
 .description-subbox1 {
@@ -74,7 +75,7 @@ body {
 
 .link-path {
   display: inline-block;
-  padding-left: 1%;
+  padding-left: 2%;
   font-size: 60%;
 }
 

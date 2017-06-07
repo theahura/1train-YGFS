@@ -47,48 +47,56 @@ links = [
   {
     "source": nodes["United States"],
     "target": nodes["Russia"],
+    "sweep": 1,
     "linknum": 1000,
     "confirmed": true
   },
   {
     "source": nodes["Russia"],
     "target": nodes["United States"],
+    "sweep": 1,
     "linknum": 1000,
     "confirmed": true
   },
   {
     "source": nodes["United States"],
     "target": nodes["Russia"],
+    "sweep": 1,
     "linknum": 0,
     "confirmed": true
   },
   {
     "source": nodes["Russia"],
     "target": nodes["United States"],
+    "sweep": 1,
     "linknum": 0,
     "confirmed": true
   },
   {
     "source": nodes["United States"],
     "target": nodes["Russia"],
+    "sweep": 1,
     "linknum": 30,
     "confirmed": true
   },
   {
     "source": nodes["Russia"],
     "target": nodes["United States"],
+    "sweep": 1,
     "linknum": 30,
     "confirmed": true
   },
   {
     "source": nodes["United States"],
     "target": nodes["Russia"],
+    "sweep": 1,
     "linknum": 60,
     "confirmed": true
   },
   {
     "source": nodes["Russia"],
     "target": nodes["United States"],
+    "sweep": 1,
     "linknum": 60,
     "confirmed": true
   }

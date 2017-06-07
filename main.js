@@ -440,10 +440,17 @@ function nodeBuild(isStart) {
                 networkNodes(d);
                 d3.select(this)
                     .style("cursor", "default");
-                d3.select(this.parentNode).selectAll("text")
-                    .style("opacity", 0);
                 d3.select(this.parentNode).selectAll("circle")
-                    .attr("fill", function (d) { return "url(#image" + d.index + ")" });
+                    .attr("fill", function (d) {
+                        if (d.image != "") {
+                            d3.select(this.parentNode).selectAll("text")
+                                .style("opacity", 0);
+                            return "url(#image" + d.index + ")";                
+                        }
+                        else {
+                            return "white"
+                        }
+                    })
             })
             .on("mouseout", function (d) {
                 defaultDescriptionBox();
@@ -460,7 +467,7 @@ function nodeBuild(isStart) {
                 d3.select(this.parentNode).selectAll("text")
                     .style("opacity", 1);
                 d3.select(this.parentNode).selectAll("circle")
-                    .attr("fill", "white") 
+                    .attr("fill", "white")
             });
     }
 
@@ -656,7 +663,6 @@ function pathStartPoint(path) {
 }
 
 function ticked() {
-    // link.attr("d", "M 200 300 L 50 100 L 90 70 L 140 100");
     link.attr("d", linkArc);
 
     node.attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; });
@@ -671,8 +677,10 @@ function linkArc(d) {
         dy = d.target.y - d.source.y,
         dr = Math.sqrt(dx * dx + dy * dy);
     }
-
-    return "M " + d.source.x + "," + d.source.y + " A " + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
+    if (d.source.country == "Russia") {
+        d.sweep = 0;
+    }
+    return "M " + d.source.x + "," + d.source.y + " A " + dr + "," + dr + " 0 0," + d.sweep + " " + d.target.x + "," + d.target.y;
 }
 
 function wrap(text, width) {
