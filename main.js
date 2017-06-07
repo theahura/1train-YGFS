@@ -1,5 +1,16 @@
 // forked from http://bl.ocks.org/mbostock/1153292
 
+$('.info-link').click(function() {
+    $('.info-box').toggle();
+    return false;
+});
+
+$(document).click(function(e) { 
+    if (e.target != $('.info-box')[0]) {
+        $('.info-box').hide();
+    }
+});
+
 var simulation = d3.forceSimulation(nodes)
     .force("link", d3.forceLink(links).distance(40))
     .alphaTarget(1)
@@ -43,6 +54,7 @@ function nodeImages() {
 }
 
 start();
+openGraph();
 
 function BFS(nData, isForward) {
     var queue = [nData];
@@ -175,8 +187,9 @@ function networkNodes(nData) {
             .transition()
             .duration(200)
             .style("opacity", 1)
-            .style("stroke", function (d) {
-                return d.type.color;
+            .style("stroke", function (lData) {
+                showLinkLabel(this);
+                return lData.type.color;
             });
 
         link.filter( function (d) {
@@ -187,12 +200,50 @@ function networkNodes(nData) {
             .style("opacity", 1)
             .style("stroke", "#000");
 
+        for (let l of immediateLinksBackward) {
+            showLinkLabel(l);
+        }
+
         clearDescriptionBox();
         populateDescriptionBox(visitedLinksForward);
         populateDescriptionBox(immediateLinksBackward);
     }
 
     populatePOIBox(nData);
+}
+
+
+
+function showLinkLabel(l) {
+
+    // link.filter( function (d) {
+        // return immediateLinksBackward.has(d);
+    // }).getTotalLength()
+
+    var midpoint = l.getPointAtLength(d3.select(l).node().getTotalLength() / 2);
+    console.log(midpoint)
+    // var text = svg.append("text")
+
+    // var textLabels = text
+    //     .attr("class", function (d) { return "linkLabel linkLabel" + lData.link_index })
+    //     .attr("x", function (d) {
+    //         return midpoint.x
+    //     })
+    //     .attr("y", function (d) {
+    //         return midpoint.y
+    //     })
+    //     .text(function (d) {
+    //         return lData.link_index;
+    //     })
+    //     .attr("text-anchor", "middle")
+    //     .style("fill", "#000")
+    //     .style("font-size", "60%")
+    //     .style("opacity", 1);
+}
+
+function hideLinkLabels() {
+    d3.select(".linkLabel")
+        .style("opacity", 0);
 }
 
 function populatePOIBox(nData) {
@@ -274,6 +325,10 @@ function openGraph() {
 function clearDescriptionBox() {
     d3.select('.description-subbox1').selectAll("div").remove()
     d3.select('.description-subbox2').selectAll("div").remove()
+}
+
+function shadedColor(lData) {
+    return d3.color(lData.type.color).brighter(lData.link_index / 25)
 }
 
 function populateDescriptionBox(visitedLinks) {
@@ -451,6 +506,7 @@ function nodeBuild(isStart) {
             .on("mouseout", function (d) {
                 defaultDescriptionBox();
                 defaultPOIBox();
+                hideLinkLabels();
                 node
                     .transition()
                     .duration(200)
@@ -574,7 +630,7 @@ function networkLinks(lData) {
     }).style("opacity", 0.5);
 
     link.filter( function (d) {
-        return lData.index == d.index;
+        return lData.link_index == d.link_index;
     })
     .style("opacity", 1)
     .style("stroke", function (d) {
@@ -594,10 +650,10 @@ function restart() {
     link = link.data(links, function (d) { return d.source.name + "-" + d.target.name; });
 
     link = link.enter().append("path")
-        .attr("class", function (d) { return "link " + d.type; })
+        .attr("class", function (d) { return "link " + d.type.name; })
         .style("stroke-dasharray", function (d) {
             if (d.confirmed) {
-                return d3.select(this).node().getTotalLength();
+                return 0;
             }
             else {
                 return 3;
@@ -622,6 +678,7 @@ function restart() {
         })
         .on("mouseout", function (d) {
             defaultDescriptionBox();
+            hideLinkLabels();
             node.style("opacity", 1);
             link.style("opacity", 0.5)
                 .style("stroke", "#A9ADB3");

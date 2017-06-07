@@ -115,3 +115,25 @@ body {
     pointer-events:none;
     cursor: none;
 }
+
+.info-link {
+  color: #BA1200;
+  position: fixed;
+  bottom: 3%;
+  right: 3%;
+  cursor: pointer;
+}
+
+.info-box {
+  display: none;
+  background-color: #fff;
+
+  position: fixed;
+  width: 45%;
+  height: 60%;
+  bottom: 25%;
+  right: 25%;
+
+  padding: 1%;
+
+}
