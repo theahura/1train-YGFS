@@ -140,7 +140,8 @@ function networkNodes(nData) {
         //     .style("stroke", "#000");
 
         clearDescriptionBox();
-        populateDescriptionBox(immediateLinksForward);
+        var a1 = Array.from(immediateLinksForward)
+        populateDescriptionBox(a1);
     }
     else if (nData.name == "Vladimir Putin") {
 
@@ -163,7 +164,8 @@ function networkNodes(nData) {
         //     .style("stroke", "#000");
 
         clearDescriptionBox();
-        populateDescriptionBox(immediateLinksBackward);
+        var a1 = Array.from(immediateLinksBackward)
+        populateDescriptionBox(a1);
     }
     else {
 
@@ -188,7 +190,7 @@ function networkNodes(nData) {
             .duration(200)
             .style("opacity", 1)
             .style("stroke", function (lData) {
-                showLinkLabel(this);
+                showLinkLabel(this, lData);
                 return lData.type.color;
             });
 
@@ -200,13 +202,11 @@ function networkNodes(nData) {
             .style("opacity", 1)
             .style("stroke", "#000");
 
-        for (let l of immediateLinksBackward) {
-            showLinkLabel(l);
-        }
-
         clearDescriptionBox();
-        populateDescriptionBox(visitedLinksForward);
-        populateDescriptionBox(immediateLinksBackward);
+        var a1 = Array.from(visitedLinksForward),
+            a2 = Array.from(immediateLinksBackward),
+            a3 = a1.concat(a2);
+        populateDescriptionBox(a3);
     }
 
     populatePOIBox(nData);
@@ -214,35 +214,45 @@ function networkNodes(nData) {
 
 
 
-function showLinkLabel(l) {
+function showLinkLabel(l, lData) {
+    var l = d3.select(l).node()
 
-    // link.filter( function (d) {
-        // return immediateLinksBackward.has(d);
-    // }).getTotalLength()
+    var midpoint = l.getPointAtLength(l.getTotalLength() / 2);
+    var rectText = svg
+        .append("g")
+        .attr("class", function (d) { return "linkLabel linkLabel" + lData.link_index })
 
-    var midpoint = l.getPointAtLength(d3.select(l).node().getTotalLength() / 2);
-    console.log(midpoint)
-    // var text = svg.append("text")
+    rectText
+        .append("rect")
+        .attr("x", function (d) {
+            return midpoint.x - 10
+        })
+        .attr("y", function (d) {
+            return midpoint.y - 10
+        })
+        .attr("width", "20px")
+        .attr("height", "20px")
+        .style("fill", "#000")
 
-    // var textLabels = text
-    //     .attr("class", function (d) { return "linkLabel linkLabel" + lData.link_index })
-    //     .attr("x", function (d) {
-    //         return midpoint.x
-    //     })
-    //     .attr("y", function (d) {
-    //         return midpoint.y
-    //     })
-    //     .text(function (d) {
-    //         return lData.link_index;
-    //     })
-    //     .attr("text-anchor", "middle")
-    //     .style("fill", "#000")
-    //     .style("font-size", "60%")
-    //     .style("opacity", 1);
+    rectText
+        .append("text")
+        .attr("x", function (d) {
+            return midpoint.x - 5
+        })
+        .attr("y", function (d) {
+            return midpoint.y + 5
+        })
+        .text(function (d) {
+            return lData.link_index;
+        })
+        // .attr("text-anchor", "middle")
+        .style("fill", "#fff")
+        .style("font-size", "60%")
+        .style("opacity", 1);
 }
 
 function hideLinkLabels() {
-    d3.select(".linkLabel")
+    d3.selectAll(".linkLabel")
         .style("opacity", 0);
 }
 
@@ -331,16 +341,31 @@ function shadedColor(lData) {
     return d3.color(lData.type.color).brighter(lData.link_index / 25)
 }
 
+function compareLinkIndex(a,b) {
+  if (a.link_index < b.link_index)
+    return -1;
+  if (a.link_index > b.link_index)
+    return 1;
+  return 0;
+}
+
 function populateDescriptionBox(visitedLinks) {
 
-    for (let l of visitedLinks) {
-        var description = l.description;
+    visitedLinks.sort(compareLinkIndex)
 
-        if (l.news_source_name != "") {
-            description = description + " (" + l.news_source_name + ")";
+    for (var l in visitedLinks) {
+        lObj = visitedLinks[l]
+        var description = lObj.description;
+
+        if (lObj.link_index) {
+            description = lObj.link_index + " | " + description;
         }
 
-        buildDescriptionBoxLinks(l.type.color, description, !l.confirmed);
+        if (lObj.news_source_name != "") {
+            description = description + " (" + lObj.news_source_name + ")";
+        }
+
+        buildDescriptionBoxLinks(lObj.type.color, description, !lObj.confirmed);
     }
 }
 
