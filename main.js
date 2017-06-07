@@ -54,7 +54,7 @@ function nodeImages() {
 }
 
 start();
-openGraph();
+// openGraph();
 
 function BFS(nData, isForward) {
     var queue = [nData];
