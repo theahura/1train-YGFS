@@ -54,7 +54,7 @@ function nodeImages() {
 }
 
 start();
-// openGraph();
+openGraph();
 
 function BFS(nData, isForward) {
     var queue = [nData];
@@ -358,7 +358,7 @@ function populateDescriptionBox(visitedLinks) {
         var description = lObj.description;
 
         if (lObj.link_index) {
-            description = lObj.link_index + " | " + description;
+            description = lObj.link_index + " | " + lObj.sweep + " | " + description;
         }
 
         if (lObj.news_source_name != "") {
@@ -754,9 +754,7 @@ function linkArc(d) {
         dy = d.target.y - d.source.y,
         dr = Math.sqrt(dx * dx + dy * dy);
     }
-    if (d.source.country == "Russia") {
-        d.sweep = 0;
-    }
+
     return "M " + d.source.x + "," + d.source.y + " A " + dr + "," + dr + " 0 0," + d.sweep + " " + d.target.x + "," + d.target.y;
 }
 
