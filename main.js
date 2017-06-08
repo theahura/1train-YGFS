@@ -62,6 +62,7 @@ function BFSpaths(nData) {
                 toTrump.push([l]);
             }
             queue.push([l]);
+            visitedLinks.add(l);
             immediateLinks.add(l);
         }
     }
@@ -90,21 +91,42 @@ function BFSpaths(nData) {
 
     }
 
+    // only add minimum links to visitedLinks
+    var minPathLength = getMinPathLength(toTrump);
+
     for (let p of toTrump) {
-        for (let l of p) {
-            visitedNodes.add(l.source);
-            visitedNodes.add(l.target);
-            visitedLinks.add(l)
+        if (p.length == minPathLength) {
+            for (let l of p) {
+                visitedLinks.add(l)
+            }
         }
+    }
+
+    // add the minimum links + immediate links
+    for (let l of visitedLinks) {
+        visitedNodes.add(l.source);
+        visitedNodes.add(l.target);
     }
 
     return [visitedNodes, visitedLinks, immediateLinks];
 }
 
-function printPaths(path) {
-    for (let l in path) {
-        // console.log(l.source);
+function getMinPathLength(arr) {
+
+    if (arr.length == 0) {
+        return 0;
     }
+
+    var minLength = arr[0].length;
+
+    for (let p of arr) {
+        if (p.length < minLength) {
+            minLength = p.length;
+        }
+    }
+
+    return minLength;
+
 }
 
 function BFS(nData) {
@@ -129,7 +151,6 @@ function BFS(nData) {
 
                 if (parent == n && !visitedNodes.has(child)) {
                     queue.push(child);
-                    console.log(l);
                     visitedLinks.add(l);
                 }
             }
@@ -150,9 +171,6 @@ function networkNodes(nData) {
     var visitedNodesBackward = backward[0],
         visitedLinksBackward = backward[1],
         immediateLinksBackward = backward[2];
-
-    console.log(visitedLinksBackward);
-    console.log(visitedLinksForward);
 
     node.filter( function (d) {
         return !visitedNodesForward.has(d) && !visitedNodesBackward.has(d);
@@ -175,8 +193,9 @@ function networkNodes(nData) {
             .transition()
             .duration(200)
             .style("opacity", 1)
-            .style("stroke", function (d) {
-                return d.type.color;
+            .style("stroke", function (lData) {
+                showLinkLabel(this, lData);
+                return lData.type.color;
             });
 
         link.filter( function (d) {
@@ -199,17 +218,18 @@ function networkNodes(nData) {
             .transition()
             .duration(200)
             .style("opacity", 1)
-            .style("stroke", function (d) {
-                return d.type.color;
+            .style("stroke", function (lData) {
+                showLinkLabel(this, lData);
+                return lData.type.color;
             });
 
-        // link.filter( function (d) {
-        //     return visitedLinksBackward.has(d) && !immediateLinksBackward.has(d);
-        // })
-        //     .transition()
-        //     .duration(200)
-        //     .style("opacity", 1)
-        //     .style("stroke", "#000");
+        link.filter( function (d) {
+            return visitedLinksBackward.has(d) && !immediateLinksBackward.has(d);
+        })
+            .transition()
+            .duration(200)
+            .style("opacity", 1)
+            .style("stroke", "#000");
 
         clearDescriptionBox();
         var a1 = Array.from(immediateLinksBackward)
@@ -232,7 +252,7 @@ function networkNodes(nData) {
             .style("opacity", 0.1)
 
         link.filter( function (d) {
-            return visitedLinksBackward.has(d) //|| immediateLinksBackward.has(d);
+            return visitedLinksForward.has(d) || immediateLinksBackward.has(d);
         })
             .transition()
             .duration(200)
@@ -243,13 +263,11 @@ function networkNodes(nData) {
             });
 
         link.filter( function (d) {
-            // console.log(visitedLinksBackward)
-            return visitedLinksBackward.has(d) //&& !immediateLinksBackward.has(d);
+            return visitedLinksBackward.has(d) && !immediateLinksBackward.has(d);
         })
             .transition()
             .duration(200)
             .style("opacity", function(dd) {
-                console.log(dd);
                 return 1;
             })
             .style("stroke", "#000");
@@ -559,11 +577,11 @@ function nodeBuild(isStart) {
             .transition()
             .duration(200)
             .style("opacity", 1);
+
         a
+            .style("cursor", "default")
             .on("mouseover", function (d) {
                 networkNodes(d);
-                d3.select(this)
-                    .style("cursor", "default");
                 d3.select(this.parentNode).selectAll("circle")
                     .attr("fill", function (d) {
                         if (d.image != "") {

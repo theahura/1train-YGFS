@@ -70,7 +70,7 @@ function finalDataBuild() {
             "name": "Sergey Kislyak",
             "country": "Russia",
             "index": 7,
-            "x": width * 0.55,
+            "x": width * 0.52,
             "y": height * 0.46,
             "image": "Sergey-Kislyak.png",
             "image_source_name": "CNN",
@@ -136,8 +136,8 @@ function finalDataBuild() {
             "name": "Viktor Yanukovych",
             "country": "Russia",
             "index": 13,
-            "x": width * 0.76,
-            "y": height * 0.65,
+            "x": width * 0.725,
+            "y": height * 0.76,
             "image": "Viktor-Yanukovych.png",
             "image_source_name": "BBC",
             "image_source_url": "http://www.bbc.com/news/world-europe-25182830",
@@ -180,8 +180,8 @@ function finalDataBuild() {
             "name": "Gazprom",
             "country": "Russia",
             "index": 16,
-            "x": width * 0.87,
-            "y": height * 0.65,
+            "x": width * 0.80,
+            "y": height * 0.63,
             "image": "Gazprom.png",
             "image_source_name": "Twitter",
             "image_source_url": "https://twitter.com/gazpromen",
@@ -202,7 +202,7 @@ function finalDataBuild() {
             "name": "Roger Stone",
             "country": "USA",
             "index": 18,
-            "x": width * 0.105,
+            "x": width * 0.12,
             "y": height * 0.78,
             "image": "Roger-Stone.png",
             "image_source_name": "Salon",
@@ -302,7 +302,7 @@ function finalDataBuild() {
             "country": "USA",
             "index": 27,
             "x": width * 0.23,
-            "y": height * 0.71,
+            "y": height * 0.77,
             "image": "Rex-Tillerson.png",
             "image_source_name": "NYer",
             "image_source_url": "http://www.newyorker.com/news/news-desk/rex-tillerson-from-a-corporate-oil-sovereign-to-the-state-department",
@@ -363,6 +363,17 @@ function finalDataBuild() {
             "image_source_url": "http://www.independent.co.uk/news/world/americas/source-d-trump-russia-dossier-sergei-millian-putin-belarus-american-billionaire-christopher-steele-a7657446.html",
             "description": "Belarusian-American businessman, President of the Russian American Chamber of Commerce"
         },
+        "Ivanka Trump": {
+            "name": "Ivanka Trump",
+            "country": "USA",
+            "index": 33,
+            "x": width * 0.25,
+            "y": height * 0.65,
+            "image": "Ivanka-Trump.png",
+            "image_source_name": "Wikipedia",
+            "image_source_url": "https://en.wikipedia.org/wiki/Ivanka_Trump",
+            "description": "American businesswoman and former fashion model, assistant to Donald Trump"
+        }
     }
 
 	links = [
@@ -770,7 +781,7 @@ function finalDataBuild() {
             "source": nodes["Erik Prince"],
             "target": nodes["Vladimir Putin"],
             "type": LINK_TYPE.Political,
-            "sweep": 1,
+            "sweep": 0,
             "confirmed": false,
             "description":"Prince and a Russian close to Putin met in January 2017 to allegedly establish a back-channel between Moscow and Trump",
             "news_source_name":"WashPo",
@@ -780,7 +791,7 @@ function finalDataBuild() {
             "source": nodes["Donald Trump"],
             "target": nodes["Rex Tillerson"],
             "type": LINK_TYPE.Political,
-            "sweep": 1,
+            "sweep": 0,
             "confirmed": true,
             "description":"Trump appointed Tillerson as Secretary of State",
             "news_source_name":"WashPo",
@@ -885,6 +896,26 @@ function finalDataBuild() {
             "description":"Millian claims that Trump hired prostitutes at Moscow Ritz-Carlton and the Kremlin kept evidence of this",
             "news_source_name":"The Independent",
             "news_source_url": "http://www.independent.co.uk/news/world/americas/source-d-trump-russia-dossier-sergei-millian-putin-belarus-american-billionaire-christopher-steele-a7657446.html"
+        },
+        {
+            "source": nodes["Donald Trump"],
+            "target": nodes["Ivanka Trump"],
+            "type": LINK_TYPE.Personal,
+            "sweep": 1,
+            "confirmed": true,
+            "description":"Ivanka Trump is Donald Trump's oldest daughter",
+            "news_source_name":"",
+            "news_source_url": ""
+        },
+        {
+            "source": nodes["Ivanka Trump"],
+            "target": nodes["Jared Kushner"],
+            "type": LINK_TYPE.Personal,
+            "sweep": 1,
+            "confirmed": true,
+            "description":"Ivanka Trump is married to Jared Kushner",
+            "news_source_name":"",
+            "news_source_url": ""
         }
     ]
 }
