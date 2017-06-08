@@ -16,7 +16,7 @@ for (let l of links) {
             return "marker";
         })
         .style("fill", "#000")
-        .attr("r", "2")
+        .attr("r", "5")
         .attr("transform", "translate(" + width * 0.2 + ", " + height * 0.2 + ")")
         .moveToBack();
 }
@@ -27,7 +27,6 @@ var g = svg.append("g"),
 
 nodeImages();
 start();
-openGraph();
 
 function nodeImages() {
     svg.append("defs").selectAll("pattern")
@@ -450,7 +449,7 @@ function buildDescriptionBoxLinks(color, label, isDashed = false, isBigger = tru
     div = div.append('div');
 
     div
-        .append('svg')
+        .append("svg")
             .attr('height', 10)
             .attr('width', 50)
         .append('path')

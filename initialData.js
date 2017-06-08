@@ -1,12 +1,6 @@
-var width = $(document).width(),
-    height = $(document).height(),
+var width = 1250,
+    height = 700,
     nodes, links;
-
-d3.select(window).on('resize', function () {
-    console.log(222);
-    width = $(document).width()
-    height = $(document).height()
-});
 
 var LINK_TYPE = {
     Business: {
