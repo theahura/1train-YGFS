@@ -1,72 +1,5 @@
 // forked from http://bl.ocks.org/mbostock/1153292
 
-$('.info-link').click(function() {
-
-    svgStyling();
-    bodyStyling();
-    $('.info-box').toggle();
-
-    return false;
-});
-
-$(document).click(function(e) { 
-    if ($('.info-box').css('display') != "none" && e.target != $('.info-box')[0]) {
-        svgStyling();
-        bodyStyling()
-        $('.info-box').hide();
-    }
-});
-
-function svgStyling() {
-    var svgDOM = $(".main")
-
-    if (svgDOM.css("position") == "absolute") {
-        svgDOM.css("position", "static");
-        svgDOM.css("z-index", 1);
-    }
-    else {
-        svgDOM.css("position", "absolute");
-        svgDOM.css("z-index", -1);
-    }
-}
-
-function bodyStyling() {
-
-    var boxDOM = $(".info-box");
-    $("body").children()
-        .css("opacity", function (d) {
-            if (boxDOM.css("display") != "none") {
-
-                if ($(this).attr("class") == "info-box") {
-                    return 0;
-                }
-
-                if ($(this).css("opacity") == "0") {
-                    return 0;
-                }
-                else {
-                    return 1                
-                }
-
-            }
-            else {
-
-                if ($(this).attr("class") == "info-box") {
-                    return 1;
-                }
-
-                if ($(this).css("opacity") == "0") {
-                    return 0;
-                }
-                else {
-                    return 0.5                
-                }
-
-            }
-
-        });
-}
-
 var simulation = d3.forceSimulation(nodes)
     .force("link", d3.forceLink(links).distance(40))
     .alphaTarget(1)
@@ -77,7 +10,7 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-for (var l in links) {
+for (let l of links) {
     svg.append("circle")
         .attr("class", function() {
             return "marker";
@@ -93,6 +26,7 @@ var g = svg.append("g"),
     node = g.append("g").selectAll("circle")
 
 nodeImages();
+start();
 
 function nodeImages() {
     svg.append("defs").selectAll("pattern")
@@ -110,9 +44,6 @@ function nodeImages() {
             .attr("width", 70);
 }
 
-start();
-// openGraph();
-
 function BFS(nData, isForward) {
     var queue = [nData];
     var visitedNodes = new Set();
@@ -125,24 +56,24 @@ function BFS(nData, isForward) {
         if (!visitedNodes.has(n)) {
             visitedNodes.add(n);
 
-            for (var l in links) {
+            for (let l of links) {
                 
                 if (isForward) {
-                    var parent = links[l].source;
-                    var child = links[l].target;
+                    var parent = l.source;
+                    var child = l.target;
                 }
                 else {
-                    var parent = links[l].target;
-                    var child = links[l].source;
+                    var parent = l.target;
+                    var child = l.source;
                 }
 
                 if (parent == nData) {
-                    immediateLinks.add(links[l]);
+                    immediateLinks.add(l);
                 }
 
                 if (parent == n && !visitedNodes.has(child)) {
                     queue.push(child);
-                    visitedLinks.add(links[l]);
+                    visitedLinks.add(l);
                 }
             }
         }
@@ -268,8 +199,6 @@ function networkNodes(nData) {
 
     populatePOIBox(nData);
 }
-
-
 
 function showLinkLabel(l, lData) {
     var l = d3.select(l).node()
@@ -410,19 +339,18 @@ function populateDescriptionBox(visitedLinks) {
 
     visitedLinks.sort(compareLinkIndex)
 
-    for (var l in visitedLinks) {
-        lObj = visitedLinks[l]
-        var description = lObj.description;
+    for (let l of visitedLinks) {
+        var description = l.description;
 
-        if (lObj.link_index) {
-            description = lObj.link_index + " | " + description;
+        if (l.link_index) {
+            description = l.link_index + " | " + description;
         }
 
-        if (lObj.news_source_name != "") {
-            description = description + " (" + lObj.news_source_name + ")";
+        if (l.news_source_name != "") {
+            description = description + " (" + l.news_source_name + ")";
         }
 
-        buildDescriptionBoxLinks(lObj.type.color, description, !lObj.confirmed);
+        buildDescriptionBoxLinks(l.type.color, description, !l.confirmed);
     }
 }
 
@@ -469,7 +397,6 @@ function buildDescriptionBoxLinks(color, label, isDashed = false, isBigger = tru
     else {
         subdiv.style("width", "62%")
     }
-
 }
 
 function buildDescriptionBoxNodes(country) {
@@ -632,6 +559,8 @@ function nodeBuild(isStart) {
 
 function start() {
 
+    populateSourcesBox();
+
     nodeBuild(true);
 
     link = link.data(links, function (d) { return d.source.name + "-" + d.target.name; });
@@ -694,8 +623,6 @@ function start() {
         .duration(2000)
         .attrTween("transform", translateAlong(d3.select("#link7").node()))
 
-
-
     simulation.nodes(nodes);
     simulation.force("link").links(links);
     simulation.alpha(1).on("tick", ticked).restart();
@@ -724,9 +651,58 @@ function networkLinks(lData) {
     populateDescriptionBox([lData]);
 }
 
+function populateSourcesBox() {
+    
+    simulation.stop();
+
+    finalDataBuild();
+
+    var lSet = new Set();
+
+    for (let l of links) {
+        lSet.add(l.news_source_name)
+    }
+
+    for (let l of lSet) {
+        $("#news-sources").append(function() {
+            return '<div class = "sources-row">' + l + '</div>'
+        });
+    }
+
+    for (var n in nodes) {
+        var POI = nodes[n];
+            console.log(POI);
+        $("#image-sources").append(function() {
+
+            var source_name;
+            var source_link;
+            if (POI.image_source_name == "") {
+                source_name = "No Image Found";
+                source_link = " <span class = \"right\">(" + source_name + ")</span>"
+            }
+            else {
+                source_name = POI.image_source_name;
+                source_link = " <span class = \"right\">(<a href=\""
+                    + POI.image_source_url + "\">"
+                    + source_name
+                    + "</a>)</span>"
+            }
+
+            return "<div class = \"sources-row\">" + POI.name + source_link + "</div>"
+        });
+    }
+
+    initialDataBuild();
+
+    simulation.nodes(nodes);
+    simulation.force("link").links(links);
+    simulation.alpha(1).on("tick", ticked).restart();
+
+}
+
 function restart() {
 
-    dataBuild();
+    finalDataBuild();
     nodeImages();
     nodeBuild(false);
 

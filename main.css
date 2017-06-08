@@ -142,3 +142,30 @@ body {
 .right {
   float: right;
 }
+
+#sources-box {
+  display: none;
+  padding-top: 3%;
+}
+
+.info-choice {
+  cursor: pointer;
+}
+
+#about-us {
+  color: #BA1200;
+}
+
+.sources-category {
+  font-size: 80%;
+  padding-bottom: 2%;
+}
+
+.sources-row {
+  font-size: 40%;
+}
+
+.sources-subbox {
+  width: 45%;
+  float: left;
+}

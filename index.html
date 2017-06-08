@@ -69,26 +69,41 @@
 			about
 		</div>
 		<div class="info-box">
-			<p>
-				YourGov.ForSale connects the dots between the different people and organizations that link US President Donald Trump to Russia. After decades of a Cold War and public animosity, these two nations have begun to form deeply private connections that go against the very tradition of transparent government. Our goal here is to map out those connections in a clear and informative way for the benefit of the public.
-			</p>
+			<span id = "about-us" class = "info-choice">about us</span> |
+			<span id = "sources" class = "info-choice">sources</span>
 
-			<p>
-				We collected data from an exclusive list of credible news sources, keeping only the most relevant information tying Trump to Russia. For example, a Trump ally casually eating with a Russian at a fancy dinner is no reason to be alarmed. But if the ally was announced to be the new NSA director and the Russian is Vladimir Putin, we put it in the graph.
-			</p>
+			<div id = "about-us-box">
+				<p>
+					YourGov.ForSale connects the dots between the different people and organizations that link US President Donald Trump to Russia. After decades of Cold War and public animosity, these two nations have begun to form deeply private connections that go against the very tradition of transparent government. Our goal here is to map out those connections in a clear and informative way for the benefit of the public.
+				</p>
 
-			<p>
-				As part of our efforts to increase transparency in politics, the code and data for this app is publicly available on <a href="#">Github</a>, and links for all of our news sources are built into the graph itself.
-			</p>
+				<p>
+					We collected data from an exclusive list of credible news sources, keeping only the most relevant information tying Trump to Russia. For example, a Trump ally casually eating with a Russian at a fancy dinner is no reason to be alarmed. But if the ally was announced to be the new NSA director and the Russian is Vladimir Putin, we put it in the graph.
+				</p>
 
-			<p>
-				Our philosophy is simple. We let the data speak for itself.
-			</p>
+				<p>
+					As part of our efforts to increase transparency in politics, the code and data for this app is publicly available on <a href="#">Github</a>, and links for all of our news sources are built into the graph itself.
+				</p>
 
-			<p class = "right">
-				Sincerely,
-				1train
-			</p>
+				<p>
+					Our philosophy is simple. We let the data speak for itself.
+				</p>
+
+				<p class = "right dont-touch">
+					Sincerely,
+					1train
+				</p>
+			</div>
+
+			<div id = "sources-box">
+				<div id = "news-sources" class = "sources-subbox">
+				<div class = "sources-category">News Sources</div>
+
+				</div>
+				<div id = "image-sources" class = "sources-subbox">
+				<div class = "sources-category">Image Sources</div>
+				</div>
+			</div>
 		</div>
 		<div id="source-cursor"></div>
 
@@ -97,6 +112,7 @@
 		<script type="text/javascript" src="initialData.js"></script>
 		<script type="text/javascript" src="completeData.js"></script>
 		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="domMods.js"></script>
 
 	</body>
 
