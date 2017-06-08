@@ -369,7 +369,6 @@ function finalDataBuild() {
         {
             "source": nodes["Donald Trump"],
             "target": nodes["Paul Manafort"],
-            "link_index": 1,
             "type": LINK_TYPE.Political,
             "sweep": 0,
             "confirmed": true,
@@ -380,7 +379,6 @@ function finalDataBuild() {
         {
             "source": nodes["Paul Manafort"],
             "target": nodes["Oleg Deripaska"],
-            "link_index": 2,
             "type": LINK_TYPE.Business,
             "sweep": 1,
             "confirmed": false,
@@ -391,7 +389,6 @@ function finalDataBuild() {
         {
             "source": nodes["Paul Manafort"],
             "target": nodes["Viktor Yanukovych"],
-            "link_index": 3,
             "type": LINK_TYPE.Business,
             "sweep": 1,
             "confirmed": true,
@@ -402,7 +399,6 @@ function finalDataBuild() {
         {
             "source": nodes["Viktor Yanukovych"],
             "target": nodes["Vladimir Putin"],
-            "link_index": 4,
             "type": LINK_TYPE.Political,
             "sweep": 0,
             "confirmed": true,
@@ -413,7 +409,6 @@ function finalDataBuild() {
         {
             "source": nodes["Donald Trump"],
             "target": nodes["Michael Flynn"],
-            "link_index": 5,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -424,7 +419,6 @@ function finalDataBuild() {
         {
             "source": nodes["Michael Flynn"],
             "target": nodes["Vladimir Putin"],
-            "link_index": 6,
             "type": LINK_TYPE.Personal,
             "sweep": 0,
             "confirmed": true,
@@ -435,7 +429,6 @@ function finalDataBuild() {
         {
             "source": nodes["Michael Flynn"],
             "target": nodes["Sergey Kislyak"],
-            "link_index": 7,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -446,7 +439,6 @@ function finalDataBuild() {
         {
             "source": nodes["Michael Flynn"],
             "target": nodes["RT"],
-            "link_index": 8,
             "type": LINK_TYPE.Business,
             "sweep": 1,
             "confirmed": true,
@@ -457,7 +449,6 @@ function finalDataBuild() {
         {
             "source": nodes["Michael Flynn"],
             "target": nodes["Kaspersky Lab"],
-            "link_index": 9,
             "type": LINK_TYPE.Business,
             "sweep": 1,
             "confirmed": true,
@@ -468,7 +459,6 @@ function finalDataBuild() {
         {
             "source": nodes["Michael Flynn"],
             "target": nodes["Volga-Dnepr Group"],
-            "link_index": 10,
             "type": LINK_TYPE.Business,
             "sweep": 1,
             "confirmed": true,
@@ -479,7 +469,6 @@ function finalDataBuild() {
         {
             "source": nodes["Donald Trump"],
             "target": nodes["Jared Kushner"],
-            "link_index": 11,
             "type": LINK_TYPE.Personal,
             "sweep": 1,
             "confirmed": true,
@@ -490,7 +479,6 @@ function finalDataBuild() {
         {
             "source": nodes["Jared Kushner"],
             "target": nodes["Sergey Kislyak"],
-            "link_index": 12,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -501,7 +489,6 @@ function finalDataBuild() {
         {
             "source": nodes["Jared Kushner"],
             "target": nodes["Sergey Gorkov"],
-            "link_index": 13,
             "type": LINK_TYPE.Business,
             "sweep": 1,
             "confirmed": true,
@@ -512,7 +499,6 @@ function finalDataBuild() {
         {
             "source": nodes["Donald Trump"],
             "target": nodes["Jeff Sessions"],
-            "link_index": 14,
             "type": LINK_TYPE.Political,
             "sweep": 0,
             "confirmed": true,
@@ -523,7 +509,6 @@ function finalDataBuild() {
         {
             "source": nodes["Jeff Sessions"],
             "target": nodes["Sergey Kislyak"],
-            "link_index": 15,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -534,7 +519,6 @@ function finalDataBuild() {
         {
             "source": nodes["Paul Manafort"],
             "target": nodes["Dmytro Firtash"],
-            "link_index": 16,
             "type": LINK_TYPE.Business,
             "sweep": 0,
             "confirmed": true,
@@ -545,7 +529,6 @@ function finalDataBuild() {
         {
             "source": nodes["Dmytro Firtash"],
             "target": nodes["Viktor Yanukovych"],
-            "link_index": 17,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -556,7 +539,6 @@ function finalDataBuild() {
         {
             "source": nodes["Donald Trump"],
             "target": nodes["Carter Page"],
-            "link_index": 18,
             "type": LINK_TYPE.Political,
             "sweep": 0,
             "confirmed": true,
@@ -567,7 +549,6 @@ function finalDataBuild() {
         {
             "source": nodes["Carter Page"],
             "target": nodes["Sergey Yatsenko"],
-            "link_index": 19,
             "type": LINK_TYPE.Business,
             "sweep": 1,
             "confirmed": true,
@@ -578,7 +559,6 @@ function finalDataBuild() {
         {
             "source": nodes["Sergey Yatsenko"],
             "target": nodes["Gazprom"],
-            "link_index": 20,
             "type": LINK_TYPE.Business,
             "sweep": 0,
             "confirmed": true,
@@ -589,7 +569,6 @@ function finalDataBuild() {
         {
             "source": nodes["Gazprom"],
             "target": nodes["Vladimir Putin"],
-            "link_index": 21,
             "type": LINK_TYPE.Business,
             "sweep": 1,
             "confirmed": true,
@@ -600,7 +579,6 @@ function finalDataBuild() {
         {
             "source": nodes["Carter Page"],
             "target": nodes["Gazprom"],
-            "link_index": 22,
             "type": LINK_TYPE.Business,
             "sweep": 1,
             "confirmed": true,
@@ -611,7 +589,6 @@ function finalDataBuild() {
         {
             "source": nodes["Carter Page"],
             "target": nodes["Victor Podobnyy"],
-            "link_index": 23,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": false,
@@ -622,7 +599,6 @@ function finalDataBuild() {
         {
             "source": nodes["Donald Trump"],
             "target": nodes["Roger Stone"],
-            "link_index": 24,
             "type": LINK_TYPE.Political,
             "sweep": 0,
             "confirmed": true,
@@ -633,7 +609,6 @@ function finalDataBuild() {
         {
             "source": nodes["Roger Stone"],
             "target": nodes["Guccifer 2.0"],
-            "link_index": 25,
             "type": LINK_TYPE.Personal,
             "sweep": 1,
             "confirmed": true,
@@ -644,7 +619,6 @@ function finalDataBuild() {
         {
             "source": nodes["RT"],
             "target": nodes["Vladimir Putin"],
-            "link_index": 26,
             "type": LINK_TYPE.Business,
             "sweep": 1,
             "confirmed": true,
@@ -655,7 +629,6 @@ function finalDataBuild() {
         {
             "source": nodes["Sergey Kislyak"],
             "target": nodes["Vladimir Putin"],
-            "link_index": 27,
             "type": LINK_TYPE.Political,
             "sweep": 0,
             "confirmed": true,
@@ -666,7 +639,6 @@ function finalDataBuild() {
         {
             "source": nodes["Victor Podobnyy"],
             "target": nodes["Vladimir Putin"],
-            "link_index": 28,
             "type": LINK_TYPE.Political,
             "sweep": 0,
             "confirmed": true,
@@ -677,7 +649,6 @@ function finalDataBuild() {
         {
             "source": nodes["Roger Stone"],
             "target": nodes["WikiLeaks"],
-            "link_index": 29,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -688,7 +659,6 @@ function finalDataBuild() {
         {
             "source": nodes["WikiLeaks"],
             "target": nodes["Hillary Clinton"],
-            "link_index": 30,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -699,7 +669,6 @@ function finalDataBuild() {
         {
             "source": nodes["Hillary Clinton"],
             "target": nodes["Vladimir Putin"],
-            "link_index": 31,
             "type": LINK_TYPE.Political,
             "sweep": 0,
             "confirmed": true,
@@ -710,7 +679,6 @@ function finalDataBuild() {
         {
             "source": nodes["Donald Trump"],
             "target": nodes["J.D. Gordon"],
-            "link_index": 32,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -721,7 +689,6 @@ function finalDataBuild() {
         {
             "source": nodes["J.D. Gordon"],
             "target": nodes["Sergey Kislyak"],
-            "link_index": 33,
             "type": LINK_TYPE.Political,
             "sweep": 0,
             "confirmed": true,
@@ -732,7 +699,6 @@ function finalDataBuild() {
         {
             "source": nodes["Andrii Artemenko"],
             "target": nodes["Paul Manafort"],
-            "link_index": 34,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -743,7 +709,6 @@ function finalDataBuild() {
         {
             "source": nodes["Michael Cohen"],
             "target": nodes["Andrii Artemenko"],
-            "link_index": 35,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -754,7 +719,6 @@ function finalDataBuild() {
         {
             "source": nodes["Felix Sater"],
             "target": nodes["Andrii Artemenko"],
-            "link_index": 36,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -765,7 +729,6 @@ function finalDataBuild() {
         {
             "source": nodes["Donald Trump"],
             "target": nodes["Michael Cohen"],
-            "link_index": 37,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -776,7 +739,6 @@ function finalDataBuild() {
         {
             "source": nodes["Donald Trump"],
             "target": nodes["Felix Sater"],
-            "link_index": 38,
             "type": LINK_TYPE.Political,
             "sweep": 0,
             "confirmed": true,
@@ -787,7 +749,6 @@ function finalDataBuild() {
         {
             "source": nodes["Andrii Artemenko"],
             "target": nodes["Vladimir Putin"],
-            "link_index": 39,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -798,7 +759,6 @@ function finalDataBuild() {
         {
             "source": nodes["Donald Trump"],
             "target": nodes["Erik Prince"],
-            "link_index": 40,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -809,7 +769,6 @@ function finalDataBuild() {
         {
             "source": nodes["Erik Prince"],
             "target": nodes["Vladimir Putin"],
-            "link_index": 41,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": false,
@@ -820,7 +779,6 @@ function finalDataBuild() {
         {
             "source": nodes["Donald Trump"],
             "target": nodes["Rex Tillerson"],
-            "link_index": 42,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -831,7 +789,6 @@ function finalDataBuild() {
         {
             "source": nodes["Rex Tillerson"],
             "target": nodes["Vladimir Putin"],
-            "link_index": 43,
             "type": LINK_TYPE.Personal,
             "sweep": 1,
             "confirmed": true,
@@ -842,7 +799,6 @@ function finalDataBuild() {
         {
             "source": nodes["Rex Tillerson"],
             "target": nodes["Gazprom"],
-            "link_index": 44,
             "type": LINK_TYPE.Business,
             "sweep": 1,
             "confirmed": true,
@@ -853,7 +809,6 @@ function finalDataBuild() {
         {
             "source": nodes["Jared Kushner"],
             "target": nodes["Yuri Milner"],
-            "link_index": 45,
             "type": LINK_TYPE.Business,
             "sweep": 0,
             "confirmed": true,
@@ -864,7 +819,6 @@ function finalDataBuild() {
         {
             "source": nodes["Donald Trump"],
             "target": nodes["Aras Agalarov"],
-            "link_index": 46,
             "type": LINK_TYPE.Business,
             "sweep": 1,
             "confirmed": true,
@@ -875,7 +829,6 @@ function finalDataBuild() {
         {
             "source": nodes["Aras Agalarov"],
             "target": nodes["Vladimir Putin"],
-            "link_index": 47,
             "type": LINK_TYPE.Political,
             "sweep": 0,
             "confirmed": true,
@@ -886,7 +839,6 @@ function finalDataBuild() {
         {
             "source": nodes["Sergey Gorkov"],
             "target": nodes["Dmitry Medvedev"],
-            "link_index": 48,
             "type": LINK_TYPE.Business,
             "sweep": 1,
             "confirmed": true,
@@ -897,7 +849,6 @@ function finalDataBuild() {
         {
             "source": nodes["Dmitry Medvedev"],
             "target": nodes["Vladimir Putin"],
-            "link_index": 49,
             "type": LINK_TYPE.Political,
             "sweep": 0,
             "confirmed": true,
@@ -908,7 +859,6 @@ function finalDataBuild() {
         {
             "source": nodes["Donald Trump"],
             "target": nodes["George Papadopoulos"],
-            "link_index": 50,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
@@ -919,7 +869,6 @@ function finalDataBuild() {
         {
             "source": nodes["George Papadopoulos"],
             "target": nodes["Sergei Millian"],
-            "link_index": 51,
             "type": LINK_TYPE.Political,
             "sweep": 0,
             "confirmed": false,
@@ -930,7 +879,6 @@ function finalDataBuild() {
         {
             "source": nodes["Donald Trump"],
             "target": nodes["Sergei Millian"],
-            "link_index": 52,
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": false,

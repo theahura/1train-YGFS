@@ -27,6 +27,7 @@ var g = svg.append("g"),
 
 nodeImages();
 start();
+openGraph();
 
 function nodeImages() {
     svg.append("defs").selectAll("pattern")
@@ -44,7 +45,69 @@ function nodeImages() {
             .attr("width", 70);
 }
 
-function BFS(nData, isForward) {
+function BFSpaths(nData) {
+    var queue = [];
+    var visitedNodes = new Set();
+    var visitedLinks = new Set();
+    var immediateLinks = new Set();
+    var toTrump = [];
+
+    for (let l of links) {
+
+        var parent = l.target;
+        var child = l.source;
+
+        if (parent == nData) {
+            if (child.name == "Donald Trump") {
+                toTrump.push([l]);
+            }
+            queue.push([l]);
+            immediateLinks.add(l);
+        }
+    }
+
+    while (queue.length > 0) {
+        var path = queue.shift();
+        var n = path[path.length - 1].source;
+
+        for (let l of links) {
+
+            var parent = l.target;
+            var child = l.source;
+
+            if (parent == n) {
+                var newpath = path.slice();
+                newpath.push(l)
+
+                if (child.name == "Donald Trump") {
+                    toTrump.push(newpath);
+                }
+                else {
+                    queue.push(newpath);                    
+                }
+            }
+        }
+
+    }
+
+    for (let p of toTrump) {
+        for (let l of p) {
+            visitedNodes.add(l.source);
+            visitedNodes.add(l.target);
+            visitedLinks.add(l)
+        }
+    }
+
+    return [visitedNodes, visitedLinks, immediateLinks];
+}
+
+function printPaths(path) {
+    for (let l in path) {
+        // console.log(l.source);
+    }
+}
+
+function BFS(nData) {
     var queue = [nData];
     var visitedNodes = new Set();
     var visitedLinks = new Set();
@@ -57,15 +120,8 @@ function BFS(nData, isForward) {
             visitedNodes.add(n);
 
             for (let l of links) {
-                
-                if (isForward) {
-                    var parent = l.source;
-                    var child = l.target;
-                }
-                else {
-                    var parent = l.target;
-                    var child = l.source;
-                }
+                var parent = l.source;
+                var child = l.target;
 
                 if (parent == nData) {
                     immediateLinks.add(l);
@@ -73,6 +129,7 @@ function BFS(nData, isForward) {
 
                 if (parent == n && !visitedNodes.has(child)) {
                     queue.push(child);
+                    console.log(l);
                     visitedLinks.add(l);
                 }
             }
@@ -83,16 +140,19 @@ function BFS(nData, isForward) {
 
 function networkNodes(nData) {
 
-    var forward = BFS(nData, true),
-        backward = BFS(nData, false);
+    var forward = BFS(nData),
+        backward = BFSpaths(nData);
 
     var visitedNodesForward = forward[0],
-        visitedNodesBackward = backward[0],
-        immediateLinksForward = forward[2];
         visitedLinksForward = forward[1],
-        visitedLinksBackward = backward[1];
+        immediateLinksForward = forward[2];
+
+    var visitedNodesBackward = backward[0],
+        visitedLinksBackward = backward[1],
         immediateLinksBackward = backward[2];
 
+    console.log(visitedLinksBackward);
+    console.log(visitedLinksForward);
 
     node.filter( function (d) {
         return !visitedNodesForward.has(d) && !visitedNodesBackward.has(d);
@@ -157,22 +217,22 @@ function networkNodes(nData) {
     }
     else {
 
-        node.filter( function (d) {
-            return !visitedNodesForward.has(d) && !visitedNodesBackward.has(d);
-        })
-            .transition()
-            .duration(200)
-            .style("opacity", 0.3)
+        // node.filter( function (d) {
+        //     return !visitedNodesForward.has(d) && !visitedNodesBackward.has(d);
+        // })
+        //     .transition()
+        //     .duration(200)
+        //     .style("opacity", 0.3)
+
+        // link.filter( function (d) {
+        //     return !visitedLinksForward.has(d) && !visitedLinksBackward.has(d);
+        // })
+        //     .transition()
+        //     .duration(200)
+        //     .style("opacity", 0.1)
 
         link.filter( function (d) {
-            return !visitedLinksForward.has(d) && !visitedLinksBackward.has(d);
-        })
-            .transition()
-            .duration(200)
-            .style("opacity", 0.1)
-
-        link.filter( function (d) {
-            return visitedLinksForward.has(d) || immediateLinksBackward.has(d);
+            return visitedLinksBackward.has(d) //|| immediateLinksBackward.has(d);
         })
             .transition()
             .duration(200)
@@ -182,13 +242,17 @@ function networkNodes(nData) {
                 return lData.type.color;
             });
 
-        link.filter( function (d) {
-            return visitedLinksBackward.has(d) && !immediateLinksBackward.has(d);
-        })
-            .transition()
-            .duration(200)
-            .style("opacity", 1)
-            .style("stroke", "#000");
+        // link.filter( function (d) {
+        //     // console.log(visitedLinksBackward)
+        //     return visitedLinksBackward.has(d) //&& !immediateLinksBackward.has(d);
+        // })
+        //     .transition()
+        //     .duration(200)
+        //     .style("opacity", function(dd) {
+        //         console.log(dd);
+        //         return 1;
+        //     })
+        //     .style("stroke", "#000");
 
         clearDescriptionBox();
         var a1 = Array.from(visitedLinksForward),
@@ -206,7 +270,7 @@ function showLinkLabel(l, lData) {
     var midpoint = l.getPointAtLength(l.getTotalLength() / 2);
     var rectText = svg
         .append("g")
-        .attr("class", function (d) { return "linkLabel linkLabel" + lData.link_index })
+        .attr("class", function (d) { return "linkLabel linkLabel" + (lData.index + 1) })
 
     rectText
         .append("rect")
@@ -229,7 +293,7 @@ function showLinkLabel(l, lData) {
             return midpoint.y + 5
         })
         .text(function (d) {
-            return lData.link_index;
+            return lData.index + 1;
         })
         // .attr("text-anchor", "middle")
         .style("fill", "#fff")
@@ -324,13 +388,13 @@ function clearDescriptionBox() {
 }
 
 function shadedColor(lData) {
-    return d3.color(lData.type.color).brighter(lData.link_index / 25)
+    return d3.color(lData.type.color).brighter(lData.index / 25)
 }
 
 function compareLinkIndex(a,b) {
-  if (a.link_index < b.link_index)
+  if (a.index < b.index)
     return -1;
-  if (a.link_index > b.link_index)
+  if (a.index > b.index)
     return 1;
   return 0;
 }
@@ -342,8 +406,8 @@ function populateDescriptionBox(visitedLinks) {
     for (let l of visitedLinks) {
         var description = l.description;
 
-        if (l.link_index) {
-            description = l.link_index + " | " + description;
+        if (l.index) {
+            description = l.index + 1 + " | " + description;
         }
 
         if (l.news_source_name != "") {
@@ -639,7 +703,7 @@ function networkLinks(lData) {
     }).style("opacity", 0.5);
 
     link.filter( function (d) {
-        return lData.link_index == d.link_index;
+        return lData.index == d.index;
     })
     .style("opacity", 1)
     .style("stroke", function (d) {
@@ -671,7 +735,6 @@ function populateSourcesBox() {
 
     for (var n in nodes) {
         var POI = nodes[n];
-            console.log(POI);
         $("#image-sources").append(function() {
 
             var source_name;
