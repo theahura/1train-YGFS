@@ -104,10 +104,6 @@ body {
   font-size: 100%;
 }
 
-.poi-title {
-
-}
-
 #source-cursor {
     position:fixed;
     margin-left:-8px;
@@ -122,11 +118,15 @@ body {
   bottom: 3%;
   right: 3%;
   cursor: pointer;
+
+  z-index: 2;
 }
 
 .info-box {
   display: none;
   background-color: #fff;
+
+  font-size: 80%;
 
   position: fixed;
   width: 45%;
@@ -135,5 +135,10 @@ body {
   right: 25%;
 
   padding: 1%;
+  border: 2px #000 solid;
 
+}
+
+.right {
+  float: right;
 }

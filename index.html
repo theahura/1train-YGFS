@@ -6,10 +6,33 @@
 
 		<title>connections</title>
 
+		<!-- fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
+		<!-- styling -->
 		<link rel="stylesheet" type="text/css" href="main.css">
 
+		<!-- favicon -->
+			<link rel="apple-touch-icon" sizes="57x57" href="favicon.icofavicon.ico/apple-icon-57x57.png">
+			<link rel="apple-touch-icon" sizes="60x60" href="favicon.ico/apple-icon-60x60.png">
+			<link rel="apple-touch-icon" sizes="72x72" href="favicon.ico/apple-icon-72x72.png">
+			<link rel="apple-touch-icon" sizes="76x76" href="favicon.ico/apple-icon-76x76.png">
+			<link rel="apple-touch-icon" sizes="114x114" href="favicon.ico/apple-icon-114x114.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="favicon.ico/apple-icon-120x120.png">
+			<link rel="apple-touch-icon" sizes="144x144" href="favicon.ico/apple-icon-144x144.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="favicon.ico/apple-icon-152x152.png">
+			<link rel="apple-touch-icon" sizes="180x180" href="favicon.ico/apple-icon-180x180.png">
+			<link rel="icon" type="image/png" sizes="192x192"  href="favicon.ico/android-icon-192x192.png">
+			<link rel="icon" type="image/png" sizes="32x32" href="favicon.ico/favicon-32x32.png">
+			<link rel="icon" type="image/png" sizes="96x96" href="favicon.ico/favicon-96x96.png">
+			<link rel="icon" type="image/png" sizes="16x16" href="favicon.ico/favicon-16x16.png">
+			<link rel="manifest" href="/manifest.json">
+			<meta name="msapplication-TileColor" content="#ffffff">
+			<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+			<meta name="theme-color" content="#ffffff">
+		<!-- end favicon -->
+
+		<!-- js dependencies -->
 		<script src="d3.min.js"></script>
 		<script src="jquery-3.1.1.min.js"></script>
 
@@ -46,10 +69,30 @@
 			about
 		</div>
 		<div class="info-box">
-			YourGov.ForSale aims to illuminate the complex system of people and organizations that connect President Trump and Russia.
+			<p>
+				YourGov.ForSale connects the dots between the different people and organizations that link US President Donald Trump to Russia. After decades of a Cold War and public animosity, these two nations have begun to form deeply private connections that go against the very tradition of transparent government. Our goal here is to map out those connections in a clear and informative way for the benefit of the public.
+			</p>
+
+			<p>
+				We collected data from an exclusive list of credible news sources, keeping only the most relevant information tying Trump to Russia. For example, a Trump ally casually eating with a Russian at a fancy dinner is no reason to be alarmed. But if the ally was announced to be the new NSA director and the Russian is Vladimir Putin, we put it in the graph.
+			</p>
+
+			<p>
+				As part of our efforts to increase transparency in politics, the code and data for this app is publicly available on <a href="#">Github</a>, and links for all of our news sources are built into the graph itself.
+			</p>
+
+			<p>
+				Our philosophy is simple. We let the data speak for itself.
+			</p>
+
+			<p class = "right">
+				Sincerely,
+				1train
+			</p>
 		</div>
 		<div id="source-cursor"></div>
 
+		<!-- js source -->
 		<script type="text/javascript" src="d3extras.js"></script>
 		<script type="text/javascript" src="initialData.js"></script>
 		<script type="text/javascript" src="completeData.js"></script>

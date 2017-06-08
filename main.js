@@ -1,15 +1,71 @@
 // forked from http://bl.ocks.org/mbostock/1153292
 
 $('.info-link').click(function() {
+
+    svgStyling();
+    bodyStyling();
     $('.info-box').toggle();
+
     return false;
 });
 
 $(document).click(function(e) { 
-    if (e.target != $('.info-box')[0]) {
+    if ($('.info-box').css('display') != "none" && e.target != $('.info-box')[0]) {
+        svgStyling();
+        bodyStyling()
         $('.info-box').hide();
     }
 });
+
+function svgStyling() {
+    var svgDOM = $(".main")
+
+    if (svgDOM.css("position") == "absolute") {
+        svgDOM.css("position", "static");
+        svgDOM.css("z-index", 1);
+    }
+    else {
+        svgDOM.css("position", "absolute");
+        svgDOM.css("z-index", -1);
+    }
+}
+
+function bodyStyling() {
+
+    var boxDOM = $(".info-box");
+    $("body").children()
+        .css("opacity", function (d) {
+            if (boxDOM.css("display") != "none") {
+
+                if ($(this).attr("class") == "info-box") {
+                    return 0;
+                }
+
+                if ($(this).css("opacity") == "0") {
+                    return 0;
+                }
+                else {
+                    return 1                
+                }
+
+            }
+            else {
+
+                if ($(this).attr("class") == "info-box") {
+                    return 1;
+                }
+
+                if ($(this).css("opacity") == "0") {
+                    return 0;
+                }
+                else {
+                    return 0.5                
+                }
+
+            }
+
+        });
+}
 
 var simulation = d3.forceSimulation(nodes)
     .force("link", d3.forceLink(links).distance(40))
@@ -17,6 +73,7 @@ var simulation = d3.forceSimulation(nodes)
     .on("tick", ticked);
 
 var svg = d3.select("body").append("svg")
+    .attr("class", "main")
     .attr("width", width)
     .attr("height", height);
 
@@ -296,7 +353,7 @@ function openGraph() {
     })
     .transition()
         .duration(2000)
-        .attr("transform", "translate(" + width * 0.05 + "," + height * 0.5 + ")")
+        .attr("transform", "translate(" + width * 0.05 + "," + height * 0.6 + ")")
     .transition()
         .duration(200)
         .style("opacity", 0)
@@ -358,7 +415,7 @@ function populateDescriptionBox(visitedLinks) {
         var description = lObj.description;
 
         if (lObj.link_index) {
-            description = lObj.link_index + " | " + lObj.sweep + " | " + description;
+            description = lObj.link_index + " | " + description;
         }
 
         if (lObj.news_source_name != "") {
@@ -659,6 +716,7 @@ function networkLinks(lData) {
     })
     .style("opacity", 1)
     .style("stroke", function (d) {
+        showLinkLabel(this, d);
         return d.type.color;
     });
 
