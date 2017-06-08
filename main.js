@@ -179,13 +179,13 @@ function networkNodes(nData) {
                 return d.type.color;
             });
 
-        // link.filter( function (d) {
-        //     return visitedLinksForward.has(d) && !immediateLinksForward.has(d);
-        // })
-        //     .transition()
-        //     .duration(200)
-        //     .style("opacity", 1)
-        //     .style("stroke", "#000");
+        link.filter( function (d) {
+            return visitedLinksForward.has(d) && !immediateLinksForward.has(d);
+        })
+            .transition()
+            .duration(200)
+            .style("opacity", 1)
+            .style("stroke", "#000");
 
         clearDescriptionBox();
         var a1 = Array.from(immediateLinksForward)
@@ -217,19 +217,19 @@ function networkNodes(nData) {
     }
     else {
 
-        // node.filter( function (d) {
-        //     return !visitedNodesForward.has(d) && !visitedNodesBackward.has(d);
-        // })
-        //     .transition()
-        //     .duration(200)
-        //     .style("opacity", 0.3)
+        node.filter( function (d) {
+            return !visitedNodesForward.has(d) && !visitedNodesBackward.has(d);
+        })
+            .transition()
+            .duration(200)
+            .style("opacity", 0.3)
 
-        // link.filter( function (d) {
-        //     return !visitedLinksForward.has(d) && !visitedLinksBackward.has(d);
-        // })
-        //     .transition()
-        //     .duration(200)
-        //     .style("opacity", 0.1)
+        link.filter( function (d) {
+            return !visitedLinksForward.has(d) && !visitedLinksBackward.has(d);
+        })
+            .transition()
+            .duration(200)
+            .style("opacity", 0.1)
 
         link.filter( function (d) {
             return visitedLinksBackward.has(d) //|| immediateLinksBackward.has(d);
@@ -242,17 +242,17 @@ function networkNodes(nData) {
                 return lData.type.color;
             });
 
-        // link.filter( function (d) {
-        //     // console.log(visitedLinksBackward)
-        //     return visitedLinksBackward.has(d) //&& !immediateLinksBackward.has(d);
-        // })
-        //     .transition()
-        //     .duration(200)
-        //     .style("opacity", function(dd) {
-        //         console.log(dd);
-        //         return 1;
-        //     })
-        //     .style("stroke", "#000");
+        link.filter( function (d) {
+            // console.log(visitedLinksBackward)
+            return visitedLinksBackward.has(d) //&& !immediateLinksBackward.has(d);
+        })
+            .transition()
+            .duration(200)
+            .style("opacity", function(dd) {
+                console.log(dd);
+                return 1;
+            })
+            .style("stroke", "#000");
 
         clearDescriptionBox();
         var a1 = Array.from(visitedLinksForward),
