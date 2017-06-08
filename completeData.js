@@ -6,7 +6,7 @@ function finalDataBuild() {
             "index": 1,
             "x": width * 0.05,
             "y": height * 0.6,
-            "image": "Donald-Trump.png",
+            "image": "donald-trump.png",
             "image_source_name": "National Review",
             "image_source_url": "http://www.nationalreview.com/article/430533/donald-trump-grow",
             "description": "President of the United States"
@@ -17,7 +17,7 @@ function finalDataBuild() {
             "index": 2,
 	        "x": width * 0.95,
 	        "y": height * 0.5,
-            "image": "Vladimir-Putin.png",
+            "image": "vladimir-putin.png",
             "image_source_name": "Daily Express",
             "image_source_url": "http://www.express.co.uk/pictures/galleries/3216/Vladimir-Putin-Russian-president-politician-pictures/Russian-President-Vladimir-Putin-leaves-the-Elysee-Palace-73375",
             "description": "President of the Russian Federation"
@@ -28,7 +28,7 @@ function finalDataBuild() {
             "index": 3,
             "x": width * 0.05,
             "y": height * 0.9,
-            "image": "Paul-Manafort.png",
+            "image": "paul-manafort.png",
             "image_source_name": "NYT",
             "image_source_url": "https://www.nytimes.com/2016/08/15/us/politics/paul-manafort-ukraine-donald-trump.html",
             "description": "American lawyer, lobbyist, and political consultant"
@@ -39,7 +39,7 @@ function finalDataBuild() {
             "index": 4,
             "x": width * 0.4,
             "y": height * 0.8,
-            "image": "oleg-Deripaska.png",
+            "image": "oleg-deripaska.png",
             "image_source_name": "Huffington Post",
             "image_source_url": "http://www.huffingtonpost.com/2013/07/08/oleg-deripaska-bonus_n_3560778.html",
             "description": "Russian oligarch and philanthropist, founder and owner of industrial group Basic Element"
@@ -50,7 +50,7 @@ function finalDataBuild() {
             "index": 5,
             "x": width * 0.06,
             "y": height * 0.4,
-            "image": "Michael-Flynn.png",
+            "image": "michael-flynn.png",
             "image_source_name": "Politico",
             "image_source_url": "http://www.politico.com/story/2016/07/donald-trump-general-michael-flynn-vp-225253",
             "description": "Retired United States Army lieutenant general"
@@ -61,7 +61,7 @@ function finalDataBuild() {
             "index": 6,
             "x": width * 0.7,
             "y": height * 0.5,
-            "image": "RT.png",
+            "image": "rt.png",
             "image_source_name": "RT",
             "image_source_url": "https://www.rt.com/",
             "description": "Russian international television network funded by the Russian government"
@@ -72,7 +72,7 @@ function finalDataBuild() {
             "index": 7,
             "x": width * 0.52,
             "y": height * 0.46,
-            "image": "Sergey-Kislyak.png",
+            "image": "sergey-kislyak.png",
             "image_source_name": "CNN",
             "image_source_url": "http://www.cnn.com/2017/03/02/world/sergey-kislyak-russian-ambassador-us-profile/index.html",
             "description": "Russian Ambassador to the United States"
@@ -83,7 +83,7 @@ function finalDataBuild() {
             "index": 8,
             "x": width * 0.5,
             "y": height * 0.9,
-            "image": "Kaspersky-Lab.png",
+            "image": "kaspersky-lab.png",
             "image_source_name": "Twitter",
             "image_source_url": "https://twitter.com/kaspersky",
             "description": "Russian multinational cybersecurity and anti-virus provider"
@@ -94,7 +94,7 @@ function finalDataBuild() {
             "index": 9,
             "x": width * 0.8,
             "y": height * 0.8,
-            "image": "Volga-Dnepr-Group.png",
+            "image": "volga-dnepr-group.png",
             "image_source_name": "Twitter",
             "image_source_url": "https://twitter.com/volgadneprgroup?lang=en",
             "description": "Russian airline holding company"
@@ -105,7 +105,7 @@ function finalDataBuild() {
             "index": 10,
             "x": width * 0.3,
             "y": height * 0.9,
-            "image": "Jared-Kushner.png",
+            "image": "jared-kushner.png",
             "image_source_name": "NYMag",
             "image_source_url": "http://nymag.com/news/features/57891/",
             "description": "American real estate investor and developer, and newspaper owner"
@@ -116,7 +116,7 @@ function finalDataBuild() {
             "index": 11,
             "x": width * 0.53,
             "y": height * 0.78,
-            "image": "Sergey-Gorkov.png",
+            "image": "sergey-gorkov.png",
             "image_source_name": "Business Insider",
             "image_source_url": "http://www.businessinsider.com/jared-kushner-russia-vnesheconombank-ceo-putin-2017-3",
             "description": "Russian banker and attorney, chairman of state-owned Vnesheconombank"
@@ -127,7 +127,7 @@ function finalDataBuild() {
             "index": 12,
             "x": width * 0.22,
             "y": height * 0.54,
-            "image": "Jeff-Sessions.png",
+            "image": "jeff-sessions.png",
             "image_source_name": "Slate",
             "image_source_url": "http://www.slate.com/articles/news_and_politics/politics/2017/01/jeff_sessions_fights_for_racist_outcomes_who_care_what_s_in_his_heart.html",
             "description": "Attorney General of the United States"
@@ -138,7 +138,7 @@ function finalDataBuild() {
             "index": 13,
             "x": width * 0.725,
             "y": height * 0.76,
-            "image": "Viktor-Yanukovych.png",
+            "image": "viktor-yanukovych.png",
             "image_source_name": "BBC",
             "image_source_url": "http://www.bbc.com/news/world-europe-25182830",
             "description": "Former President of Ukraine"
@@ -149,7 +149,7 @@ function finalDataBuild() {
             "index": 14,
             "x": width * 0.63,
             "y": height * 0.74,
-            "image": "Dmytro-Firtash.png",
+            "image": "dmytro-firtash.png",
             "image_source_name": "Wikipedia",
             "image_source_url": "https://en.wikipedia.org/wiki/Dmytro_Firtash",
             "description": "Russian billionaire who funds the campaigns of pro-Russian Ukrainian politicians"
@@ -160,7 +160,7 @@ function finalDataBuild() {
             "index": 15,
             "x": width * 0.17,
             "y": height * 0.9,
-            "image": "Carter-Page.png",
+            "image": "carter-page.png",
             "image_source_name": "NBC News",
             "image_source_url": "http://www.nbcnews.com/news/us-news/trump-campaign-associate-carter-page-revealed-target-russian-spies-n742356",
             "description": "Russian billionaire who funds the campaigns of pro-Russian Ukrainian politicians"
@@ -182,7 +182,7 @@ function finalDataBuild() {
             "index": 16,
             "x": width * 0.80,
             "y": height * 0.63,
-            "image": "Gazprom.png",
+            "image": "gazprom.png",
             "image_source_name": "Twitter",
             "image_source_url": "https://twitter.com/gazpromen",
             "description": "Large Russian energy company majority-owned by the government"
@@ -204,7 +204,7 @@ function finalDataBuild() {
             "index": 18,
             "x": width * 0.12,
             "y": height * 0.78,
-            "image": "Roger-Stone.png",
+            "image": "roger-stone.png",
             "image_source_name": "Salon",
             "image_source_url": "http://www.salon.com/2015/01/28/roger_stone_vs_the_world_inside_the_conspiracy_filled_mind_of_legendary_gop_trickster/",
             "description": "American political consultant, lobbyist, and strategist"
@@ -215,7 +215,7 @@ function finalDataBuild() {
             "index": 19,
             "x": width * 0.64,
             "y": height * 0.6,
-            "image": "Guccifer-2.0.png",
+            "image": "guccifer-2.0.png",
             "image_source_name": "Twitter",
             "image_source_url": "https://twitter.com/guccifer_2",
             "description": "Twitter account that took credit for the hacking of the Democratic National Committee"
@@ -226,7 +226,7 @@ function finalDataBuild() {
             "index": 20,
             "x": width * 0.34,
             "y": height * 0.38,
-            "image": "WikiLeaks.png",
+            "image": "wikiLeaks.png",
             "image_source_name": "WikiLeaks",
             "image_source_url": "https://wikileaks.org/",
             "description": "International non-profit organization that publishes secret information provided anonymously"
@@ -237,7 +237,7 @@ function finalDataBuild() {
             "index": 21,
             "x": width * 0.38,
             "y": height * 0.65,
-            "image": "Hillary-Clinton.png",
+            "image": "hillary-clinton.png",
             "image_source_name": "Politifact",
             "image_source_url": "http://www.politifact.com/truth-o-meter/statements/2016/may/31/hillary-clinton/fact-checking-hillary-clintons-claim-her-email-pra/",
             "description": "2016 Democratic candidate for President of the United States"
@@ -248,7 +248,7 @@ function finalDataBuild() {
             "index": 22,
             "x": width * 0.2,
             "y": height * 0.38,
-            "image": "JD-Gordon.png",
+            "image": "jd-gordon.png",
             "image_source_name": "Wikipedia",
             "image_source_url": "https://en.wikipedia.org/wiki/J._D._Gordon",
             "description": "American communications and foreign policy advisor, former spokesman for the Pentagon"
@@ -259,7 +259,7 @@ function finalDataBuild() {
             "index": 23,
             "x": width * 0.53,
             "y": height * 0.6,
-            "image": "Andrii-Artemenko.png",
+            "image": "andrii-artemenko.png",
             "image_source_name": "NYT",
             "image_source_url": "https://www.nytimes.com/2017/02/22/opinion/ukraine-and-the-shadowy-freelancers.html",
             "description": "Ukrainian politician with a peace plan for Ukraine"
@@ -270,7 +270,7 @@ function finalDataBuild() {
             "index": 24,
             "x": width * 0.15,
             "y": height * 0.64,
-            "image": "Felix-Sater.png",
+            "image": "felix-sater.png",
             "image_source_name": "Twitter",
             "image_source_url": "https://twitter.com/felixsater",
             "description": "American real estate developer and former managing director of Bayrock Group LLC"
@@ -281,7 +281,7 @@ function finalDataBuild() {
             "index": 25,
             "x": width * 0.12,
             "y": height * 0.5,
-            "image": "Michael-Cohen.png",
+            "image": "michael-cohen.png",
             "image_source_name": "CNN",
             "image_source_url": "http://www.cnn.com/2015/07/13/politics/donald-trump-immigration-mexico-el-chapo/index.html",
             "description": "American lawyer, spokesperson for Donald Trump"
@@ -292,7 +292,7 @@ function finalDataBuild() {
             "index": 26,
             "x": width * 0.31,
             "y": height * 0.56,
-            "image": "Erik-Prince.png",
+            "image": "erik-prince.png",
             "image_source_name": "ABC News",
             "image_source_url": "http://abcnews.go.com/US/blackwater-founder-erik-prince-regrets-working-us-state/story?id=20931184",
             "description": "American businessman and former U.S. Navy SEAL officer, Founder of government services and security company Blackwater USA"
@@ -303,7 +303,7 @@ function finalDataBuild() {
             "index": 27,
             "x": width * 0.23,
             "y": height * 0.77,
-            "image": "Rex-Tillerson.png",
+            "image": "rex-tillerson.png",
             "image_source_name": "NYer",
             "image_source_url": "http://www.newyorker.com/news/news-desk/rex-tillerson-from-a-corporate-oil-sovereign-to-the-state-department",
             "description": "United States Secretary of State, diplomat, civil engineer, and former CEO of ExxonMobil"
@@ -314,7 +314,7 @@ function finalDataBuild() {
             "index": 28,
             "x": width * 0.61,
             "y": height * 0.87,
-            "image": "Yuri-Milner.png",
+            "image": "yuri-milner.png",
             "image_source_name": "PopSci",
             "image_source_url": "http://www.popsci.com/who-is-yuri-milner",
             "description": "Russian entrepreneur, venture capitalist and physicist, Founder of DST Global"
@@ -325,7 +325,7 @@ function finalDataBuild() {
             "index": 29,
             "x": width * 0.44,
             "y": height * 0.52,
-            "image": "Aras-Agalarov.png",
+            "image": "aras-agalarov.png",
             "image_source_name": "Politico",
             "image_source_url": "http://www.politico.com/story/2016/05/donald-trump-russia-moscow-miss-universe-223173",
             "description": "Azerbaijani businessman, developer, and public figure"
@@ -336,7 +336,7 @@ function finalDataBuild() {
             "index": 30,
             "x": width * 0.74,
             "y": height * 0.9,
-            "image": "Dmitry-Medvedev.png",
+            "image": "dmitry-medvedev.png",
             "image_source_name": "Wikipedia",
             "image_source_url": "https://en.wikipedia.org/wiki/Inauguration_of_Dmitry_Medvedev",
             "description": "Prime Minister of the Russian Federation"
@@ -347,7 +347,7 @@ function finalDataBuild() {
             "index": 31,
             "x": width * 0.32,
             "y": height * 0.74,
-            "image": "George-Papadopoulos.png",
+            "image": "george-papadopoulos.png",
             "image_source_name": "ABC News",
             "image_source_url": "http://abcnews.go.com/Politics/meet-donald-trumps-foreign-policy-advisers/story?id=37822480",
             "description": "Former foreign policy advisor for Donald Trump"
@@ -358,7 +358,7 @@ function finalDataBuild() {
             "index": 32,
             "x": width * 0.45,
             "y": height * 0.7,
-            "image": "Sergei-Millian.png",
+            "image": "sergei-millian.png",
             "image_source_name": "The Independent",
             "image_source_url": "http://www.independent.co.uk/news/world/americas/source-d-trump-russia-dossier-sergei-millian-putin-belarus-american-billionaire-christopher-steele-a7657446.html",
             "description": "Belarusian-American businessman, President of the Russian American Chamber of Commerce"
@@ -369,7 +369,7 @@ function finalDataBuild() {
             "index": 33,
             "x": width * 0.25,
             "y": height * 0.65,
-            "image": "Ivanka-Trump.png",
+            "image": "ivanka-trump.png",
             "image_source_name": "Wikipedia",
             "image_source_url": "https://en.wikipedia.org/wiki/Ivanka_Trump",
             "description": "American businesswoman and former fashion model, assistant to Donald Trump"
