@@ -1,4 +1,5 @@
 function finalDataBuild() {
+
 	nodes = {
         "Donald Trump": {
             "name": "Donald Trump",
@@ -708,8 +709,8 @@ function finalDataBuild() {
             "news_source_url": "http://www.independent.co.uk/news/world/americas/us-politics/donald-trump-adviser-jeffrey-jd-gordon-speak-russia-ambassador-sergey-kislyak-us-relations-isis-a7616436.html"
         },
         {
-            "source": nodes["Andrii Artemenko"],
-            "target": nodes["Paul Manafort"],
+            "source": nodes["Paul Manafort"],
+            "target": nodes["Andrii Artemenko"],
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,

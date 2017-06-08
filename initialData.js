@@ -1,5 +1,5 @@
-var width = 1250,
-    height = 700,
+var width = window.innerWidth,
+    height = window.innerHeight,
     nodes, links;
 
 var LINK_TYPE = {
@@ -18,6 +18,7 @@ var LINK_TYPE = {
 }
 
 function initialDataBuild() {
+
     nodes = {
         "United States": {
             "name": "United States",

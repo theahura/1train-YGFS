@@ -148,13 +148,15 @@ function BFS(nData) {
                     immediateLinks.add(l);
                 }
 
-                if (parent == n && !visitedNodes.has(child)) {
+                if (parent == n) {
                     queue.push(child);
                     visitedLinks.add(l);
                 }
             }
         }
+
     }
+
     return [visitedNodes, visitedLinks, immediateLinks];
 }
 
@@ -540,6 +542,12 @@ function nodePrebuild() {
 }
 
 function nodeBuild(isStart) {
+
+    if (!isStart) {
+        width = 1250;
+        height = 700;
+    }
+
     node = node.data(d3.values(nodes), function (d) { return d.name;});
 
     node = node.enter()
@@ -568,6 +576,11 @@ function nodeBuild(isStart) {
                     .attr("fill", "white"); 
             })
             .on("click", function() {
+                width = 1550;
+                height = 900;
+                svg
+                    .attr("width", width)
+                    .attr("height", height);
                 openGraph();
             });
     }
@@ -777,7 +790,6 @@ function populateSourcesBox() {
     simulation.nodes(nodes);
     simulation.force("link").links(links);
     simulation.alpha(1).on("tick", ticked).restart();
-
 }
 
 function restart() {
