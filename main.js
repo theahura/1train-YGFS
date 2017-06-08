@@ -544,8 +544,8 @@ function nodePrebuild() {
 function nodeBuild(isStart) {
 
     if (!isStart) {
-        width = 1250;
-        height = 700;
+        width = 1000;
+        height = 500;
     }
 
     node = node.data(d3.values(nodes), function (d) { return d.name;});
