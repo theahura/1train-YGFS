@@ -9,19 +9,16 @@ var svg = d3.select("body").append("svg")
     .attr("class", "main")
     // .attr("width", width)
     // .attr("height", height)
-    .attr("viewBox", "0 0 1302 737")
+    .attr("viewBox", "0 0 1300 1200")
     .attr("preserveAspectRatio", "xMidYMid meet");
 
-for (var l of links) {
-    svg.append("circle")
-        .attr("class", function() {
-            return "marker";
-        })
-        .style("fill", "#000")
-        .attr("r", "5")
-        .attr("transform", "translate(" + width * 0.2 + ", " + height * 0.2 + ")")
-        .moveToBack();
-}
+// for (var l of links) {
+//     svg.append("circle")
+//         .attr("class", "marker")
+//         .attr("fill", "#000")
+//         .attr("r", "5")
+//         .attr("transform", "translate(" + width * 0.2 + ", " + height * 0.2 + ")")
+// }
 
 var g = svg.append("g"),
     link = g.append("g").selectAll("path"),
@@ -352,7 +349,7 @@ function openGraph() {
     simulation.stop();
 
     link.remove()
-    d3.selectAll("circle.marker").remove();
+    // d3.selectAll("circle.marker").remove();
 
     node.selectAll("text")
 		.style("opacity", 0);
@@ -370,7 +367,7 @@ function openGraph() {
         .attr("transform", "translate(" + width * 0.05 + "," + height * 0.6 + ")")
     .transition()
         .duration(200)
-        //.style("opacity", 0)
+        .style("opacity", 0)
 
     node.filter( function (d) {
         return d.index == 2;
@@ -380,7 +377,7 @@ function openGraph() {
         .attr("transform", "translate(" + width * 0.95 + "," + height * 0.5 + ")")
     .transition()
         .duration(200)
-        //.style("opacity", 0)
+        .style("opacity", 0)
     .on("end", function (d) {
         nodePrebuild();
     });
@@ -653,7 +650,12 @@ function start() {
         .attr("class", function (d) { return "link " })
         .attr("id", function (d) { return "link" + d.index; })
         .style("stroke", function (d) {
-            return "#000"
+            if (d.index % 2) {
+                return "#8D0801"                
+            }
+            else {
+                return "#437AAD"
+            }
         })
         .style("stroke-width", 3);
 
@@ -674,38 +676,38 @@ function start() {
         .attr("stroke-dashoffset", 0);
 
     // add another transition for every new initial link
-    d3.selectAll("circle.marker")
-        .transition()
-        .duration(2000)
-        .attrTween("transform", translateAlong(d3.select("#link0").node()))
+    // d3.selectAll("circle.marker")
+    //     .transition()
+    //     .duration(2000)
+    //     .attrTween("transform", translateAlong(d3.select("#link0").node()))
         
-        .transition()
-        .duration(2000)
-        .attrTween("transform", translateAlong(d3.select("#link1").node()))
+    //     .transition()
+    //     .duration(2000)
+    //     .attrTween("transform", translateAlong(d3.select("#link1").node()))
         
-        .transition()
-        .duration(2000)
-        .attrTween("transform", translateAlong(d3.select("#link2").node()))
+    //     .transition()
+    //     .duration(2000)
+    //     .attrTween("transform", translateAlong(d3.select("#link2").node()))
         
-        .transition()
-        .duration(2000)
-        .attrTween("transform", translateAlong(d3.select("#link3").node()))
+    //     .transition()
+    //     .duration(2000)
+    //     .attrTween("transform", translateAlong(d3.select("#link3").node()))
         
-        .transition()
-        .duration(2000)
-        .attrTween("transform", translateAlong(d3.select("#link4").node()))
+    //     .transition()
+    //     .duration(2000)
+    //     .attrTween("transform", translateAlong(d3.select("#link4").node()))
         
-        .transition()
-        .duration(2000)
-        .attrTween("transform", translateAlong(d3.select("#link5").node()))
+    //     .transition()
+    //     .duration(2000)
+    //     .attrTween("transform", translateAlong(d3.select("#link5").node()))
         
-        .transition()
-        .duration(2000)
-        .attrTween("transform", translateAlong(d3.select("#link6").node()))
+    //     .transition()
+    //     .duration(2000)
+    //     .attrTween("transform", translateAlong(d3.select("#link6").node()))
         
-        .transition()
-        .duration(2000)
-        .attrTween("transform", translateAlong(d3.select("#link7").node()))
+    //     .transition()
+    //     .duration(2000)
+    //     .attrTween("transform", translateAlong(d3.select("#link7").node()))
 
     simulation.nodes(nodes);
     simulation.force("link").links(links);
