@@ -37,10 +37,12 @@ function svgStyling() {
     if (svgDOM.css("position") == "absolute") {
         svgDOM.css("position", "static");
         svgDOM.css("z-index", 1);
+        $('.info-box').css("z-index", -1);
     }
     else {
         svgDOM.css("position", "absolute");
         svgDOM.css("z-index", -1);
+        $('.info-box').css("z-index", 1);
     }
 }
 
