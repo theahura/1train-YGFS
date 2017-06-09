@@ -7,10 +7,12 @@ var simulation = d3.forceSimulation(nodes)
 
 var svg = d3.select("body").append("svg")
     .attr("class", "main")
-    .attr("width", width)
-    .attr("height", height);
+    // .attr("width", width)
+    // .attr("height", height)
+    .attr("viewBox", "0 0 1302 737")
+    .attr("preserveAspectRatio", "xMidYMid meet");
 
-for (let l of links) {
+for (var l of links) {
     svg.append("circle")
         .attr("class", function() {
             return "marker";
@@ -51,7 +53,7 @@ function BFSpaths(nData) {
     var immediateLinks = new Set();
     var toTrump = [];
 
-    for (let l of links) {
+    for (var l of links) {
 
         var parent = l.target;
         var child = l.source;
@@ -70,7 +72,7 @@ function BFSpaths(nData) {
         var path = queue.shift();
         var n = path[path.length - 1].source;
 
-        for (let l of links) {
+        for (var l of links) {
 
             var parent = l.target;
             var child = l.source;
@@ -93,16 +95,16 @@ function BFSpaths(nData) {
     // only add minimum links to visitedLinks
     var minPathLength = getMinPathLength(toTrump);
 
-    for (let p of toTrump) {
+    for (var p of toTrump) {
         if (p.length == minPathLength) {
-            for (let l of p) {
+            for (var l of p) {
                 visitedLinks.add(l)
             }
         }
     }
 
     // add the minimum links + immediate links
-    for (let l of visitedLinks) {
+    for (var l of visitedLinks) {
         visitedNodes.add(l.source);
         visitedNodes.add(l.target);
     }
@@ -118,7 +120,7 @@ function getMinPathLength(arr) {
 
     var minLength = arr[0].length;
 
-    for (let p of arr) {
+    for (var p of arr) {
         if (p.length < minLength) {
             minLength = p.length;
         }
@@ -140,7 +142,7 @@ function BFS(nData) {
         if (!visitedNodes.has(n)) {
             visitedNodes.add(n);
 
-            for (let l of links) {
+            for (var l of links) {
                 var parent = l.source;
                 var child = l.target;
 
@@ -422,7 +424,7 @@ function populateDescriptionBox(visitedLinks) {
 
     visitedLinks.sort(compareLinkIndex)
 
-    for (let l of visitedLinks) {
+    for (var l of visitedLinks) {
         var description = l.description;
 
         description = (l.index + 1) + " | " + description;
@@ -431,11 +433,11 @@ function populateDescriptionBox(visitedLinks) {
             description = description + " (" + l.news_source_name + ")";
         }
 
-        buildDescriptionBoxLinks(l.type.color, description, !l.confirmed);
+        buildDescriptionBoxLinks(l.type.color, description, !l.confirmed, true);
     }
 }
 
-function buildDescriptionBoxLinks(color, label, isDashed = false, isBigger = true) {
+function buildDescriptionBoxLinks(color, label, isDashed, isBigger) {
 
     var div = d3.select('.description-subbox1')
     
@@ -541,11 +543,6 @@ function nodePrebuild() {
 
 function nodeBuild(isStart) {
 
-    if (!isStart) {
-        width = 1000;
-        height = 500;
-    }
-
     node = node.data(d3.values(nodes), function (d) { return d.name;});
 
     node = node.enter()
@@ -574,11 +571,6 @@ function nodeBuild(isStart) {
                     .attr("fill", "white"); 
             })
             .on("click", function() {
-                width = 1550;
-                height = 900;
-                svg
-                    .attr("width", width)
-                    .attr("height", height);
                 openGraph();
             });
     }
@@ -751,11 +743,11 @@ function populateSourcesBox() {
 
     var lSet = new Set();
 
-    for (let l of links) {
+    for (var l of links) {
         lSet.add(l.news_source_name)
     }
 
-    for (let l of lSet) {
+    for (var l of lSet) {
         $("#news-sources").append(function() {
             return '<div class = "sources-row">' + l + '</div>'
         });
