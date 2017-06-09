@@ -353,7 +353,7 @@ function openGraph() {
     d3.selectAll("circle.marker").remove();
 
     node.selectAll("text")
-        .style("opacity", 0);
+		.style("opacity", 0);
     node.selectAll("circle")
         .attr("fill", function (d) { return "url(#image" + d.index + ")" });
 
@@ -368,7 +368,7 @@ function openGraph() {
         .attr("transform", "translate(" + width * 0.05 + "," + height * 0.6 + ")")
     .transition()
         .duration(200)
-        .style("opacity", 0)
+        //.style("opacity", 0)
 
     node.filter( function (d) {
         return d.index == 2;
@@ -378,7 +378,7 @@ function openGraph() {
         .attr("transform", "translate(" + width * 0.95 + "," + height * 0.5 + ")")
     .transition()
         .duration(200)
-        .style("opacity", 0)
+        //.style("opacity", 0)
     .on("end", function (d) {
         nodePrebuild();
     });
