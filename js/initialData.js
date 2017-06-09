@@ -19,14 +19,17 @@ var LINK_TYPE = {
 
 function initialDataBuild() {
 
+    var relWidth = 1150,
+        relHeight = 800;
+
     nodes = {
         "United States": {
             "name": "United States",
             "country": "USA",
             "USA": true,
             "index": 1,
-            "x": width * 0.75,
-            "y": height * 0.7,
+            "x": relWidth * 0.77,
+            "y": relHeight * 0.9,
             "image": "american-flag.png",
             "source": "http://flaglane.com/download/american-flag/american-flag-large.png"
         },
@@ -35,8 +38,8 @@ function initialDataBuild() {
             "country": "Russia",
             "USA": false,
             "index": 2,
-            "x": width * 0.85,
-            "y": height * 0.3,
+            "x": relWidth * 0.83,
+            "y": relHeight * 0.7,
             "image": "russia-flag.png",
             "source": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Flag_of_Russia.png"
         }

@@ -32,7 +32,7 @@ $(document).click(function(e) {
 });
 
 function svgStyling() {
-    var svgDOM = $(".main")
+    var svgDOM = $(".svg-container")
 
     if (svgDOM.css("position") == "absolute") {
         svgDOM.css("position", "static");

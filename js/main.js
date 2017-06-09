@@ -1,7 +1,7 @@
 // forked from http://bl.ocks.org/mbostock/1153292
 
 var simulation = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).distance(40))
+    .force("link", d3.forceLink(links).distance(200))
     .alphaTarget(1)
     .on("tick", ticked);
 
@@ -9,16 +9,16 @@ var svg = d3.select(".svg-container").append("svg")
     .attr("class", "main")
     // .attr("width", width)
     // .attr("height", height)
-    .attr("viewBox", "0 0 1250 737")
+    .attr("viewBox", "0 0 1150 800")
     .attr("preserveAspectRatio", "xMidYMid meet");
 
-// for (var l of links) {
-//     svg.append("circle")
-//         .attr("class", "marker")
-//         .attr("fill", "#000")
-//         .attr("r", "5")
-//         .attr("transform", "translate(" + width * 0.2 + ", " + height * 0.2 + ")")
-// }
+for (var l of links) {
+    svg.append("circle")
+        .attr("class", "marker")
+        .attr("fill", "#FFF")
+        .attr("r", "5")
+        .attr("transform", "translate(" + width * 0.2 + ", " + height * 0.2 + ")")
+}
 
 var g = svg.append("g"),
     link = g.append("g").selectAll("path"),
@@ -346,10 +346,12 @@ function defaultPOIBox() {
 
 function openGraph() {
 
+    // svg.style("z-index", "-1");
+
     simulation.stop();
 
     link.remove()
-    // d3.selectAll("circle.marker").remove();
+    d3.selectAll("circle.marker").remove();
 
     node.selectAll("text")
 		.style("opacity", 0);
@@ -364,7 +366,7 @@ function openGraph() {
     })
     .transition()
         .duration(2000)
-        .attr("transform", "translate(" + width * 0.05 + "," + height * 0.6 + ")")
+        .attr("transform", "translate(" + 1150 * 0.05 + "," + 800 * 0.6 + ")")
     .transition()
         .duration(200)
         .style("opacity", 0)
@@ -374,12 +376,12 @@ function openGraph() {
     })
     .transition()
         .duration(2000)
-        .attr("transform", "translate(" + width * 0.95 + "," + height * 0.5 + ")")
+        .attr("transform", "translate(" + 1150 * 0.95 + "," + 800 * 0.5 + ")")
     .transition()
         .duration(200)
         .style("opacity", 0)
     .on("end", function (d) {
-        nodePrebuild();
+        restart();
     });
     
     $(".intro-subbox")
@@ -533,9 +535,7 @@ function defaultDescriptionBox() {
 }
 
 function nodePrebuild() {
-    node = node.data(d3.values(nodes), function (d) { return d.name;});
-    node.exit().remove()
-    restart();
+    
 }
 
 function nodeBuild(isStart) {
@@ -636,6 +636,7 @@ function nodeBuild(isStart) {
         .style("font-size", "60%")
         .text(function (d) { return d.name; })
         .call(wrap, 50);
+    node = node.merge(node);
 }
 
 function start() {
@@ -649,14 +650,7 @@ function start() {
     link = link.enter().append("path")
         .attr("class", function (d) { return "link " })
         .attr("id", function (d) { return "link" + d.index; })
-        .style("stroke", function (d) {
-            if (d.index % 2) {
-                return "#8D0801"                
-            }
-            else {
-                return "#437AAD"
-            }
-        })
+        .style("stroke", "#FFF")
         .style("stroke-width", 3);
 
     link
@@ -676,38 +670,38 @@ function start() {
         .attr("stroke-dashoffset", 0);
 
     // add another transition for every new initial link
-    // d3.selectAll("circle.marker")
-    //     .transition()
-    //     .duration(2000)
-    //     .attrTween("transform", translateAlong(d3.select("#link0").node()))
+    d3.selectAll("circle.marker")
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link0").node()))
         
-    //     .transition()
-    //     .duration(2000)
-    //     .attrTween("transform", translateAlong(d3.select("#link1").node()))
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link1").node()))
         
-    //     .transition()
-    //     .duration(2000)
-    //     .attrTween("transform", translateAlong(d3.select("#link2").node()))
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link2").node()))
         
-    //     .transition()
-    //     .duration(2000)
-    //     .attrTween("transform", translateAlong(d3.select("#link3").node()))
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link3").node()))
         
-    //     .transition()
-    //     .duration(2000)
-    //     .attrTween("transform", translateAlong(d3.select("#link4").node()))
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link4").node()))
         
-    //     .transition()
-    //     .duration(2000)
-    //     .attrTween("transform", translateAlong(d3.select("#link5").node()))
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link5").node()))
         
-    //     .transition()
-    //     .duration(2000)
-    //     .attrTween("transform", translateAlong(d3.select("#link6").node()))
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link6").node()))
         
-    //     .transition()
-    //     .duration(2000)
-    //     .attrTween("transform", translateAlong(d3.select("#link7").node()))
+        .transition()
+        .duration(2000)
+        .attrTween("transform", translateAlong(d3.select("#link7").node()))
 
     simulation.nodes(nodes);
     simulation.force("link").links(links);
@@ -787,10 +781,18 @@ function populateSourcesBox() {
 function restart() {
 
     finalDataBuild();
+    node = node.data(d3.values(nodes), function (d) { return d.name;});
+    node.exit().remove()
+
     nodeImages();
     nodeBuild(false);
 
     link = link.data(links, function (d) { return d.source.name + "-" + d.target.name; });
+
+    // Keep the exiting links connected to the moving remaining nodes.
+    link.exit().transition()
+        .attr("opacity", 0)
+        .remove();
 
     link = link.enter().append("path")
         .attr("class", function (d) { return "link " + d.type.name; })

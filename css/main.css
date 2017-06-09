@@ -18,14 +18,26 @@ body {
 	text-align: center;
 }
 
-.svg-container svg {
+.svg-container {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
+.info-svg-container {
+  width: 100%;
+  height: 100%;
+}
+
+.main {
   position: relative;
-  max-width: 1250px;
-  min-width: 900px;
+  max-width: 1100px;
+  min-width: 1000px;
   max-height: 100%;
-  min-height: 576px;
+  min-height: 800px;
   display: block;
   margin: 0 auto;
+  z-index: 1;
 }
 
 .link {
@@ -37,11 +49,11 @@ body {
 .intro-box {
   pointer-events: none;
   position: fixed;
-  padding-top: 10%;
+  padding-top: 20%;
   padding-left: 10%;
   top: 0;
   left: 0;
-  width: 50%;
+  width: 100%;
   height: 100%;
   background-color: #001427;
 	text-align: left;
@@ -50,8 +62,8 @@ body {
 }
 
 .intro-subbox p {
-  font-size: 130%;
-  width: 64%;
+  font-size: 2.5vw;
+  width: 60%;
   color: #fff;
 }
 
@@ -61,12 +73,12 @@ body {
 
 .part1 {
   color: #fff;
-  font-size: 500%;
+  font-size: 8.8vw;
 }
 
 .part2 {
   color: #BA1200;
-  font-size: 500%;
+  font-size: 8.2vw;
 }
 
 .description-box {
@@ -131,6 +143,7 @@ body {
   bottom: 3%;
   right: 3%;
   cursor: pointer;
+  font-size: 2vw;
 
   z-index: 2;
 }
@@ -143,7 +156,7 @@ body {
   font-size: 80%;
 
   position: fixed;
-  width: 45%;
+  width: 50%;
   height: 60%;
   bottom: 25%;
   right: 25%;
@@ -172,12 +185,12 @@ body {
 }
 
 .sources-category {
-  font-size: 100%;
+  font-size: 110%;
   padding-bottom: 2%;
 }
 
 .sources-row {
-  font-size: 60%;
+  font-size: 90%;
 }
 
 .sources-subbox {
@@ -192,19 +205,26 @@ body {
 
 .logo {
   position: fixed;
-  padding-bottom: 2%;
-  padding-right: 2%;
-  bottom: 25%;
-  right: 25%;
+  top: 13%;
+  right: 27%;
 }
 
 .logo-image {
    /*min-width: 0.1vw;*/
    /*width: 100%;*/
-   height: 4vh
+   height: 3vw
 }
 
 .logo-image:hover {
   cursor: pointer;
   opacity: 0.7;
+}
+
+#about-us-box {
+  padding: 3vw;
+  font-size: 2vw;
+}
+
+#about-us-box p {
+  text-align: justify;
 }
