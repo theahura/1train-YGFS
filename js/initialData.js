@@ -4,7 +4,7 @@ var width = window.innerWidth,
 
 var LINK_TYPE = {
     Business: {
-        name: "business",
+        name: "financial",
         color: "#3B8EA5"
     },
     Political: {

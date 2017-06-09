@@ -40,8 +40,8 @@ function nodeImages() {
             .attr("y", "0")
         .append("image")
             .attr("xlink:href", function (d) { return "img/" + d.image })
-            .attr("height", 70)
-            .attr("width", 70);
+            .attr("height", 85)
+            .attr("width", 85);
 }
 
 function BFSpaths(nData) {
@@ -199,13 +199,13 @@ function networkNodes(nData) {
                 return lData.type.color;
             });
 
-        link.filter( function (d) {
-            return visitedLinksForward.has(d) && !immediateLinksForward.has(d);
-        })
-            .transition()
-            .duration(200)
-            .style("opacity", 1)
-            .style("stroke", "#000");
+        // link.filter( function (d) {
+        //     return visitedLinksForward.has(d) && !immediateLinksForward.has(d);
+        // })
+        //     .transition()
+        //     .duration(200)
+        //     .style("opacity", 1)
+        //     .style("stroke", "#000");
 
         clearDescriptionBox();
         var a1 = Array.from(immediateLinksForward)
@@ -425,9 +425,7 @@ function populateDescriptionBox(visitedLinks) {
     for (let l of visitedLinks) {
         var description = l.description;
 
-        if (l.index) {
-            description = l.index + 1 + " | " + description;
-        }
+        description = (l.index + 1) + " | " + description;
 
         if (l.news_source_name != "") {
             description = description + " (" + l.news_source_name + ")";
@@ -627,7 +625,7 @@ function nodeBuild(isStart) {
     }
 
     a.append("circle")
-        .attr("r", 35)
+        .attr("r", 40)
         .attr("fill", "white")
         .attr("stroke-width", 2)
         .attr("stroke", function (d) {
