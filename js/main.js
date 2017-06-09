@@ -5,11 +5,11 @@ var simulation = d3.forceSimulation(nodes)
     .alphaTarget(1)
     .on("tick", ticked);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select(".svg-container").append("svg")
     .attr("class", "main")
     // .attr("width", width)
     // .attr("height", height)
-    .attr("viewBox", "0 0 1300 1200")
+    .attr("viewBox", "0 0 1250 737")
     .attr("preserveAspectRatio", "xMidYMid meet");
 
 // for (var l of links) {
