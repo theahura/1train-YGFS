@@ -374,6 +374,17 @@ function finalDataBuild() {
             "image_source_name": "Wikipedia",
             "image_source_url": "https://en.wikipedia.org/wiki/Ivanka_Trump",
             "description": "American businesswoman and former fashion model, assistant to Donald Trump"
+        },
+        "James Comey": {
+            "name": "James Comey",
+            "country": "USA",
+            "index": 34,
+            "x": width * 0.27,
+            "y": height * 0.43,
+            "image": "james-comey.png",
+            "image_source_name": "NBC News",
+            "image_source_url": "http://www.nbcnews.com/politics/2016-election/clinton-emails-only-latest-controversy-fbi-director-james-comey-n675006",
+            "description": "Former Director of the Federal Bureau of Investigation under Presidents Bush, Obama, and Trump"
         }
     }
 
@@ -917,6 +928,36 @@ function finalDataBuild() {
             "description":"Ivanka Trump is married to Jared Kushner",
             "news_source_name":"",
             "news_source_url": ""
+        },
+        {
+            "source": nodes["Donald Trump"],
+            "target": nodes["James Comey"],
+            "type": LINK_TYPE.Political,
+            "sweep": 1,
+            "confirmed": true,
+            "description":"Trump fired Comey, who was investigating whether Trump advisers had colluded with the Russian government to rig the 2016 presidential election",
+            "news_source_name":"",
+            "news_source_url": ""
+        },
+        {
+            "source": nodes["James Comey"],
+            "target": nodes["Hillary Clinton"],
+            "type": LINK_TYPE.Political,
+            "sweep": 1,
+            "confirmed": false,
+            "description":"Clinton has implied that Comey's mishandling of her email scandal led to her loss in the presidential election",
+            "news_source_name":"WashPo",
+            "news_source_url": "https://www.washingtonpost.com/politics/hillary-clinton-blames-russian-hackers-and-comey-for-2016-election-loss/2017/05/02/e62fef72-2f60-11e7-8674-437ddb6e813e_story.html?utm_term=.88ff21b8e11f"
+        },
+        {
+            "source": nodes["WikiLeaks"],
+            "target": nodes["RT"],
+            "type": LINK_TYPE.Business,
+            "sweep": 1,
+            "confirmed": true,
+            "description":"WikiLeaks founder Julian Assange held a talk show on RT in 2012",
+            "news_source_name":"WashPo",
+            "news_source_url": "http://www.nytimes.com/2012/04/18/arts/television/julian-assange-starts-talk-show-on-russian-tv.html"
         }
     ]
 }
