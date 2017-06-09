@@ -49,7 +49,7 @@ body {
 .intro-box {
   pointer-events: none;
   position: fixed;
-  padding-top: 20%;
+  padding-top: 10%;
   padding-left: 10%;
   top: 0;
   left: 0;
@@ -62,8 +62,8 @@ body {
 }
 
 .intro-subbox p {
-  font-size: 2.5vw;
-  width: 60%;
+  font-size: 1.8vw;
+  width: 40%;
   color: #fff;
 }
 
@@ -73,12 +73,12 @@ body {
 
 .part1 {
   color: #fff;
-  font-size: 8.8vw;
+  font-size: 6.8vw;
 }
 
 .part2 {
   color: #BA1200;
-  font-size: 8.2vw;
+  font-size: 6.2vw;
 }
 
 .description-box {
@@ -143,7 +143,7 @@ body {
   bottom: 3%;
   right: 3%;
   cursor: pointer;
-  font-size: 2vw;
+  font-size: 1.2vw;
 
   z-index: 2;
 }
