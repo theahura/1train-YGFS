@@ -237,4 +237,6 @@ body {
   font-size: 2vw;
 
   z-index: 2;
+
+	cursor: pointer;
 }
