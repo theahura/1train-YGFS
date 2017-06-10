@@ -381,7 +381,7 @@ function openGraph() {
   //       restart();
   //   });
     
-    $(".intro-subbox")
+    $(".intro-subbox, .launch-button")
         .animate({"opacity": 0})
         .delay(200)
         .queue( function() {
