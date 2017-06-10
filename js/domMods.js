@@ -23,7 +23,7 @@ $( document ).ready(function() {
     });
 
     $(".launch-button").click( function() {
-		$(this).hide()
+        $(this).animate({"opacity": 0})
         openGraph();
 
         return false;
