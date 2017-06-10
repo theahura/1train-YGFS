@@ -28,7 +28,7 @@ body {
   position: relative;
   max-width: 100%;
   min-width: 1000px;
-  height: 700px;
+  min-height: 700px;
   display: block;
   margin: 0 auto;
   z-index: 1;
