@@ -678,7 +678,7 @@ function populateSourcesBox() {
     
     simulation.stop();
 
-    finalDataBuild();
+    // finalDataBuild();
 
     var lSet = new Set();
 
@@ -714,7 +714,7 @@ function populateSourcesBox() {
         });
     }
 
-    initialDataBuild();
+    // initialDataBuild();
 
     simulation.nodes(nodes);
     simulation.force("link").links(links);
@@ -724,6 +724,8 @@ function populateSourcesBox() {
 function restart() {
 
     finalDataBuild();
+    populateSourcesBox();
+
     node = node.data(d3.values(nodes), function (d) { return d.name;});
     node.exit().remove()
 
