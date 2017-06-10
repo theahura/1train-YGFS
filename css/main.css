@@ -91,6 +91,8 @@ body {
   background-color: rgba(249,232,192,0.9);
 	text-align: left;
 	font-size: 1vw;
+
+  z-index: 2;
 }
 
 .description-subbox1 {

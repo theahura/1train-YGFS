@@ -334,6 +334,7 @@ function openGraph() {
         .delay(200)
         .queue( function() {
              $(".intro-box").animate({"width": 0, "padding-left": 0}, 500)
+             $(".launch-button").remove();
         });
 
     $(".description-box")
