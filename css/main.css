@@ -140,7 +140,7 @@ body {
 }
 
 .info-link {
-  color: #BA1200;
+  color: #FFF;
   position: fixed;
   bottom: 3%;
   right: 3%;
@@ -231,7 +231,7 @@ body {
   height: 10%;
   width: 7%;
 
-  color: #BA1200;
+  color: #FFF;
   position: fixed;
   bottom: 15%;
   left: 46%;
