@@ -9,7 +9,7 @@ var svg = d3.select(".svg-container").append("svg")
     .attr("class", "main")
     // .attr("width", width)
     // .attr("height", height)
-    .attr("viewBox", "0 0 1150 800")
+    .attr("viewBox", "0 70 1150 800")
     .attr("preserveAspectRatio", "xMidYMid meet");
 
 // for (var l of links) {
