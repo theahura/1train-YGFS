@@ -90,6 +90,7 @@ body {
   border: 1px #000 dashed;
   background-color: rgba(249,232,192,0.9);
 	text-align: left;
+	font-size: 1vw;
 }
 
 .description-subbox1 {
@@ -120,12 +121,12 @@ body {
 }
 
 .poi-name {
-  font-size: 70%;
+  font-size: 1.2vw;
   margin-bottom: 0.75%;
 }
 
 .poi-description {
-  font-size: 100%;
+  font-size: 1.4vw;
 }
 
 #source-cursor {
