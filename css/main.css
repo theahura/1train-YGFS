@@ -21,7 +21,6 @@ body {
 .svg-container {
   width: 100%;
   height: 100%;
-  display: inline-block;
 }
 
 .info-svg-container {
@@ -30,11 +29,11 @@ body {
 }
 
 .main {
+  opacity: 0;
   position: relative;
   max-width: 1100px;
   min-width: 1000px;
-  max-height: 100%;
-  min-height: 800px;
+  height: 700px;
   display: block;
   margin: 0 auto;
   z-index: 1;
@@ -49,7 +48,7 @@ body {
 .intro-box {
   pointer-events: none;
   position: fixed;
-  padding-top: 20%;
+  padding-top: 10%;
   padding-left: 10%;
   top: 0;
   left: 0;
@@ -222,9 +221,19 @@ body {
 
 #about-us-box {
   padding: 3vw;
-  font-size: 2vw;
+  font-size: 1vw;
 }
 
-#about-us-box p {
-  text-align: justify;
+.launch-button {
+  height: 10%;
+  width: 10%;
+
+  color: #BA1200;
+  position: fixed;
+  bottom: 3%;
+  right: 50%;
+
+  font-size: 2vw;
+
+  z-index: 2;
 }

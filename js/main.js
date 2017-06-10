@@ -12,20 +12,19 @@ var svg = d3.select(".svg-container").append("svg")
     .attr("viewBox", "0 0 1150 800")
     .attr("preserveAspectRatio", "xMidYMid meet");
 
-for (var l of links) {
-    svg.append("circle")
-        .attr("class", "marker")
-        .attr("fill", "#FFF")
-        .attr("r", "5")
-        .attr("transform", "translate(" + width * 0.2 + ", " + height * 0.2 + ")")
-}
+// for (var l of links) {
+//     svg.append("circle")
+//         .attr("class", "marker")
+//         .attr("fill", "#FFF")
+//         .attr("r", "5")
+//         .attr("transform", "translate(" + width * 0.2 + ", " + height * 0.2 + ")")
+// }
 
 var g = svg.append("g"),
     link = g.append("g").selectAll("path"),
     node = g.append("g").selectAll("circle")
 
 nodeImages();
-start();
 
 function nodeImages() {
     svg.append("defs").selectAll("pattern")
@@ -346,58 +345,58 @@ function defaultPOIBox() {
 
 function openGraph() {
 
-    // svg.style("z-index", "-1");
+  //   simulation.stop();
 
-    simulation.stop();
+  //   link.remove()
+  //   d3.selectAll("circle.marker").remove();
 
-    link.remove()
-    d3.selectAll("circle.marker").remove();
+  //   node.selectAll("text")
+		// .style("opacity", 0);
+  //   node.selectAll("circle")
+  //       .attr("fill", function (d) { return "url(#image" + d.index + ")" });
 
-    node.selectAll("text")
-		.style("opacity", 0);
-    node.selectAll("circle")
-        .attr("fill", function (d) { return "url(#image" + d.index + ")" });
+  //   node.selectAll("a").on("mouseover", null);
+  //   node.selectAll("a").on("mouseout", null);
 
-    node.selectAll("a").on("mouseover", null);
-    node.selectAll("a").on("mouseout", null);
+  //   node.filter( function (d) {
+  //       return d.index == 1;
+  //   })
+  //   .transition()
+  //       .duration(2000)
+  //       .attr("transform", "translate(" + 1150 * 0.05 + "," + 800 * 0.6 + ")")
+  //   .transition()
+  //       .duration(200)
+  //       .style("opacity", 0)
 
-    node.filter( function (d) {
-        return d.index == 1;
-    })
-    .transition()
-        .duration(2000)
-        .attr("transform", "translate(" + 1150 * 0.05 + "," + 800 * 0.6 + ")")
-    .transition()
-        .duration(200)
-        .style("opacity", 0)
-
-    node.filter( function (d) {
-        return d.index == 2;
-    })
-    .transition()
-        .duration(2000)
-        .attr("transform", "translate(" + 1150 * 0.95 + "," + 800 * 0.5 + ")")
-    .transition()
-        .duration(200)
-        .style("opacity", 0)
-    .on("end", function (d) {
-        restart();
-    });
+  //   node.filter( function (d) {
+  //       return d.index == 2;
+  //   })
+  //   .transition()
+  //       .duration(2000)
+  //       .attr("transform", "translate(" + 1150 * 0.95 + "," + 800 * 0.5 + ")")
+  //   .transition()
+  //       .duration(200)
+  //       .style("opacity", 0)
+  //   .on("end", function (d) {
+  //       restart();
+  //   });
     
     $(".intro-subbox")
         .animate({"opacity": 0})
         .delay(200)
         .queue( function() {
-            $(".intro-box").animate({"width": 0, "padding-left": 0})
+             $(".intro-box").animate({"width": 0, "padding-left": 0}, 500)
         });
 
     $(".description-box")
-        .delay(500)
-        .animate({"opacity": 1}, 1500)
+        .delay(550)
+        .animate({"opacity": 1}, 1000, function() {
+          restart();
+        })
 
     $(".poi-box")
         .delay(500)
-        .animate({"opacity": 1}, 1500)
+        .animate({"opacity": 1}, 1000)
 
     defaultDescriptionBox();
 }
@@ -572,10 +571,10 @@ function nodeBuild(isStart) {
             });
     }
     else {
-        node.style("opacity", 0)
-            .transition()
-            .duration(200)
-            .style("opacity", 1);
+        // node.style("opacity", 0)
+        //     .transition()
+        //     .duration(200)
+        //     .style("opacity", 1);
 
         a
             .style("cursor", "default")
@@ -831,11 +830,16 @@ function restart() {
             $('body').css('cursor', 'default');
         })
         
-    link
-        .style("opacity", 0)
+    // link
+    //     .style("opacity", 0)
+    //     .transition()
+    //     .duration(200)
+    //     .style("opacity", 0.5);
+
+    d3.select(".main")
         .transition()
-        .duration(200)
-        .style("opacity", 0.5);
+        .duration(500)
+        .style("opacity", 1);
 
     simulation.nodes(nodes);
     simulation.force("link").links(links);

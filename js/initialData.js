@@ -28,8 +28,8 @@ function initialDataBuild() {
             "country": "USA",
             "USA": true,
             "index": 1,
-            "x": relWidth * 0.77,
-            "y": relHeight * 0.9,
+            "x": relWidth * 0.05,
+            "y": relHeight * 0.8,
             "image": "american-flag.png",
             "source": "http://flaglane.com/download/american-flag/american-flag-large.png"
         },
@@ -38,8 +38,8 @@ function initialDataBuild() {
             "country": "Russia",
             "USA": false,
             "index": 2,
-            "x": relWidth * 0.83,
-            "y": relHeight * 0.7,
+            "x": relWidth * 0.2,
+            "y": relHeight * 0.6,
             "image": "russia-flag.png",
             "source": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Flag_of_Russia.png"
         }

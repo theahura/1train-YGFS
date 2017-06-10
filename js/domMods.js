@@ -21,6 +21,13 @@ $( document ).ready(function() {
 
         return false;
     });
+
+    $(".launch-button").click( function() {
+        console.log(1324)
+        openGraph();
+
+        return false;
+    });
 });
 
 $(document).click(function(e) { 
