@@ -23,7 +23,7 @@ $( document ).ready(function() {
     });
 
     $(".launch-button").click( function() {
-        console.log(1324)
+		$(this).hide()
         openGraph();
 
         return false;
