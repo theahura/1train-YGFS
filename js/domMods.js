@@ -41,15 +41,14 @@ $(document).click(function(e) {
 function svgStyling() {
     var svgDOM = $(".svg-container")
 
-    if (svgDOM.css("position") == "absolute") {
+    if (svgDOM.css("z-index") == -1) {
         //svgDOM.css("position", "static");
         svgDOM.css("z-index", 1);
         $('.info-box').css("z-index", -1);
     }
     else {
-        //svgDOM.css("position", "absolute");
         svgDOM.css("z-index", -1);
-        $('.info-box').css("z-index", 1);
+        $('.info-box').css("z-index", 3);
     }
 }
 
