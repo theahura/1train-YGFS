@@ -18,6 +18,8 @@ var g = svg.append("g"),
 
 nodeImages();
 
+populateSourcesBox();
+
 function nodeImages() {
     svg.append("defs").selectAll("pattern")
         .data(d3.values(nodes))
@@ -679,7 +681,7 @@ function populateSourcesBox() {
     
     simulation.stop();
 
-    // finalDataBuild();
+    finalDataBuild();
 
     var lSet = new Set();
 
