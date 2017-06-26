@@ -960,9 +960,9 @@ function finalDataBuild() {
             "type": LINK_TYPE.Political,
             "sweep": 1,
             "confirmed": true,
-            "description":"Trump fired Comey, who was investigating whether Trump advisers had colluded with the Russian government to rig the 2016 presidential election",
-            "news_source_name":"",
-            "news_source_url": ""
+            "description":"Trump fired Comey, who was investigating whether Trump advisers had colluded with the Russian government to rig the 2016 presidential election.",
+            "news_source_name":"NYT",
+            "news_source_url": "https://www.nytimes.com/2017/05/09/us/politics/james-comey-fired-fbi.html"
         },
         {
             "source": nodes["James Comey"],

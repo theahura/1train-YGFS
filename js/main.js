@@ -268,7 +268,8 @@ function networkNodes(nData) {
 }
 
 function showLinkLabel(l, lData) {
-    var l = d3.select(l).node()
+	var base_l = d3.select(l)
+    var l = base_l.node()
 
     var midpoint = l.getPointAtLength(l.getTotalLength() / 2);
     var rectText = svg
@@ -286,6 +287,17 @@ function showLinkLabel(l, lData) {
         .attr("width", "20px")
         .attr("height", "20px")
         .style("fill", "#000")
+        .on("mouseover", function (d) {
+            networkLinks(lData);
+            $('body').css('cursor', 'pointer');
+		})
+		.on("mouseout", function(d) {
+			base_l.on("mouseout")()
+		})
+        .on("click", function (d) {
+			// Not working
+			// alert()
+        });
 
     rectText
         .append("text")
@@ -301,7 +313,17 @@ function showLinkLabel(l, lData) {
         // .attr("text-anchor", "middle")
         .style("fill", "#fff")
         .style("font-size", "60%")
-        .style("opacity", 1);
+        .style("opacity", 1)
+        .on("mouseover", function (d) {
+            networkLinks(lData);
+			$('body').css('cursor', 'pointer');
+		})
+		.on("mouseout", function(d) {
+			base_l.on("mouseout")()
+		})
+        .on("click", function (d) {
+			// alert()
+        });
 }
 
 function hideLinkLabels() {
@@ -670,7 +692,7 @@ function networkLinks(lData) {
     .style("stroke", function (d) {
         showLinkLabel(this, d);
         return d.type.color;
-    });
+    })
 
     clearDescriptionBox();
     populateDescriptionBox([lData]);

@@ -7,6 +7,12 @@ d3.selection.prototype.moveToBack = function() {
     });
 };
 
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+};
+
 jQuery.fn.d3Click = function () {
   this.each(function (i, e) {
     var evt = new MouseEvent("click");
