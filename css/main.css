@@ -148,6 +148,11 @@ body {
   font-size: 1.2vw;
 
   z-index: 2;
+
+
+   -webkit-transition-property:color; 
+    -webkit-transition-duration: 1s, 1s; 
+    -webkit-transition-timing-function: linear, ease-in;
 }
 
 .info-box {

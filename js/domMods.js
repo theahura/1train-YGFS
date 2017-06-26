@@ -24,6 +24,7 @@ $( document ).ready(function() {
 
     $(".launch-button").click( function() {
         console.log(1324)
+		$(".info-link").css("color", "#000");
         openGraph();
 
         return false;
