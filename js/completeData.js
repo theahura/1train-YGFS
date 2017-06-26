@@ -382,13 +382,35 @@ function finalDataBuild() {
             "name": "James Comey",
             "country": "USA",
             "index": 34,
-            "x": relWidth * 0.29,
+            "x": relWidth * 0.31,
             "y": relHeight * 0.36,
             "image": "james-comey.png",
             "image_source_name": "NBC News",
             "image_source_url": "http://www.nbcnews.com/politics/2016-election/clinton-emails-only-latest-controversy-fbi-director-james-comey-n675006",
             "description": "Former Director of the Federal Bureau of Investigation under Presidents Bush, Obama, and Trump"
-        }
+        },
+        "Sally Yates": {
+            "name": "Sally Yates",
+            "country": "USA",
+            "index": 35,
+            "x": relWidth * 0.24,
+            "y": relHeight * 0.36,
+            "image": "sally-yates.jpg",
+            "image_source_name": "Business Insider",
+            "image_source_url": "http://www.businessinsider.com/sally-yates-michael-flynn-trump-immigration-order-2017-5",
+            "description": "Former acting Attorney General under Trump"
+        },
+        "Robert Mueller": {
+            "name": "Robert Mueller",
+            "country": "USA",
+            "index": 36,
+            "x": relWidth * 0.24,
+            "y": relHeight * 0.46,
+            "image": "robert-mueller.jpg",
+            "image_source_name": "NYT",
+            "image_source_url": "https://www.nytimes.com/2017/05/17/us/politics/robert-mueller-special-counsel-russia-investigation.html",
+            "description": "Former FBI Director, Special Counsel for Russia Investigation"
+        },
     }
 
 	links = [
@@ -953,6 +975,16 @@ function finalDataBuild() {
             "news_source_url": "https://www.washingtonpost.com/politics/hillary-clinton-blames-russian-hackers-and-comey-for-2016-election-loss/2017/05/02/e62fef72-2f60-11e7-8674-437ddb6e813e_story.html?utm_term=.88ff21b8e11f"
         },
         {
+            "source": nodes["James Comey"],
+            "target": nodes["Vladimir Putin"],
+            "type": LINK_TYPE.Political,
+            "sweep": 0,
+            "confirmed": true,
+            "description":"Comey was investigating Russian interference in the US election as well as Russian ties to Trump's campaign before his dismissal.",
+            "news_source_name":"NYT",
+            "news_source_url": "https://www.nytimes.com/2017/05/10/us/politics/comey-russia-investigation-fbi.html"       
+		},
+        {
             "source": nodes["WikiLeaks"],
             "target": nodes["RT"],
             "type": LINK_TYPE.Business,
@@ -961,6 +993,57 @@ function finalDataBuild() {
             "description":"WikiLeaks founder Julian Assange held a talk show on RT in 2012",
             "news_source_name":"WashPo",
             "news_source_url": "http://www.nytimes.com/2012/04/18/arts/television/julian-assange-starts-talk-show-on-russian-tv.html"
-        }
+        },
+        {
+            "source": nodes["Donald Trump"],
+            "target": nodes["Sally Yates"],
+            "type": LINK_TYPE.Political,
+            "sweep": 0,
+            "confirmed": true,
+            "description":"Sally Yates was dismissed by Trump after she refused to implement the 2017 Muslim-country travel ban.",
+            "news_source_name":"NYT",
+            "news_source_url": "https://www.nytimes.com/2017/01/30/us/politics/trump-immigration-ban-memo.html"
+		},
+        {
+            "source": nodes["Michael Flynn"],
+            "target": nodes["Sally Yates"],
+            "type": LINK_TYPE.Political,
+            "sweep": 0,
+            "confirmed": true,
+            "description":"Sally Yates testified that she warned the Trump administration about potential ties between Michael Flynn and the Russian government.",
+            "news_source_name":"NYT",
+            "news_source_url": "https://www.nytimes.com/2017/05/08/us/politics/michael-flynn-sally-yates-hearing.html"
+		},
+        {
+            "source": nodes["Donald Trump"],
+            "target": nodes["Robert Mueller"],
+            "type": LINK_TYPE.Political,
+            "sweep": 0,
+            "confirmed": false,
+            "description":"Trump friend claims that Trump is considering firing Robert Mueller.",
+            "news_source_name":"NYT",
+            "news_source_url": "https://www.nytimes.com/2017/06/12/us/politics/robert-mueller-trump.html"
+		},
+        {
+            "source": nodes["Robert Mueller"],
+            "target": nodes["Vladimir Putin"],
+            "type": LINK_TYPE.Political,
+            "sweep": 0,
+            "confirmed": true,
+            "description":"Robert Mueller is heading the investigation into possible ties between Trump's campaign and Russian officials.",
+            "news_source_name":"NYT",
+            "news_source_url": "https://www.nytimes.com/2017/06/12/us/politics/robert-mueller-trump.html"
+		},
+        {
+            "source": nodes["Robert Mueller"],
+            "target": nodes["James Comey"],
+            "type": LINK_TYPE.Personal,
+            "sweep": 0,
+            "confirmed": true,
+            "description":"Robert Mueller and James Comey are close friends.",
+            "news_source_name":"WashPo",
+            "news_source_url": "https://www.washingtonpost.com/politics/2017/live-updates/trump-white-house/trump-comey-and-russia-how-key-washington-players-are-reacting/brothers-in-arms-the-long-friendship-between-mueller-and-comey/"
+		},
+
     ]
 }
