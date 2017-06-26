@@ -447,8 +447,7 @@ function buildDescriptionBoxNodes(country) {
     a.append("circle")
         .attr("cx", 37.5)
         .attr("cy", 37.5)
-        .attr("r", 35)
-        .attr("fill", "white")
+        .attr("r", 35) .attr("fill", "white")
         .attr("stroke-width", 2)
         .attr("stroke", function (d) {
             if (country == "USA") {
@@ -764,7 +763,7 @@ function restart() {
             var x = coordinates[0];
             var y = coordinates[1];
 
-            $("#source-cursor").text(d.news_source_name);
+            $("#source-cursor").text(d.news_source_name).css("z-index", 3);
             $("#source-cursor").css("left", x + 20);
             $("#source-cursor").css("top", y + 20);
             $('body').css('cursor', 'pointer');
