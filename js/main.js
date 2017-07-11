@@ -340,8 +340,7 @@ function hideLinkLabels() {
 
 function populatePOIBox(nData) {
 
-	//d3.select(".poi-box")
-	$('.poi-box').animate({"opacity": 1});
+	d3.select(".poi-box").style('opacity', 1)
 
 	d3.select(".poi-name")
 		.text( function (d) {
@@ -374,6 +373,7 @@ function openGraph() {
 			restart();
 		})
 
+	$('.poi-box').animate({"opacity": 1});
 	populatePOIBox({
 		'name': 'Instructions',
 		'description': 'Hover over nodes, click on links, drag to pan, scroll to zoom.'
