@@ -369,7 +369,7 @@ function openGraph() {
 		});
 
 	$(".description-box")
-		.delay(550)
+		.delay(400)
 		.animate({"opacity": 1}, 1000, function() {
 			restart();
 		})
