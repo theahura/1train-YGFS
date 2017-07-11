@@ -9,7 +9,7 @@ var svg = d3.select(".svg-container").append("svg")
 	.attr("class", "main")
 	.attr("width", width)
 	.attr("height", height)
-	.attr("viewBox", "0 0 1150 800")
+	.attr("viewBox", "0 300 1150 800")
 	.attr("preserveAspectRatio", "xMidYMid meet")
 	.call(d3.zoom()
 		.scaleExtent([1/2, 4])
@@ -19,7 +19,7 @@ function zoomed() {
 	g.attr("transform", d3.event.transform);
 }
 
-var g = svg.append("g"),
+var g = svg.append("g").attr('align', 'center'),
 	link = g.append("g").selectAll("path"),
 	node = g.append("g").selectAll("circle")
 
@@ -340,8 +340,8 @@ function hideLinkLabels() {
 
 function populatePOIBox(nData) {
 
-	d3.select(".poi-box")
-		.style("opacity", 1);
+	//d3.select(".poi-box")
+	$('.poi-box').animate({"opacity": 1});
 
 	d3.select(".poi-name")
 		.text( function (d) {
@@ -364,7 +364,7 @@ function openGraph() {
 		.animate({"opacity": 0})
 		.delay(200)
 		.queue( function() {
-			$(".intro-box").animate({"width": 0, "padding-left": 0}, 500)
+			$(".intro-box").animate({"opacity": 0}, 500)
 			$(".launch-button").remove();
 		});
 
@@ -374,9 +374,10 @@ function openGraph() {
 			restart();
 		})
 
-	$(".poi-box")
-		.delay(500)
-		.animate({"opacity": 1}, 1000)
+	populatePOIBox({
+		'name': 'Instructions',
+		'description': 'Hover over nodes, click on links, drag to pan, scroll to zoom.'
+	});
 
 	defaultDescriptionBox();
 }

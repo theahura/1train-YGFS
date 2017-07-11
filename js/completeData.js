@@ -1,14 +1,14 @@
 function finalDataBuild() {
 
     var relWidth = 1150,
-        relHeight = 800;
+        relHeight = 1200;
 
 	nodes = {
         "Donald Trump": {
             "name": "Donald Trump",
             "country": "USA",
             "index": 1,
-            "x": relWidth * 0.05,
+            "x": relWidth * 0.02,
             "y": relHeight * 0.6,
             "image": "donald-trump.png",
             "image_source_name": "National Review",
@@ -64,7 +64,7 @@ function finalDataBuild() {
             "country": "Russia",
             "index": 6,
             "x": relWidth * 0.78,
-            "y": relHeight * 0.42,
+            "y": relHeight * 0.452,
             "image": "rt.png",
             "image_source_name": "RT",
             "image_source_url": "https://www.rt.com/",
@@ -86,7 +86,7 @@ function finalDataBuild() {
             "country": "Russia",
             "index": 8,
             "x": relWidth * 0.71,
-            "y": relHeight * 0.42,
+            "y": relHeight * 0.452,
             "image": "kaspersky-lab.png",
             "image_source_name": "Twitter",
             "image_source_url": "https://twitter.com/kaspersky",
@@ -130,7 +130,7 @@ function finalDataBuild() {
             "country": "USA",
             "index": 12,
             "x": relWidth * 0.115,
-            "y": relHeight * 0.71,
+            "y": relHeight * 0.742,
             "image": "jeff-sessions.png",
             "image_source_name": "Slate",
             "image_source_url": "http://www.slate.com/articles/news_and_politics/politics/2017/01/jeff_sessions_fights_for_racist_outcomes_who_care_what_s_in_his_heart.html",
@@ -196,7 +196,7 @@ function finalDataBuild() {
             "country": "Russia",
             "index": 17,
             "x": relWidth * 0.60,
-            "y": relHeight * 0.47,
+            "y": relHeight * 0.5,
             "image": "",
             "image_source_name": "",
             "image_source_url": "",
@@ -218,7 +218,7 @@ function finalDataBuild() {
             "country": "Russia",
             "index": 19,
             "x": relWidth * 0.60,
-            "y": relHeight * 0.37,
+            "y": relHeight * 0.432,
             "image": "guccifer-2.0.png",
             "image_source_name": "Twitter",
             "image_source_url": "https://twitter.com/guccifer_2",
@@ -262,7 +262,7 @@ function finalDataBuild() {
             "country": "Russia",
             "index": 23,
             "x": relWidth * 0.7,
-            "y": relHeight * 0.81,
+            "y": relHeight * 0.842,
             "image": "andrii-artemenko.png",
             "image_source_name": "NYT",
             "image_source_url": "https://www.nytimes.com/2017/02/22/opinion/ukraine-and-the-shadowy-freelancers.html",
@@ -295,7 +295,7 @@ function finalDataBuild() {
             "country": "USA",
             "index": 26,
             "x": relWidth * 0.31,
-            "y": relHeight * 0.80,
+            "y": relHeight * 0.832,
             "image": "erik-prince.png",
             "image_source_name": "ABC News",
             "image_source_url": "http://abcnews.go.com/US/blackwater-founder-erik-prince-regrets-working-us-state/story?id=20931184",
@@ -350,7 +350,7 @@ function finalDataBuild() {
             "country": "USA",
             "index": 31,
             "x": relWidth * 0.38,
-            "y": relHeight * 0.80,
+            "y": relHeight * 0.832,
             "image": "george-papadopoulos.png",
             "image_source_name": "ABC News",
             "image_source_url": "http://abcnews.go.com/Politics/meet-donald-trumps-foreign-policy-advisers/story?id=37822480",
@@ -372,7 +372,7 @@ function finalDataBuild() {
             "country": "USA",
             "index": 33,
             "x": relWidth * 0.13,
-            "y": relHeight * 0.39,
+            "y": relHeight * 0.423,
             "image": "ivanka-trump.png",
             "image_source_name": "Wikipedia",
             "image_source_url": "https://en.wikipedia.org/wiki/Ivanka_Trump",
@@ -405,11 +405,33 @@ function finalDataBuild() {
             "country": "USA",
             "index": 36,
             "x": relWidth * 0.24,
-            "y": relHeight * 0.46,
+            "y": relHeight * 0.427,
             "image": "robert-mueller.jpg",
             "image_source_name": "NYT",
             "image_source_url": "https://www.nytimes.com/2017/05/17/us/politics/robert-mueller-special-counsel-russia-investigation.html",
             "description": "Former FBI Director, Special Counsel for Russia Investigation"
+        },
+        "Natalia Veselnitskaya": {
+            "name": "Natalia Veselnitskaya",
+            "country": "Russia",
+            "index": 37,
+            "x": relWidth * 0.60,
+            "y": relHeight * 0.75,
+            "image": "natalia-veselnitskaya.png",
+            "image_source_name": "Financial Times",
+            "image_source_url": "https://www.ft.com/content/38532856-6584-11e7-8526-7b38dcaef614?mhq5j=e1",
+            "description": "Russian Lawyer"
+        },
+        "Donald Trump Jr.": {
+            "name": "Donald Trump Jr.",
+            "country": "USA",
+            "index": 38,
+            "x": relWidth * 0.06,
+            "y": relHeight * 0.49,
+            "image": "trump-jr.jpg",
+            "image_source_name": "CNN",
+            "image_source_url": "http://money.cnn.com/2016/10/17/media/don-jr-on-shock-jock-radio/index.html",
+            "description": "American businessman and assistant to Donald Trump"
         },
     }
 
@@ -438,7 +460,7 @@ function finalDataBuild() {
             "source": nodes["Paul Manafort"],
             "target": nodes["Viktor Yanukovych"],
             "type": LINK_TYPE.Business,
-            "sweep": 1,
+            "sweep": 0,
             "confirmed": true,
             "description":"Manafort worked for Yanukovych, the former president of Ukraine, who was backed by the Kremlin",
             "news_source_name":"NYT",
@@ -1044,6 +1066,55 @@ function finalDataBuild() {
             "news_source_name":"WashPo",
             "news_source_url": "https://www.washingtonpost.com/politics/2017/live-updates/trump-white-house/trump-comey-and-russia-how-key-washington-players-are-reacting/brothers-in-arms-the-long-friendship-between-mueller-and-comey/"
 		},
-
+        {
+            "source": nodes["Paul Manafort"],
+            "target": nodes["Natalia Veselnitskaya"],
+            "type": LINK_TYPE.Political,
+            "sweep": 1,
+            "confirmed": false,
+            "description":"Confirmed to have met on the campaign trail. Allegedly, the meeting was for damaging information on the Clinton campaign.",
+            "news_source_name":"NYT",
+            "news_source_url": "https://www.nytimes.com/2017/07/09/us/politics/trump-russia-kushner-manafort.html"
+		},
+        {
+            "source": nodes["Jared Kushner"],
+            "target": nodes["Natalia Veselnitskaya"],
+            "type": LINK_TYPE.Political,
+            "sweep": 0,
+            "confirmed": false,
+            "description":"Confirmed to have met on the campaign trail. Allegedly, the meeting was for damaging information on the Clinton campaign.",
+            "news_source_name":"NYT",
+            "news_source_url": "https://www.nytimes.com/2017/07/09/us/politics/trump-russia-kushner-manafort.html"
+		},
+        {
+            "source": nodes["Donald Trump Jr."],
+            "target": nodes["Natalia Veselnitskaya"],
+            "type": LINK_TYPE.Political,
+            "sweep": 0,
+            "confirmed": false,
+            "description":"Confirmed to have met on the campaign trail. Allegedly, the meeting was for damaging information on the Clinton campaign.",
+            "news_source_name":"NYT",
+            "news_source_url": "https://www.nytimes.com/2017/07/09/us/politics/trump-russia-kushner-manafort.html"
+		},
+        {
+            "source": nodes["Donald Trump"],
+            "target": nodes["Donald Trump Jr."],
+            "type": LINK_TYPE.Personal,
+            "sweep": 0,
+            "confirmed": true,
+            "description":"Donald Trump Jr. is Donald Trump's son.",
+            "news_source_name":"",
+            "news_source_url": ""
+		},
+        {
+            "source": nodes["Donald Trump Jr."],
+            "target": nodes["Ivanka Trump"],
+            "type": LINK_TYPE.Personal,
+            "sweep": 1,
+            "confirmed": true,
+            "description":"Donald Trump Jr. is Ivanka Trump's brother.",
+            "news_source_name":"",
+            "news_source_url": ""
+		},
     ]
 }
