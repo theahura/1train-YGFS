@@ -415,7 +415,7 @@ function finalDataBuild() {
             "name": "Natalia Veselnitskaya",
             "country": "Russia",
             "index": 37,
-            "x": relWidth * 0.60,
+            "x": relWidth * 0.57,
             "y": relHeight * 0.75,
             "image": "natalia-veselnitskaya.png",
             "image_source_name": "Financial Times",
@@ -433,6 +433,17 @@ function finalDataBuild() {
             "image_source_url": "http://money.cnn.com/2016/10/17/media/don-jr-on-shock-jock-radio/index.html",
             "description": "American businessman and assistant to Donald Trump"
         },
+		"Rinat Akhmetshin": {
+			"name": "Rinat Akhmetshin",
+			"country": "Neither",
+			"index": 39,
+            "x": relWidth * 0.50,
+            "y": relHeight * 0.75,
+			"image": "akhmetshin.jpg",
+			"image_source_name": "Mediaite",
+			"image_source_url": "http://www.mediaite.com/online/who-is-rinat-akhmetshin-the-fifth-person-in-the-don-jr-meeting/",
+			"description": "Russian American lobbyist and veteran of the Soviet Military"
+		}
     }
 
 	links = [
@@ -1071,30 +1082,30 @@ function finalDataBuild() {
             "target": nodes["Natalia Veselnitskaya"],
             "type": LINK_TYPE.Political,
             "sweep": 1,
-            "confirmed": false,
-            "description":"Confirmed to have met on the campaign trail. Allegedly, the meeting was for damaging information on the Clinton campaign.",
+            "confirmed": true,
+            "description":"Confirmed to have met on the campaign trail for damaging information on the Clinton campaign.",
             "news_source_name":"NYT",
-            "news_source_url": "https://www.nytimes.com/2017/07/09/us/politics/trump-russia-kushner-manafort.html"
+            "news_source_url": "https://www.nytimes.com/interactive/2017/07/11/us/politics/donald-trump-jr-email-text.html"
 		},
         {
             "source": nodes["Jared Kushner"],
             "target": nodes["Natalia Veselnitskaya"],
             "type": LINK_TYPE.Political,
             "sweep": 0,
-            "confirmed": false,
-            "description":"Confirmed to have met on the campaign trail. Allegedly, the meeting was for damaging information on the Clinton campaign.",
+            "confirmed": true,
+            "description":"Confirmed to have met on the campaign trail for damaging information on the Clinton campaign.",
             "news_source_name":"NYT",
-            "news_source_url": "https://www.nytimes.com/2017/07/09/us/politics/trump-russia-kushner-manafort.html"
+            "news_source_url": "https://www.nytimes.com/interactive/2017/07/11/us/politics/donald-trump-jr-email-text.html"
 		},
         {
             "source": nodes["Donald Trump Jr."],
             "target": nodes["Natalia Veselnitskaya"],
             "type": LINK_TYPE.Political,
             "sweep": 0,
-            "confirmed": false,
-            "description":"Confirmed to have met on the campaign trail. Allegedly, the meeting was for damaging information on the Clinton campaign.",
+            "confirmed": true,
+            "description":"Confirmed to have met on the campaign trail for damaging information on the Clinton campaign.",
             "news_source_name":"NYT",
-            "news_source_url": "https://www.nytimes.com/2017/07/09/us/politics/trump-russia-kushner-manafort.html"
+            "news_source_url": "https://www.nytimes.com/interactive/2017/07/11/us/politics/donald-trump-jr-email-text.html"
 		},
         {
             "source": nodes["Donald Trump"],
@@ -1116,5 +1127,36 @@ function finalDataBuild() {
             "news_source_name":"",
             "news_source_url": ""
 		},
+		{
+            "source": nodes["Paul Manafort"],
+            "target": nodes["Rinat Akhmetshin"],
+            "type": LINK_TYPE.Political,
+            "sweep": 1,
+            "confirmed": true,
+            "description":"Confirmed to have met on the campaign trail for damaging information on the Clinton campaign.",
+            "news_source_name":"WashPo",
+            "news_source_url": "https://www.washingtonpost.com/politics/russian-american-lobbyist-was-present-at-trump-jrs-meeting-with-kremlin-connected-lawyer/2017/07/14/1b96f25a-68aa-11e7-9928-22d00a47778f_story.html?utm_term=.0e00e26e9b0e"
+		},
+        {
+            "source": nodes["Jared Kushner"],
+            "target": nodes["Rinat Akhmetshin"],
+            "type": LINK_TYPE.Political,
+            "sweep": 0,
+            "confirmed": true,
+            "description":"Confirmed to have met on the campaign trail for damaging information on the Clinton campaign.",
+            "news_source_name":"WashPo",
+            "news_source_url": "https://www.washingtonpost.com/politics/russian-american-lobbyist-was-present-at-trump-jrs-meeting-with-kremlin-connected-lawyer/2017/07/14/1b96f25a-68aa-11e7-9928-22d00a47778f_story.html?utm_term=.0e00e26e9b0e"
+		},
+        {
+            "source": nodes["Donald Trump Jr."],
+            "target": nodes["Rinat Akhmetshin"],
+            "type": LINK_TYPE.Political,
+            "sweep": 0,
+            "confirmed": true,
+            "description":"Confirmed to have met on the campaign trail for damaging information on the Clinton campaign.",
+            "news_source_name":"WashPo",
+            "news_source_url": "https://www.washingtonpost.com/politics/russian-american-lobbyist-was-present-at-trump-jrs-meeting-with-kremlin-connected-lawyer/2017/07/14/1b96f25a-68aa-11e7-9928-22d00a47778f_story.html?utm_term=.0e00e26e9b0e"
+		},
+
     ]
 }
